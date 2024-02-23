@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+
+/* reset css (inicio)*/
+*{
+    margin: 0px;
+    padding: 0px;
+}
+/* reset css (fim) */
+body{
+    background-color: rgb(25, 25, 25);
+    background-image: url(../static/img/Sem_título.png);
+}
+
+
+/* main (inicio)*/
+main{
+    width: auto;
+    padding: 10px;
+    padding-top: 0px;
+    margin: 0px;
+    display: flex;
+
+}
+
+/* main (fim)*/
+/* header (fim)*/
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: transparent;
+    padding: 5px;
+    height: 64px;
+    border-top: none;
+    border-bottom: none;
+    background-color: rgba(245, 245, 245, 0.7);
+
+
+}
+nav{
+    display: inline;
+}
+header > nav{
+    display: flex;
+}
+header > nav > div{
+    padding: 27px 20px;
+    align-self: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.15em;
+    color: black;
+}
+
+header > nav > div:hover > a, header > nav > div:hover{
+    color: goldenrod;
+    transition-duration: 0.5s;
+}
+header > nav > div > a{
+    text-decoration: none;
+    color: black;
+    background-color: transparent;
+}
+header > nav > div#div_image{
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    margin: 0px 15px;
+}
+header > nav > div.header_image:hover{
+    cursor: pointer;
+}
+header > img{
+    display: inline;
+    width: 400px;
+}
+
+/* header (fim) */
+img#gol_d{
+    height: 260px;
+    width: 100%;
+    margin-left: auto;
+    margin-bottom: -4px;
+}
+
+
+
+/* quadro pesquisa (bloco de seleções para ser pesquisado no backending) (início) */
+div#quadro_pesquisa{
+    border: 2.5px solid black;
+    padding: 10px;
+    display: inline-block;
+    background-color: white;
+}
+div#quadro_pesquisa > div > label{
+    margin-left: 20px;
+}
+
+div#quadro_pesquisa > div > ul{
+    list-style-type: circle;
+    margin-left: 30px;
+
+}
+div#quadro_pesquisa > div{
+    padding: 15px 0px;
+}
+button#pesquisar{
+    width: 100px;
+    height: 50px;
+}
+/* quadro pesquisa (bloco de seleções para ser pesquisado no backending) (fim) */
+
+
+
+/* section carros (precisará ser trabalho no backending) (início) */
+section#carros{
+    width: 100px;
+}
+section#carros > div{
+    background-color: white;
+    display: flex;
+    width: 900px;
+    margin: 25px;
+    border: 4px solid black;
+
+}
+div#carros > div{
+    width: 495px;
+    margin: 25px;
+}
+div#carro_caracteristicas{
+    align-self: center;
+    width: 600px;
+}
+
+div#carro_nome{
+    text-align: center;
+    margin: auto;
+    margin-bottom: 100px;
+}
+div#carro_nome > h3{
+    font-size: 2em;
+}
+div#carro_nome > p{
+    font-size: 1.25em;
+}
+
+div#carro_detalhes{
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 10px;
+}
+div#carro_detalhes > div > h4{
+    font-size: 1.5em;
+}
+div#carro_detalhes > div > p{
+    text-align: center;
+}
+img#carro_img{
+    width: 460px;
+}
+/* section carros (precisará ser trabalho no backending) (fim) */
+
+
+main#home{
+    display: block;
+
+}
+/* Página Home (início)*/
+
+
+/* aside_esq (união da frase "desconto da semana" com o nome e modelo do carro (início) */
+div#opt_svg_nome{
+    display: inline-block;
+    width: 600px;
+
+}
+div#oportunidade_da_semana{
+    display: block;
+}
+div#oportunidade_da_semana > h2{
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    margin-left: 150px;
+    color: white;
+    font-size: 40px;
+
+}
+text#svg_semana{
+    font-family: "Playfair Display", serif;
+    font-weight: 900;
+    font-size: 35px;
+
+}
+div#nome_carro{
+    width: 300px;
+}
+div#nome_carro > h2{
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-size: 75px;
+    letter-spacing: 5px;
+    color: rgb(193,85,0);
+    text-shadow: 2px 2px 4px black;
+    margin-left: 25px;
+
+}
+div#nome_carro > h3{
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+    letter-spacing: 5px;
+    color: rgb(193,85,0);
+    width: 450px;
+    text-shadow: 2px 2px black;
+    margin-left: 25px;
+
+}
+/* aside_esq (união da frase "desconto da semana" com o nome e modelo do carro (fim) */
+
+/* aside_img (união da div aside_esq com a div img) (início) */
+div#aside_img{
+    margin: 75px 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+/* aside_img (união da div aside_esq com a div img) (fim) */
+
+
+/* div contendo imagem do carro (início) */
+div#img_carro{
+    display: inline-block;
+    border: 2px solid black;
+
+}
+div#img_carro > img{
+    width: 600px;
+}
+/* div contendo imagem do carro (final) */
+
+
+
+
+/* div contendo todos os svgs, texto 1 ("explicação do svg") e texto 2 ("valor daquele item no carro") (início) */ 
+
+
+div#caixa_todos{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+div#svg_todos > div{
+    align-self: center;
+}
+div#nome_img_carro{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 15px 100px;
+}
+/*no html:
+caixa é a união (svg + texto 1 + texto 2)
+svg é a div contendo o texto do svg
+texto 1 é a "explicação do svg" (o svg de calendário tem escrito: data de fabricação do veículo)
+texto 2 é o valor daquela característica do carro */
+/* div contendo todos os svgs, texto 1 ("explicação do svg") e texto 2 ("valor daquele item no carro") (final) */ 
+
+
+div.svg_ > svg{
+    color: rgb(193,85,0);
+    text-shadow: 2px 2px black;
+}
+div.caixa_{
+    width: 250px;
+    padding: 15px;
+    border: 2px solid black;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px black;
+    text-align: center;
+}
+div.texto_ > h3{
+    font-family: "Playfair Display", serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: rgb(193,85,0);
+    text-shadow: 2px 2px black;
+    
+}
+div.texto_ > h4{
+    text-align: center;
+    font-size: 16px;
+    font-family: "Playfair Display", serif;
+    color: white;
+}
+
+
+
+div#svg_preco_detalhe{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 25px 100px;
+    align-items: center;
+}
+div#svg_preco, div#svg_detalhe{
+    align-self: center;
+}
+
+
+
+
+
+
+img#foto_sobre{
+    width: 100%;
+    margin-bottom: -10px;
+}
+
+main#sobre{
+    background-color: white;
+    padding: 50px;
+    width: 75%;
+    margin: auto;
+}
+div.caixa_texto{
+    text-align: justify;
+    padding: 0px 15px;
+    font-size: 1.075em;
+}
+div.caixa_texto > p{
+    margin: 10px 0px;
+}
+div.caixa_texto > h2, div.caixa_texto > h3{
+    font-family: "Playfair Display", serif;
+    text-align: center;
+    white-space: nowrap;
+}
+
+div#primeiro{
+    width: 40%;
+}
+div#segundo{
+    width: 25%;
+}
+div#terceiro{
+    width: 30%;
+}
+
+div.caixa_div{
+    width: 100%;
+    height: 107%;
+    background-color: rgba(0, 0, 0, 0.75);
+    position: absolute;
+    z-index: 1;
+}
+div#div_login{
+    display: block;
+    max-width: 600px;
+    height: auto;
+    background-color: white;
+    padding: 50px;
+    position: absolute;
+    z-index: 2;
+    margin-left: calc(50% - 353.3px);
+    margin-top: -50px;
+}
+div.div_fechar{
+    margin-left: 95%;
+    padding: 5px;
+    cursor: pointer;
+}
+span.falso_link{
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+div.div_quadro > h2{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    margin-top: -25px;
+    margin-bottom: -10px;
+}
+div.div_quadro > h3{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    margin: 5px 0px;
+}
+div.div_quadro > p, div.div_quadro > a {
+    font-weight: 400;
+    font-size: 1.25em;
+}
+div.div_quadro > form > button#submit{
+    width: 150px;
+    height: 50px;
+    position: absolute;
+    margin-top: -45px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+    background-color: rgb(193,85,0);;
+}
+div#div_quadro > form > button#submit:hover{
+    cursor: pointer;
+    animation: bordinha 2s infinite;
+}
+@keyframes bordinha {
+    0%{
+        border: red solid 1px;
+    }
+    50%{
+        border: yellow solid 1px;
+    }
+    100%{
+        border: red solid 1px;
+    }
+}
+
+div#div_criar_conta{
+    width: 600px;
+    height: auto;
+    background-color: white;
+    padding: 50px;
+    position: absolute;
+    z-index: 2;
+    margin-left: calc(50% - 353.3px);
+    margin-top: -50px;
+
+}
+input.svg_input{
+    width: 387px;
+    height: 25px;
+    position: absolute;
+    border: none;
+}
+input#email_criar_conta{margin: -245px 0px 0px 30px;}
+input#senha_criar_conta{margin: -176px 0px 0px 30px;}
+input#confirmar_senha_criar_conta{margin: -104px 0px 0px 30px;}
+input#nome_criar_conta{margin: -314px 0px 0px 30px;}
+input.svg_input:focus{outline: none;}
+input#senha_login{ margin: -71px -6px -6px 29px;}
+input#email_login{margin:-140px 0px 0px 30px;}
