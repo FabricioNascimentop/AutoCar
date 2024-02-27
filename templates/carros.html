@@ -11,7 +11,7 @@
         <img src="../static/img/logoconsilcar.png" alt="logomarca">
         <nav>
             <div>
-                <a href="/">HOME</a>
+                <a href="{{url_for('home')}}">HOME</a>
             </div>
             <div>
                 <a href="/sobre nós">SOBRE NÓS</a>
@@ -47,17 +47,14 @@
     </header>
     <img src="../static/img/nao_eh_um_gol_quadrado.png" alt="" id="gol_d">
 <main>
-    <aside>
+    <aside id="aside_pesquisa">
         <div id="quadro_pesquisa">
-            <div id="modelo">
-                <h3>MODELO</h3>
-                    <ul id="modelo_UL">
-                        <li>    MODELO 1</li>
-                        <li>    MODELO 2</li>
-                        <li>    MODELO 3</li>
-                        <li>    MODELO 4</li>
-                        <li>    MODELO 5</li>
-                    </ul>
+            <h2>PESQUISA</h2>
+            <div id="marca">
+                <h3>MARCA</h3>
+                    {% for marca in marcas %}
+                    <label>{{marca}} <input type="checkbox" name="" id="{{marca}}" class="input_marcas_carros" value="{{marca}}"> </label><br>
+                    {% endfor %}
             </div>
 
             <div id="registro">
@@ -107,66 +104,48 @@
 
 
 <section id="carros">
-    <div id="carro">
-        <img src="../static/img/peugeot_3008.jpg" alt="" id="carro_img">
+    {%for carro in carros %}
+    <div class="quadro_carros">
+        <a href="">
+            <div id="div_carro_img">
+                <div id="div_img_carro_carros">
+                    <img src="../static/img/imagens_carro/{{lista[carro.id-1]}}.jpeg">
+                </div>
 
-        <div id="carro_caracteristicas">
+                    <div id="carro_caracteristicas">
+                        <div id="carro_nome">
+                            <h3>{{carro.nome}}</h3>
+                            <p>{{carro.modelo}}</p>
+                        </div>
 
+                        <div id="carro_detalhes">
+                            <div id="carro_registro">
+                                <h4>registro</h4>
+                                <p>{{carro.registro}}</p>
+                            </div>
 
-            <div id="carro_nome">
-                <h3>Peugeot 3008</h3>
-                <p>1.2 PureTech M6 Active Navigator</p>
+                            <div id="carro_quilometro">
+                                <h4>quilômetros</h4>
+                                <p>{{carro.quilometros}}</p>
+                            </div>
+
+                            <div id="carro_garantia">
+                                <h4>garantia</h4>
+                                <p>{{carro.garantia}}</p>
+                            </div>
+                        </div>
+                        <div id="carro_preco">
+                            <h4>preço</h4>
+                            <p>{{carro.preco}}</p>
+                        </div>
+                    </div>
             </div>
-
-            <div id="carro_detalhes">
-                <div id="carro_registro">
-                    <h4>registro</h4>
-                    <p>Outubro/2018</p>
-                </div>
-                <div id="carro_quilometro">
-                    <h4>quilômetros</h4>
-                    <p>93.671 Km</p>
-                </div>
-                <div id="carro_garantia">
-                    <h4>garantia</h4>
-                    <p>18 meses</p>
-                </div>
-            </div>
-        
-
-        </div>
-
+        </a>
     </div>
-
-    <div id="carro1">
-        <img src="../static/img/peugeot_3008.jpg" alt="" id="carro_img">
-        <div id="carro_caracteristicas">
+    {% endfor %}
 
 
-            <div id="carro_nome">
-                <h3>Carro genérico</h3>
-                <p>Lorem ipsum dolor sit amet</p>
-            </div>
 
-            <div id="carro_detalhes">
-                <div id="carro_registro">
-                    <h4>registro</h4>
-                    <p>*data*</p>
-                </div>
-                <div id="carro_quilometro">
-                    <h4>quilômetros</h4>
-                    <p>*quilometragem*</p>
-                </div>
-                <div id="carro_garantia">
-                    <h4>garantia</h4>
-                    <p>*tempo de garantia*</p>
-                </div>
-            </div>
-        
-
-        </div>
-
-    </div>
 </section>
 </div>
 
