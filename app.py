@@ -54,17 +54,23 @@ def sobre():
 
 @app.route('/carros')
 def carros():
-    lst = []
+    lst_marcas_carros = []
     lst_marcas = []
-    carros = Carros.query.all()
-    for carro in carros:
-        marca_nome_carro = str(carro.nome)
-        lst.append(marca_nome_carro).replace(' ','-')
+    anos = list(range(1956, 2025))
+    precos = list(range(30000,50000,2000)) 
+    quilometragem = list(range(1000,30000,3000))
+    carros = Carros.query.limit(10).all()
 
-        marca_carro = marca_nome_carro.split()[0] 
+    for carro in carros:
+        marca_nome_carro = str(carro.nome).replace(' ','-')
+        marca_carro = str(carro.nome.split()[0])
+        lst_marcas_carros.append(marca_nome_carro)
         if marca_carro not in lst_marcas:
-            lst_marcas.append(str(carro.nome).split()[0])
-    return render_template('carros.html',carros=carros[0:10],lista=lst[0:10],marcas=lst_marcas)
+            lst_marcas.append(marca_carro)
+            
+    return render_template('carros.html',
+carros=carros,lst_marcas=lst_marcas,lst_marcas_carros=lst_marcas_carros, anos=anos,
+precos=precos,quilometragem=quilometragem)
 
 @app.route('/carros/<string:nome_carro>')
 def carro_especifico(nome_carro):

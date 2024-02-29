@@ -98,13 +98,36 @@ div#quadro_pesquisa > div > label{
     margin-left: 20px;
 }
 
-div#quadro_pesquisa > div > ul{
-    list-style-type: circle;
-    margin-left: 30px;
 
-}
 div#quadro_pesquisa > div{
     padding: 15px 0px;
+}
+div#quadro_pesquisa > div#marcas{
+    max-height: 150px;
+    overflow-y: auto;
+
+}
+div#div_input-label_combustivel{
+    width: 100px;
+}
+div.div_label_input{
+    width: 125px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+label{
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 19px;
+}
+div.div_label_input > input{
+    width: 20px;
+    height: 20px;
+    background-color: #eee;
+}
+input#input_gasolina{
+    border: 5px rgb(193,85,0) solid;
 }
 button#pesquisar{
     width: 100px;
@@ -175,6 +198,13 @@ div#carro_detalhes > div > h4{
 div#carro_detalhes > div > p{
     text-align: center;
 }
+div#carro_preco{
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px;
+    margin-bottom: -35px;
+}
 
 /* section carros (precisará ser trabalho no backending) (fim) */
 aside#aside_pesquisa{
@@ -200,9 +230,9 @@ div#oportunidade_da_semana{
 div#oportunidade_da_semana > h2{
     font-family: "Playfair Display", serif;
     font-weight: 400;
+    font-size: 40px;
     margin-left: 150px;
     color: white;
-    font-size: 40px;
 
 }
 text#svg_semana{
@@ -386,7 +416,7 @@ div#div_login{
     padding: 50px;
     position: absolute;
     z-index: 2;
-    margin-left: calc(50% - 353.3px);
+    margin-left: calc(50% - 300px);
     margin-top: -50px;
 }
 div.div_fechar{
