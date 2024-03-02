@@ -49,62 +49,76 @@
 <main>
     <aside id="aside_pesquisa">
         <div id="quadro_pesquisa">
+            <form action="/processamento" method="post">
             <h2>PESQUISA</h2>
             <div id="marcas">
-                <h3>MARCA</h3>
+                <h3>MARCAS</h3>
                     {% for marca in lst_marcas %}
-                    <label>{{marca}} <input type="checkbox" name="" id="{{marca}}" class="input_marcas_carros" value="{{marca}}"> </label><br>
+                    <div class="caixa_marcas">
+                        <label for="Marcas">{{marca}} </label>
+                            <input type="checkbox" name="marcas" id="{{marca}}" class="input_marcas_carros" value="{{marca}}"> </label>
+                    </div>
                     {% endfor %}
             </div>
 
             <div id="registro">
                 <h3>REGISTO</h3>
-                    <h4 style="display: inline;">desde:</h4>
-                        <select name="select_registro_inicio" id="select_registro_inicio">
-                            {% for ano in anos %}
-                            <option value="{{ano}}">{{ano}}</option>
-                            {% endfor %}
-                        </select>
-                    <h4 style="display: inline;">até:</h4>
-                        <select name="select_registro_fim" id="select_registro_fim">
-                            {% for ano in anos %}
-                            <option value="{{ano}}" selected="2024">{{ano}}</option>
-                            {% endfor %}
-                        </select>
+                <div class="div_select">
+                    <label for="select_registro_inicio">Desde:</label> <br>
+                    <select name="select_registro_inicio" id="select_registro_inicio">
+                        {% for ano in anos %}
+                        <option value="{{ano}}">{{ano}}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <label for="select_registro_fim">Até</label> <br>
+                    <select name="select_registro_fim" id="select_registro_fim">
+                        {% for ano in anos %}
+                        <option value="{{ano}}" selected="2024">{{ano}}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
             </div>
 
 
             <div id="preco">
                 <h3>PREÇO</h3>
-                <h4 style="display: inline;">desde:</h4>
-                <select name="select_preco_inicio" id="select_preco_inicio">
-                    {% for preco in precos %}
-                    <option value="{{preco}}">{{preco}}</option>
-                    {% endfor %}
-                </select>
-            <h4 style="display: inline;">até:</h4>
-                <select name="select_preco_final" id="select_preco_final">
-                    {% for preco in precos %}
-                    <option value="{{preco}}" selected="2024">{{preco}}</option>
-                    {% endfor %}
-                </select>
+                <div class="div_select">
+                    <label for="select_preco_inicio">Desde:</label>
+                    <select name="select_preco_inicio" id="select_preco_inicio">
+                        {% for preco in precos %}
+                        <option value="{{preco}}">{{preco}}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <label for="select_preco_final">Até:</label>
+                    <select name="select_preco_final" id="select_preco_final">
+                        {% for preco in precos %}
+                        <option value="{{preco}}" selected="2024">{{preco}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
 
 
             <div id="quilometro">
                 <h3>QUILOMETRAGEM</h3>
-                <h4 style="display: inline;">desde:</h4>
-                <select name="select_quilometro_inicio" id="select_quilometro_inicio">
-                    {% for km in quilometragem %}
-                    <option value="{{km}}" selected="2024">{{km}}</option>
-                    {% endfor %}
-                </select>
-                <h4 style="display: inline;">até:</h4>
-                <select name="select_quilometro_final" id="select_quilometro_final">
-                    {% for km in quilometragem %}
-                    <option value="{{km}}" selected="2024">{{km}}</option>
-                    {% endfor %}
-                </select>
+                <div class="div_select">
+                    <label for="select_quilometro_inicio">Desde:</label>
+                    <select name="select_quilometro_inicio" id="select_quilometro_inicio">
+                        {% for km in quilometragem %}
+                        <option value="{{km}}" selected="2024">{{km}}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <label for="select_quilometro_final">Até:</label>
+                    <select name="select_quilometro_final" id="select_quilometro_final">
+                        {% for km in quilometragem %}
+                        <option value="{{km}}" selected="2024">{{km}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
 
 
@@ -116,47 +130,63 @@
                 <div class="div_label_label">
                     <div class="div_label_input">
                         <label for="input_gasolina">Gasolina:</label>
-                        <input type="checkbox" name="input_gasolina" id="input_gasolina">
+
+                        <input type="checkbox" name="combustivel" id="input_gasolina" value="gasolina">
                     </div>
 
                     <div class="div_label_input">
                         <label for="input_etanol">Etanol:</label>
-                        <input type="checkbox" name="input_etanol" id="input_etanol">
+                        <input type="checkbox" name="combustivel" id="input_etanol" value="etanol">
                     </div>
                     
 
                     <div class="div_label_input">
                         <label for="input_diesel">Diesel:</label>
-                        <input type="checkbox" name="input_diesel" id="input_diesel">
+                        <input type="checkbox" name="combustivel" id="input_diesel" value="diesel">
                     </div>
                     
                     <div class="div_label_input">
                         <label for="input_biodisel">Biodiesel:</label>
-                        <input type="checkbox" name="input_biodisel" id="input_biodisel">
+                        <input type="checkbox" name="combustivel" id="input_biodisel" value="biodiesel">
                     </div>
                     
                     <div class="div_label_input">
                         <label for="input_GNV">GNV:</label>
-                        <input type="checkbox" name="input_GNV" id="input_GNV">
+                        <input type="checkbox" name="combustivel" id="input_GNV" value="GNV">
                     </div>
                 
                     <div class="div_label_input">
-                        <label for="input_eletricidade">Eletricidade:</label>
-                        <input type="checkbox" name="input_eletricidade" id="input_eletricidade">
+                        <label for="input_eletricidade">Elétrico:</label>
+                        <input type="checkbox" name="combustivel" id="input_eletricidade" value="eletrico">
                     </div>
                     
                     <div class="div_label_input">
                         <label for="input_hibrido">Hibrido:</label>
-                        <input type="checkbox" name="input_hibrido" id="input_hibrido">
+                        <input type="checkbox" name="combustivel" id="input_hibrido" value="hibrido">
                     </div>
                     
                     <div class="div_label_input">
                         <label for="input_flex">Flex:</label>
-                        <input type="checkbox" name="input_flex" id="input_flex">
+                        <input type="checkbox" name="combustivel" id="input_flex" value="flex">
                     </div>
                 </div>
             </div>
+            <div id="estado">
+                <h3>ESTADO</h3>
+                    <fieldset style="border: none;">
+                        <div class="div_label_input" style="width: 100px;">
+                            <label for="input_estado_usado">Usado:</label>
+                                <input type="radio" name="estado" id="input_estado_usado" class="input_radio" value="Usado">
+                        </div>
+                        <br>
+                        <div class="div_label_input" style="width: 100px; margin-top: -10px;">
+                            <label for="input_estado_novo">Novo:</label>
+                                <input type="radio" name="estado" id="input_estado_novo" style="margin-left: 9px;" class="input_radio" value="Novo">
+                        </div>
+                    </fieldset>
+            </div>
             <button type="submit" id="pesquisar">Pesquisar</button>
+            </form>
         </div>
     </aside>
 
@@ -165,9 +195,9 @@
     {%for carro in carros %}
     <div class="quadro_carros">
         <a href="">
-            <div id="div_carro_img">
+            <div id="div_carro_img_detalhes">
                 <div id="div_img_carro_carros">
-                    <img src="../static/img/imagens_carro/{{ lst_marcas_carros[carro.id-1]}}.jpeg">
+                    
                 </div>
 
                     <div id="carro_caracteristicas">
@@ -178,28 +208,29 @@
 
                         <div id="carro_detalhes">
                             <div id="carro_registro">
-                                <h4>registro</h4>
+                                <h4>Registro</h4>
                                 <p>{{carro.registro}}</p>
                             </div>
 
                             <div id="carro_quilometro">
-                                <h4>quilômetros</h4>
-                                <p>{{carro.quilometros}}</p>
+                                <h4>Quilometragem</h4>
+                                <p>{{carro.quilometros}} km</p>
                             </div>
 
                             <div id="carro_garantia">
-                                <h4>garantia</h4>
+                                <h4>Garantia</h4>
                                 <p>{{carro.garantia}}</p>
                             </div>
                         </div>
-                        <div id="carro_preco">
-                                <h2>R$ {{carro.preco}}</h2>
+                            <div id="carro_preco">
+                                <h2>{{carro.preco}}</h2>
                             </div>
                         </div>
                     </div>
         </a>
     </div>
     {% endfor %}
+    
 
 
 

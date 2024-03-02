@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from functions import *
 
@@ -43,14 +43,27 @@ class Clientes(db.Model):
 @app.route('/')
 def home():
     nome_carro_da_semana = 'Hyundai Tucson'
-    #esta func_carro_da_semana faz alguns ajustes puramente estéticos nos dados
-    carro_da_semana = Carros.query.filter_by(nome=nome_carro_da_semana).first()
+    #esta data_preco ajusta a data e os valores para o padrão brasileiro
+    carro_da_semana = data_preco(Carros.query.filter_by(nome=nome_carro_da_semana).first())
     img_carro_da_semana = str(carro_da_semana.nome).replace(' ','-')
     return render_template('home.html',carro_da_semana=carro_da_semana, img_carro_da_semana=img_carro_da_semana)
 
 @app.route('/sobre nós')
 def sobre():
     return render_template('sobre.html')
+
+
+
+@app.route('/processamento',methods=['POST'])
+def processar():
+    c = 0
+    data = request.form
+    keys_list = ['marcas','select_registro_inicio', 'select_registro_fim', 'select_preco_inicio', 'select_preco_final', 'select_quilometro_inicio', 'select_quilometro_final','combustivel','estado']
+    for item in data.listvalues():
+        print(f"'{keys_list[c]}':{item}")
+        c += 1
+    return redirect('/carros')
+
 
 @app.route('/carros')
 def carros():
@@ -59,17 +72,20 @@ def carros():
     anos = list(range(1956, 2025))
     precos = list(range(30000,50000,2000)) 
     quilometragem = list(range(1000,30000,3000))
-    carros = Carros.query.limit(10).all()
+    carros = Carros.query.all()
+    print(request.form[''])
 
     for carro in carros:
-        marca_nome_carro = str(carro.nome).replace(' ','-')
-        marca_carro = str(carro.nome.split()[0])
+        marca_nome_carro = str(carro.nome).replace(' ','-') #tira espaços do no nome do carro
+        marca_carro = str(carro.nome.split()[0]) # pega somente a marca do carro
+        carro.registro = carro.registro.strftime('%d/%m/%Y') #corrige formato da data 
+        carro.preco = moedinha(carro.preco) # corrige formatação do valor monetário do carro
         lst_marcas_carros.append(marca_nome_carro)
         if marca_carro not in lst_marcas:
             lst_marcas.append(marca_carro)
             
     return render_template('carros.html',
-carros=carros,lst_marcas=lst_marcas,lst_marcas_carros=lst_marcas_carros, anos=anos,
+carros=carros[0:5],lst_marcas=lst_marcas,lst_marcas_carros=lst_marcas_carros, anos=anos,
 precos=precos,quilometragem=quilometragem)
 
 @app.route('/carros/<string:nome_carro>')

@@ -1,12 +1,14 @@
-def func_carro_da_semana(obj_carro):
-    obj_carro.nome = str(obj_carro.nome).upper()
-    obj_carro.modelo = str(obj_carro.modelo).upper()
+def data_preco(obj_carro):
     obj_carro.registro = obj_carro.registro.strftime('%d/%m/%Y')
-    obj_carro.combustivel = str(obj_carro.combustivel).capitalize()
-    obj_carro.preco = f"{str(obj_carro.preco).replace('.',',')}"
+    obj_carro.preco = moedinha(obj_carro.preco)
     return obj_carro
 
-
+def moedinha(numero):
+    numero_formatado = '{:.2f}'.format(numero)
+    parte_inteira, parte_decimal = numero_formatado.split('.')
+    parte_inteira = '{:,}'.format(int(parte_inteira)).replace(',', '.')
+    valor_formatado = f'R$ {parte_inteira},{parte_decimal}'
+    return valor_formatado
 
 
 

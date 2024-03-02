@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% block head%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consilcar -BR-</title>
+    <link rel="stylesheet" href="../static/style.css">
+    {% endblock %}
+</head>
+<body>
+    {% block header %}
+    <header>                            
+        <img src="../static/img/logoconsilcar.png" alt="logomarca">
+        <nav>
+            <div>
+                <a href="/">HOME</a>
+            </div>
+            <div>
+                <a href="/sobre nós">SOBRE NÓS</a>
+            </div>
+            <div>
+                <a href="carros">CARROS</a>
+            </div>
+            <div id="contatos_caixa">
+                <a href="/contatos">CONTATOS</a>
+            </div>
+            <div class="header_image" id="lupinha">
+
+                <a href="">
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+                    
+                </a>
+                
+            </div>
+            <div class="header_image" id="login_pessoinha" onclick="show_div(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="11" r="4" />
+                    <path d="M5 22s1.5-3.5 4-3.5h6c2.5 0 4 3.5 4 3.5"/></svg>
+            </div>
+        </nav>
+        {% endblock %}
+    </header>
+    {% block login_criar_conta %}
+    <div class="caixa_div" style="display: none;" id="caixa_div_login">
+        <div id="div_login" class="div_quadro">
+            <div class="div_fechar" onclick="fechar(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="black" stroke-width="2">
+                <line x1="4" y1="4" x2="16" y2="16" />
+                <line x1="16" y1="4" x2="4" y2="16" />
+                </svg>
+            </div>
+            <h2>Login</h2>
+            <br>
+            <h3>Email:</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
+                <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
+            </svg>
+            <h3>Senha:</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
+            <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
+            <text x="5%" y="50%" dominant-baseline="middle" fill="black" font-size="20"></text>
+        </svg>
+        <form action="" method="post">
+            <input type="email" name="" id="email_login" class="svg_input"> <br>
+            <input type="password" name="" id="senha_login" class="svg_input">
+            <br>
+            <button type="submit" id="submit">Enviar</button> <br>
+        </form>
+        <p>Esqueceu a senha? Clique <a href="">aqui</a></p>
+        <p>Não tem conta? <span class="falso_link" id="fake_link_criar_conta" onclick="show_div(this)">Criar conta</span></p>
+</div>   
+</div>
+<div class="caixa_div" style="display: none;" id="caixa_div_criar_conta">
+    <div id="div_criar_conta" class="div_quadro">
+        <div class="div_fechar" onclick="fechar(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="black" stroke-width="2">
+            <line x1="4" y1="4" x2="16" y2="16" />
+            <line x1="16" y1="4" x2="4" y2="16" />
+            </svg>
+        </div>
+        <h2>Criar Conta</h2>
+                <br>
+                <h3>Nome:</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
+                        <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
+                    </svg>
+                <h3>Email:</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
+                        <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
+                    </svg>
+                <h3>Senha:</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
+                        <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
+                        <text x="5%" y="50%" dominant-baseline="middle" fill="black" font-size="20"></text>
+                    </svg>
+                <h3>Confirmar senha</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
+                        <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
+                        <text x="5%" y="50%" dominant-baseline="middle" fill="black" font-size="20"></text>
+                    </svg>
+            <form action="" method="post">
+                <input type="text" name="" id="nome_criar_conta" class="svg_input"> 
+                <br>
+                <input type="email" name="" id="email_criar_conta" class="svg_input"> 
+                <br>
+                <input type="password" name="" id="senha_criar_conta" class="svg_input">
+                <br>
+                <input type="password" name="" id="confirmar_senha_criar_conta" class="svg_input">
+                <button type="submit" id="submit">Enviar</button>
+                <br>
+            
+            </form>
+    </div>
+</div>
+    {% endblock %}

@@ -175,7 +175,7 @@
                   <div id="texto_acelerometro" class="texto_">
 
                       <h3>Quilômetros Rodados</h3>
-                      <h4><span style="font-size: 1.2em;">{{ carro_da_semana.quilometros }}</span> km</h4>
+                      <h4>{{ carro_da_semana.quilometros }} KM</h4>
 
                   </div>
 
@@ -234,7 +234,7 @@
         <div id="svg_preco">
             <svg xmlns="http://www.w3.org/2000/svg" width="550" height="75"  id="svgpreco">
                 <polygon points="0,75 75,0 550,0 475,75" fill="rgb(193,85,0)" stroke="black" stroke-width="1" />
-                <text text-anchor="middle" x="275" y="50" fill="white" id="svg_semana">R${{ carro_da_semana.preco }}</text>
+                <text text-anchor="middle" x="275" y="50" fill="white" id="svg_semana">{{ carro_da_semana.preco }}</text>
             </svg>
         </div>
         
