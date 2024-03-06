@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from functions import *
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3306/carros_e_clientes'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Hf3g6cEEDgDAg56h6e-dGG51GEF3256e@viaduct.proxy.rlwy.net:30899/railway'
 db = SQLAlchemy(app)
 app.secret_key = 'fabricio'
 
@@ -38,7 +38,7 @@ class Clientes(db.Model):
 
 
 
-nome_carro_da_semana = 'Acura MDX'
+nome_carro_da_semana = 'Kia Sorento'
 
 
 @app.route('/')
@@ -104,15 +104,13 @@ def carros():
         marca_carro = str(carro.nome.split()[0]) # pega somente a marca do carro
         if marca_carro not in lst_marcas:
             lst_marcas.append(marca_carro)
-        if  carro.id <= 10:
             marca_nome_carro = str(carro.nome).replace(' ','-') #tira espaços do no nome do carro
             carro.registro = carro.registro.strftime('%d/%m/%Y') #corrige formato da data 
             carro.preco = moedinha(carro.preco) # corrige formatação do valor monetário do carro
             lst_marcas_carros.append(marca_nome_carro)
-        else:
-            break
+
             
-    return render_template('carros.html',carros=carros[0:10],lst_marcas=lst_marcas,lst_marcas_carros=lst_marcas_carros)
+    return render_template('carros.html',carros=carros,lst_marcas=lst_marcas,lst_marcas_carros=lst_marcas_carros)
 
 @app.route('/carros/<string:carro_nome>',methods=['POST','GET'])
 def carro_especifico(carro_nome):
