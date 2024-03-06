@@ -1,13 +1,15 @@
+{% block all %}
+{% block head %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    {% block head%}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consilcar -BR-</title>
-    <link rel="stylesheet" href="../static/style.css">
-    {% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+{% endblock %}
 <body>
     {% block header %}
     <header>                            
@@ -20,7 +22,7 @@
                 <a href="/sobre nós">SOBRE NÓS</a>
             </div>
             <div>
-                <a href="carros">CARROS</a>
+                <a href="{{url_for('carros')}}">CARROS</a>
             </div>
             <div id="contatos_caixa">
                 <a href="/contatos">CONTATOS</a>
@@ -42,8 +44,8 @@
                     <path d="M5 22s1.5-3.5 4-3.5h6c2.5 0 4 3.5 4 3.5"/></svg>
             </div>
         </nav>
-        {% endblock %}
     </header>
+    {% endblock %}
     {% block login_criar_conta %}
     <div class="caixa_div" style="display: none;" id="caixa_div_login">
         <div id="div_login" class="div_quadro">
@@ -64,9 +66,9 @@
             <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
             <text x="5%" y="50%" dominant-baseline="middle" fill="black" font-size="20"></text>
         </svg>
-        <form action="" method="post">
-            <input type="email" name="" id="email_login" class="svg_input"> <br>
-            <input type="password" name="" id="senha_login" class="svg_input">
+        <form action="/logar" method="post">
+            <input type="email" name="email_login" id="email_login" class="svg_input"> <br>
+            <input type="password" name="senha_login" id="senha_login" class="svg_input">
             <br>
             <button type="submit" id="submit">Enviar</button> <br>
         </form>
@@ -102,7 +104,7 @@
                         <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
                         <text x="5%" y="50%" dominant-baseline="middle" fill="black" font-size="20"></text>
                     </svg>
-            <form action="" method="post">
+            <form action="/logar" method="post">
                 <input type="text" name="" id="nome_criar_conta" class="svg_input"> 
                 <br>
                 <input type="email" name="" id="email_criar_conta" class="svg_input"> 
@@ -112,8 +114,63 @@
                 <input type="password" name="" id="confirmar_senha_criar_conta" class="svg_input">
                 <button type="submit" id="submit">Enviar</button>
                 <br>
-            
             </form>
     </div>
 </div>
+{% endblock %}
+{% block footer %}
+<footer>
+    <nav id="elementos">
+        <h2>Sinta-se em casa</h2>
+        <div id="quadro-1" class="quadro-elementos">
+            <a href="">Home</a>
+            <a href="">Sobre nós</a>
+        </div>
+        <div id="quadro-2" class="quadro-elementos">
+            <a href="">Carros</a>
+            <a href="" style="margin-right: 3.5px;">Contatos</a>
+        </div>
+    </nav>
+    <div id="ligue_nos">
+        <h2>Ligue Para Nós</h2>
+        <p>+55 79 9603-1896</p>
+        <p>Ou</p>
+        <h3>Mande Um Email</h3>
+        <p>email-exemplo@email.com</p>
+    </div>
+    <div id="area_login">
+        <h2>Área Pessoal</h2>
+        <a href="">login</a>
+        <p>ou</p>
+        <a href="">registre-se</a>
+    </div>
+</footer>
+{% endblock %}
+</body>
+    <script>
+        function show_div(e){
+        caixa_div_login = document.getElementById('caixa_div_login')
+        div_criar_conta = document.getElementById('div_criar_conta')
+        console.log('alooo')
+        caixa_div_criar_conta = document.getElementById('caixa_div_criar_conta')
+        
+
+        if(e.id == 'login_pessoinha'){
+            caixa_div_login.style.display = 'block'
+
+        }
+        if(e.id == 'fake_link_criar_conta'){
+            caixa_div_login.style.display = 'none'
+            caixa_div_criar_conta.style.display = 'block'
+        }
+
+
+    }
+        function fechar(e){
+            const div_pai = e.parentNode
+            const div_avo = div_pai.parentNode
+            div_avo.style.display = 'none'
+
+        }
+    </script>
     {% endblock %}

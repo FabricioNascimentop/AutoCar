@@ -1,50 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consilcar -BR-</title>
-    <link rel="stylesheet" href="../static/style.css">
-</head>
-<body>
-    <header>
-        <img src="../static/img/logoconsilcar.png" alt="logomarca">
-        <nav>
-            <div>
-                <a href="{{url_for('home')}}">HOME</a>
-            </div>
-            <div>
-                <a href="/sobre nós">SOBRE NÓS</a>
-            </div>
-            <div>
-                <a href="/carros">CARROS</a>
-            </div>
-            <div id="contatos_caixa">
-                <a href="/contatos">CONTATOS</a>
-            </div>
-            <div class="header_image" id="lupinha">
-
-                <a href="">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8" />
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-                    
-                </a>
-
-            </div>
-            <div class="header_image" id="pessoinha">
-            
-                <a href="login">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="11" r="4" />
-                    <path d="M5 22s1.5-3.5 4-3.5h6c2.5 0 4 3.5 4 3.5"/></svg>
-
-                </a>
-            </div>
-        </nav>
-    </header>
+{% extends "layout.html" %}
+<div id="esconde_esconde">
+  {% block all %}
+  {% block head %}
+  {{ super() }}
+  {% endblock %}
+  {% block header %}
+  {{ super() }}
+  {% endblock %}
+  {% block login_criar_conta %}
+    {{super()}}
+  {% endblock%}
+</div>
     <img src="../static/img/nao_eh_um_gol_quadrado.png" alt="" id="gol_d">
 <main>
     <aside id="aside_pesquisa">
@@ -173,17 +139,15 @@
             </div>
             <div id="estado">
                 <h3>ESTADO</h3>
-                    <fieldset style="border: none;">
-                        <div class="div_label_input" style="width: 100px;">
-                            <label for="input_estado_usado">Usado:</label>
-                                <input type="radio" name="estado" id="input_estado_usado" class="input_radio" value="Usado">
-                        </div>
-                        <br>
-                        <div class="div_label_input" style="width: 100px; margin-top: -10px;">
-                            <label for="input_estado_novo">Novo:</label>
-                                <input type="radio" name="estado" id="input_estado_novo" style="margin-left: 9px;" class="input_radio" value="Novo">
-                        </div>
-                    </fieldset>
+                    <div class="div_label_input" style="width: 100px;">
+                        <label for="input_estado_usado">Usado:</label>
+                            <input type="radio" name="estado" id="input_estado_usado" class="input_radio" value="Usado">
+                    </div>
+                    <br>
+                    <div class="div_label_input" style="width: 100px; margin-top: -10px;">
+                        <label for="input_estado_novo">Novo:</label>
+                            <input type="radio" name="estado" id="input_estado_novo" style="margin-left: 9px;" class="input_radio" value="Novo">
+                    </div>
             </div>
             <button type="submit" id="pesquisar">Pesquisar</button>
             </form>
@@ -194,10 +158,10 @@
 <section id="carros">
     {%for carro in carros %}
     <div class="quadro_carros">
-        <a href="">
+        <a href="{{url_for('carro_especifico',carro_nome=carro.nome)}}">
             <div id="div_carro_img_detalhes">
                 <div id="div_img_carro_carros">
-                    
+                    <img src="../static/img/imagens_carro/{{lst_marcas_carros[carro.id-1]}}.jpeg" alt="">
                 </div>
 
                     <div id="carro_caracteristicas">
@@ -230,13 +194,12 @@
         </a>
     </div>
     {% endfor %}
-    
-
-
-
 </section>
-</div>
-
 </main>
-</body>
-</html>
+
+{% block footer%}
+{{ super() }}
+{% endblock%}
+
+{% endblock%}
+ 

@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Georgian:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Georgian:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root{
     --cor-padrao: rgb(193,85,0);
+    --cor-botton-header: rgba(245, 245, 245, 0.7);
 }
 
 /* reset css (inicio)*/
@@ -19,8 +20,7 @@ body{
 /* main (inicio)*/
 main{
     width: auto;
-    padding: 10px;
-    padding-top: 0px;
+    padding: 0px 10px;
     margin: 0px;
     display: flex;
 
@@ -37,7 +37,7 @@ header{
     height: 64px;
     border-top: none;
     border-bottom: none;
-    background-color: rgba(245, 245, 245, 0.7);
+    background-color: var(--cor-botton-header);
 
 
 }
@@ -93,6 +93,8 @@ img#gol_d{
 div#quadro_pesquisa{
     width: 250px;
     border: 2.5px solid black;
+    border-top: none;
+    border-bottom: none;
     padding: 10px;
     display: inline-block;
     background-color: white;
@@ -174,8 +176,17 @@ input.input_radio{
     height: 20px;
 }
 button#pesquisar{
-    width: 100px;
+    width: 150px;
     height: 50px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Noto Serif Georgian", serif;
+    font-weight: 600;
+    color: white;
+    background-color: var(--cor-padrao);
+}
+div#button_carros{
+    height: 100px;
 }
 /* quadro pesquisa (bloco de seleções para ser pesquisado no backending) (fim) */
 
@@ -183,6 +194,7 @@ button#pesquisar{
 
 /* section carros (precisará ser trabalho no backending) (início) */
 section#carros{
+    display: block;
     width: 100%;
 }
 
@@ -271,7 +283,7 @@ div#carro_preco{
 
 /* section carros (precisará ser trabalho no backending) (fim) */
 aside#aside_pesquisa{
-    width: 250px;
+    width: 270px;
 }
 
 main#home{
@@ -421,6 +433,9 @@ div#svg_preco_detalhe{
 div#svg_preco, div#svg_detalhe{
     align-self: center;
 }
+text#svg_semana > a{
+    color: white;
+}
 div#svg_preco > svg > text#svg_preco{
     font-family: "Roboto", sans-serif;
     font-weight: 700;
@@ -441,37 +456,55 @@ main#sobre{
     padding: 50px;
     width: 75%;
     margin: auto;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 div.caixa_texto{
     text-align: justify;
-    padding: 0px 15px;
     font-size: 1.075em;
+    margin: 15px 0px;
 }
-div.caixa_texto > p{
-    margin: 10px 0px;
+div.caixa_texto > p, div.caixa_texto > div > p{
+    margin: 5px 0px;
 }
-div.caixa_texto > h2, div.caixa_texto > h3{
-    font-family: "Playfair Display", serif;
+div.caixa_texto > h3, div.caixa_texto > h2{
+    font-family: "Lora", serif;
     text-align: center;
-    white-space: nowrap;
+    color: var(--cor-padrao);
 }
-
+div#segundo_terceiro{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 div#primeiro{
-    width: 40%;
+    width: 100%;
 }
 div#segundo{
-    width: 25%;
+    width: 50%;
+    min-width: 250px;
+    margin: 0px auto;
+}
+div#segundo > p{
+    text-align: justify;
+    margin: 10px 0px;
 }
 div#terceiro{
-    width: 30%;
+    width: 45%;
+    min-width: 250px;
+    margin: 0px auto;
 }
 
 div.caixa_div{
     width: 100%;
-    height: 101%;
+    height: 115%;
     background-color: rgba(0, 0, 0, 0.75);
     position: absolute;
     z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 div#div_login{
     display: block;
@@ -479,10 +512,10 @@ div#div_login{
     height: auto;
     background-color: white;
     padding: 50px;
-    position: absolute;
+    position: fixed;
     z-index: 2;
     margin-left: calc(50% - 300px);
-    margin-top: -50px;
+    margin-top: 25px;
 }
 div.div_fechar{
     margin-left: 95%;
@@ -543,7 +576,8 @@ div#div_criar_conta{
     position: absolute;
     z-index: 2;
     margin-left: calc(50% - 353.3px);
-    margin-top: -50px;
+    margin-top: 25px;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 
 }
 input.svg_input{
@@ -559,3 +593,252 @@ input#nome_criar_conta{margin: -314px 0px 0px 30px;}
 input.svg_input:focus{outline: none;}
 input#senha_login{ margin: -71px -6px -6px 29px;}
 input#email_login{margin:-140px 0px 0px 30px;}
+
+
+
+div#quadro_carro_esp{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    max-width: 85%;
+    height: 600px;
+    margin: 50px auto;
+}
+
+div#carro_esp_img_nome_preco{
+    text-align: center;
+    background-color: white;
+    border: 4px solid black;
+    border-bottom: none;
+    height: auto;
+    padding: 15px 0px;
+    margin-left: 5%;
+    max-width: 672px
+}
+div#carro_esp_img_nome_preco > h2{
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 3em;
+    color: var(--cor-padrao);
+}
+img#carro_esp_img{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 400ms ease-in-out 0s;
+    width: 845px;
+    height: 563px;
+    margin-left: 0px;
+    margin-top: -4px;
+}
+div#carro_esp_img_caracteristicas{
+    display: flex;
+}
+div#carros_bgl{
+    display: grid;
+    justify-items: start;
+    text-wrap: nowrap;
+    background-color: rgb(40,40,40);
+    border-left: none;
+    margin: 0px 50px;
+}
+div.quadro_categoria_carro_esp{
+    width: 100%;
+    text-align: justify;
+    background-color: rgb(40,40,40);
+    border-bottom: solid black 1.5px;
+    padding: 10px 20px;
+
+}
+div#carros_bgl > div >  h3{
+    color: white;
+    text-transform: capitalize;
+}
+div#carros_bgl > div > h3 > span{
+    color: var(--cor-padrao);
+}
+
+.carousel-container {
+    position: relative;
+    width: 80%;
+    overflow: hidden;
+    margin: 0px -18.5px;
+    border: 4px solid black;
+}
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+.carousel-item {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+}
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+div#bostao_carousel{
+    display: flex;
+    margin: 25px auto;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.bostao{
+    font-size: 20px;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgba(40,40,40,0.9);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 50px;
+    justify-content: center;
+    margin: 0px auto;
+}
+.bostao:hover{
+    transition-duration: 0.5s;
+    font-size: 70px;
+    color: var(--cor-padrao);
+    width: 60px;
+    animation: none;
+}
+#esq:hover > svg, #dir:hover > svg{
+    animation: none;
+}
+#esq > svg{
+    animation: esq 1.5s infinite cubic-bezier(0.38, 0.38, 0.35, 1.29);
+}
+#dir > svg {
+    animation: dir 1.5s infinite cubic-bezier(0.38, 0.38, 0.35, 1.29);
+
+}
+@keyframes esq {
+    0%,100%{transform: translateX(3px)}
+    50%{transform: translateX(-8.5px);}
+}
+@keyframes dir {
+    0%,100%{transform: translateX(-3px)}
+    50%{transform: translateX(8.5px);}
+}
+
+div#contatos_grid{
+    position: fixed;
+    top: 40%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+div.borda_contatos_grid{
+    background-color: rgba(0,0,0,0.5);
+    border: 1px solid black;
+    padding: 5px;
+    margin: 0.75px 0px;
+}
+div#contatos_grid > div  > i{
+    font-size: 27px;
+}
+
+div#instagram:hover{
+    width: 125px;
+}
+div#contatos_grid > div#facebook:hover{
+    width: 125px;
+}
+div#contatos_grid > div#whatsapp:hover{
+    width: 125px;
+}
+div#contatos_grid > div#compartilhar:hover{
+    width: 125px;
+}
+
+footer{
+    position: relative;
+    width: 100%;
+    background-color: var(--cor-botton-header);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 15px 0px;
+    border-top: 2px black solid;
+}
+nav#elementos{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    text-align: center;
+}
+nav#elementos > div.quadro-elementos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2px 0px;
+}
+
+nav#elementos > div.quadro-elementos > a{
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1em;
+    color: black;
+    text-decoration: none;
+}
+nav#elementos > div.quadro-elementos > a:hover{
+    color: var(--cor-padrao);
+    transition-duration: 0.5s;
+}
+div#mensagem{
+    background-color: white;
+    width: 50%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+div#mensagem > h2{
+    text-align: center;
+    color: var(--cor-padrao);
+}
+div#mensagem > h3{
+    font-size: 15px;
+    text-align: center;
+}
+div#contatos{
+    width: 50%;
+    border: solid black 2px;
+}
+div#contatos > select{
+    width: 101.5%;
+    height: 30px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 200;
+}
+div#contatos > input{
+    width: 101%;
+    height: 25px;
+    text-align: center;
+    font-weight: 600;
+}
+div.contatos2{
+    font-weight: 600;
+    background-color: white;
+    padding: 10px;
+}
+span#exemplo{
+    padding: 3.5px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    margin-right: 50px;
+}
+div#corpo_email{
+    height: 54%;
+    background-color: white;
+}
+div#corpo_email > input{
+    width: 100%;
+    height: 98%;
+    text-align: left;
+    border: 1px solid black;
+}
