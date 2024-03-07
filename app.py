@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from funcoes import *
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Hf3g6cEEDgDAg56h6e-dGG51GEF3256e@viaduct.proxy.rlwy.net:30899/railway'db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Hf3g6cEEDgDAg56h6e-dGG51GEF3256e@viaduct.proxy.rlwy.net:30899/railway'
+db = SQLAlchemy(app)
 app.secret_key = 'fabricio'
 
 class Carros(db.Model):
