@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from funcoes import *
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Hf3g6cEEDgDAg56h6e-dGG51GEF3256e@viaduct.proxy.rlwy.net:30899/railway'
-db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Hf3g6cEEDgDAg56h6e-dGG51GEF3256e@viaduct.proxy.rlwy.net:30899/railway'db = SQLAlchemy(app)
 app.secret_key = 'fabricio'
 
 class Carros(db.Model):
@@ -77,6 +77,8 @@ def sobre():
 def lay():
     return render_template('layout.html')
 
+
+
 @app.route('/processamento',methods=['POST'])
 def processar():
     carros_list = []
@@ -124,17 +126,13 @@ def carro_especifico(carro_nome):
 def contatos():
     return render_template('contatos.html')
 
+@app.route('/email_processar',methods=['POST'])
+def processar_email():
+    selecao = request.form.get('email_selecao')
+    titulo = request.form.get('email_titulo')
+    remetente = request.form.get('email_remetente')
+    corpo = request.form.get('email_corpo')
+    enviar_email(assunto=f'-{selecao}- {titulo}',texto=corpo,remetente='testeconsilcar@gmail.com',destinatário='testeconsilcar@gmail.com')
+    return redirect(url_for('contatos'))
 
-
-def data_preco(obj_carro):
-    obj_carro.registro = obj_carro.registro.strftime('%d/%m/%Y')
-    obj_carro.preco = moedinha(obj_carro.preco)
-    return obj_carro
-
-def moedinha(numero):
-    numero_formatado = '{:.2f}'.format(numero)
-    parte_inteira, parte_decimal = numero_formatado.split('.')
-    parte_inteira = '{:,}'.format(int(parte_inteira)).replace(',', '.')
-    valor_formatado = f'R$ {parte_inteira},{parte_decimal}'
-    return valor_formatado
 

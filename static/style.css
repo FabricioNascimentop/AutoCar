@@ -454,8 +454,9 @@ img#foto_sobre{
 
 main#sobre{
     background-color: white;
-    padding: 50px;
+    padding: 5%;
     width: 75%;
+    min-width: 250px;
     margin: auto;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -757,10 +758,11 @@ div#contatos_grid > div#compartilhar:hover{
 }
 
 footer{
+    display: flex;
+    flex-wrap: wrap;
     position: relative;
     width: 100%;
     background-color: var(--cor-botton-header);
-    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: flex-start;
@@ -798,7 +800,6 @@ div#fale_conosco{
     border: solid 2px var(--cor-padrao);
     border-bottom: none;
     border-top: none;
-    padding: 0px 10%;
     z-index: 3;
 }
 div#fale_conosco > p{
@@ -833,7 +834,7 @@ nav#elementos > div.quadro-elementos > a:hover{
 
 
 main#contatos{
-    height: 600px;
+    height: 579px;
     background-color: white;
     margin: 0px;
     padding: 0px;
@@ -842,30 +843,49 @@ main#contatos{
 div#mensagem{
     width: 50%;
 }
-div#mensagem > h2{
-    height: 50px;
-    font-size: 2.5em;
-    color: var(--cor-padrao);
-    margin-top: calc(50% - 50px);
+div#mensagem > div#head_msg_container{
+    margin-top: 25px;
+    display: grid;
+    height: 400px;
 }
+div#mensagem > div#head_msg_container div.head_msg > h2{
+    font-size: 2em;
+    color: var(--cor-padrao);
+    margin-left: auto;
+}
+div#mensagem > div > h3{
+    font-size: 1em;
+    margin-bottom: 25px;
+}
+
 div#mensagem > h3{
     font-size: 18px;
 }
 div#caixa_email{
     width: 50%;
 }
-div#caixa_email > select{
+div#caixa_email > form{border: none;}
+div#caixa_email > form > select{
     width: 100%;
     text-align: center;
-    height: 35px;
+    height: 90px;
+    color: var(--cor-padrao);
+    font-size: 1.25em;
+    font-weight: 600;
 }
+div#caixa_email > form > select > option{color: black;}
+
 input#titulo{
-    width: 100%;
+    width: calc(100% - 4px);
     text-align: left;
-    height: 30px;
+    height: 56px;
 }
 div#email{
     text-align: left;
+}
+div#email_destinatario_remetente{
+    margin: 5px 0px;
+    height: 60px;
 }
 div.email_content{
     font-family: "Lora", serif;
@@ -888,9 +908,9 @@ div#corpo_email{
     height: 100%;
 }
 div#corpo_email > textarea{
-    margin: 0.75%;
+    margin: 0px 0.75%;
     width: 95%;
-    height: 400px;
+    height: 298px;
 }
 div#corpo_email > button{
     width: 100px;
@@ -900,7 +920,7 @@ div#corpo_email > button{
     font-family: "Montserrat", sans-serif;
     color: white;
     background-color: var(--cor-padrao);
-    margin-left: 10px;
+    margin: 5px 10px;
 }
 
 main#contatos > div{
