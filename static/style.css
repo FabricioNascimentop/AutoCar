@@ -46,6 +46,7 @@ nav{
 }
 header > nav{
     display: flex;
+    flex-wrap: wrap;
 }
 header > nav > div{
     padding: 27px 20px;
@@ -762,24 +763,59 @@ footer{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: flex-start;
     padding: 15px 0px;
     border-top: 2px black solid;
 }
-nav#elementos{
+div#linha{
+    position: absolute;
+    width: 100%;
+    height: 32px;
+    background-color: rgb(40,40,40);
+    z-index: 1;
+}
+footer > div > h2{
+    font-family: "Playfair Display", serif;
+    font-size: 1.5em;
+    color: var(--cor-padrao);
+    z-index: 2;
+    margin-bottom: 10px;
+}
+div#elementos{
     display: flex;
     flex-direction: column;
-    width: 200px;
     text-align: center;
 }
-nav#elementos > div.quadro-elementos{
+div#elementos > div.quadro-elementos{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 2px 0px;
 }
+div#fale_conosco{
+    text-align: center;
+    display: grid;
+    border: solid 2px var(--cor-padrao);
+    border-bottom: none;
+    border-top: none;
+    padding: 0px 10%;
+    z-index: 3;
+}
+div#fale_conosco > p{
+    font-family: "Lora", serif;
+    text-align: center;
+    font-size: 1.1em;
+}
+div#area_login{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+div#area_login > div > a{
+  font-size: 1.15em;
+}
 
-nav#elementos > div.quadro-elementos > a{
+footer > div > a, footer > div > div > a{
     font-family: "Montserrat", sans-serif;
     font-size: 1.1em;
     color: black;
@@ -789,56 +825,88 @@ nav#elementos > div.quadro-elementos > a:hover{
     color: var(--cor-padrao);
     transition-duration: 0.5s;
 }
-div#mensagem{
+
+
+
+
+
+
+
+main#contatos{
+    height: 600px;
     background-color: white;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+div#mensagem{
     width: 50%;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 div#mensagem > h2{
-    text-align: center;
+    height: 50px;
+    font-size: 2.5em;
     color: var(--cor-padrao);
+    margin-top: calc(50% - 50px);
 }
 div#mensagem > h3{
-    font-size: 15px;
-    text-align: center;
+    font-size: 18px;
 }
-div#contatos{
+div#caixa_email{
     width: 50%;
-    border: solid black 2px;
 }
-div#contatos > select{
-    width: 101.5%;
+div#caixa_email > select{
+    width: 100%;
+    text-align: center;
+    height: 35px;
+}
+input#titulo{
+    width: 100%;
+    text-align: left;
     height: 30px;
-    font-size: 15px;
-    text-align: center;
-    font-weight: 200;
 }
-div#contatos > input{
-    width: 101%;
-    height: 25px;
-    text-align: center;
-    font-weight: 600;
+div#email{
+    text-align: left;
 }
-div.contatos2{
-    font-weight: 600;
-    background-color: white;
-    padding: 10px;
+div.email_content{
+    font-family: "Lora", serif;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    margin-left: 10px    
 }
-span#exemplo{
-    padding: 3.5px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    margin-right: 50px;
+div.email_content > p, div.email_content > h3{
+    margin-right: 15px;
+    display: inline;
+}
+div.email_content > input{
+    width: 90%;
+    height: 20px;
 }
 div#corpo_email{
-    height: 54%;
-    background-color: white;
-}
-div#corpo_email > input{
     width: 100%;
-    height: 98%;
-    text-align: left;
+    height: 100%;
+}
+div#corpo_email > textarea{
+    margin: 0.75%;
+    width: 95%;
+    height: 400px;
+}
+div#corpo_email > button{
+    width: 100px;
+    height: 40px;
+    border-radius: 3px;
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+    background-color: var(--cor-padrao);
+    margin-left: 10px;
+}
+
+main#contatos > div{
     border: 1px solid black;
 }
+
+
+
+

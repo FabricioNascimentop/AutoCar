@@ -11,39 +11,37 @@
     {{super()}}
   {% endblock%}
 </div>
-<main style="margin-bottom: 125px;">
+<main id="contatos">
     <div id="mensagem">
         <h2>Selecione a razão de seu contato</h2>
         <h3>ficaremos felizes em lhe atender da melhor forma possível</h3>
     </div>
-    <div id="contatos">
+
+    <div id="caixa_email">
         <select id="opcoesSelect">
             <option value="selecionar">Selecione aqui a razão de seu contato</option>
             <option value="duvida">Duvida</option>
             <option value="sugestao">Sugestão</option>
             <option value="proposta">Quero fazer uma proposta de preco</option>
-            <option value="outra">Outra</option>
         </select>
         <br>
-        <input type="text" id="titulo" name="titulo" value="Título da mensagem">
-        <div id="para" class="contatos2">Para: <span id="exemplo">emailConsilcar@consilcar.com</span>(exemplo)</div>
-        <div id="email_cliente2" class="contatos2">De: <input type="email" name="email_cliente2" id="email_cliente2" value="seu email"></div>    
-        <div id="corpo_email"><input type="text" id="corpo_email" name="corpo_email" value="digite aqui sua mensagem"></div>
+
+        <div id="email">
+            <form action="" method="get">
+            <input type="text" id="titulo" name="titulo" placeholder="Título da mensagem">
+            <div class="email_content" id="destinatario"><h3>Para:</h3><p>emailConsilcar@consilcar.com</p></div>
+            <div class="email_content" id="remetente"><h3>De:</h3><input type="email" name="" id="" placeholder="digite aqui seu nome"></div>
+            
+            <div id="corpo_email">
+                    <textarea name="" id="" cols="30" rows="10" placeholder="digite aqui sua mensagem"></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+        
     </div>
 </main>
-<script>
-    function updateInput() {
-        var select = document.getElementById('opcoesSelect');
-        var input = document.getElementById('opcoesInput');
 
-        if (select.value === 'outra') {
-            input.style.display = 'inline-block';
-            input.focus();
-        } else {
-            input.style.display = 'none';
-        }
-    }
-</script>
 
 
 {% block footer%}
