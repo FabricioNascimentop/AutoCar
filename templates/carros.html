@@ -58,8 +58,8 @@
                         {% endfor %}
                     </select>
                     <br>
-                    <label for="select_preco_final">Até:</label>
-                    <select name="select_preco_final" id="select_preco_final">
+                    <label for="select_preco_fim">Até:</label>
+                    <select name="select_preco_fim" id="select_preco_fim">
                         {% for preco in precos %}
                         <option value="{{preco}}" selected="2024">{{preco}}</option>
                         {% endfor %}
@@ -74,14 +74,14 @@
                     <label for="select_quilometro_inicio">Desde:</label>
                     <select name="select_quilometro_inicio" id="select_quilometro_inicio">
                         {% for km in quilometragem %}
-                        <option value="{{km}}" selected="2024">{{km}}</option>
+                        <option value="{{km}}" selected="2024">{{km}}km</option>
                         {% endfor %}
                     </select>
                     <br>
-                    <label for="select_quilometro_final">Até:</label>
-                    <select name="select_quilometro_final" id="select_quilometro_final">
+                    <label for="select_quilometro_fim">Até:</label>
+                    <select name="select_quilometro_fim" id="select_quilometro_fim">
                         {% for km in quilometragem %}
-                        <option value="{{km}}" selected="2024">{{km}}</option>
+                        <option value="{{km}}" selected="2024">{{km}}km</option>
                         {% endfor %}
                     </select>
                 </div>

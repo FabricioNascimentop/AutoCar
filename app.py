@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from funcoes import *
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Hf3g6cEEDgDAg56h6e-dGG51GEF3256e@viaduct.proxy.rlwy.net:30899/railway'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3306/carros_e_clientes'
 db = SQLAlchemy(app)
 app.secret_key = 'fabricio'
 
@@ -80,16 +80,6 @@ def lay():
 
 
 
-@app.route('/processamento',methods=['POST'])
-def processar():
-    carros_list = []
-    data = request.form
-    carros = Carros.query.all()
-    for carro in carros:
-        marca_carro = str(carro.nome.split()[0])
-        if marca_carro in data.getlist('marcas'):
-            carros_list.append(carros)
-            return url_for(carros)
 
 
 @app.route('/carros')
@@ -97,11 +87,11 @@ def carros():
     lst_marcas_carros = []
     lst_marcas = []
     anos = list(range(1956, 2025))
-    precos = list(range(30000,50000,2000)) 
-    quilometragem = list(range(1000,30000,3000))
+    precos = list(range(30000,500001,2000)) 
+    quilometragem = list(range(1000,30001,2000))
+    for c in range(0,len(precos)):
+        precos[c] = moedinha(precos[c])
     carros = Carros.query.all()
-
-
     for carro in carros:
         marca_carro = str(carro.nome.split()[0]) # pega somente a marca do carro
         if marca_carro not in lst_marcas:
@@ -110,9 +100,23 @@ def carros():
         carro.registro = carro.registro.strftime('%d/%m/%Y') #corrige formato da data 
         carro.preco = moedinha(carro.preco) # corrige formatação do valor monetário do carro
         lst_marcas_carros.append(marca_nome_carro)
+    return render_template('carros.html',carros=carros,lst_marcas=lst_marcas,lst_marcas_carros=lst_marcas_carros,anos=anos,precos=precos,quilometragem=quilometragem)
 
-            
-    return render_template('carros.html',carros=carros,lst_marcas=lst_marcas,lst_marcas_carros=lst_marcas_carros)
+@app.route('/processamento',methods=['POST'])
+def processar():
+    data = request.form
+    marcas = data.getlist('marcas')
+    registro_inicio = data.get('select_registro_inicio')
+    registro_fim = data.get('select_registro_fim')
+    preco_inicio = data.get('select_preco_inicio')
+    preco_fim = data.get('select_preco_fim')
+    quilometro_inicio = data.get('select_quilometro_fim')
+    quilometro_fim = data.get('select_quilometro_fim')
+    combustivel = data.getlist('combustivel')
+    estado = data.get('estado')
+
+    print(f'marcas:{marcas} \nregistro:{registro_inicio}-{registro_fim} \npreço:{preco_inicio}-{preco_fim} \nquilometragem:{quilometro_inicio}-{quilometro_fim} \ncombustivel{combustivel} \nestado: {estado}')
+    return redirect(url_for('carros'))
 
 @app.route('/carros/<string:carro_nome>',methods=['POST','GET'])
 def carro_especifico(carro_nome):
