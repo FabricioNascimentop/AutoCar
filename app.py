@@ -103,10 +103,10 @@ def carros():
         marca_carro = str(carro.nome.split()[0]) # pega somente a marca do carro
         if marca_carro not in lst_marcas:
             lst_marcas.append(marca_carro)
-            marca_nome_carro = str(carro.nome).replace(' ','-') #tira espaços do no nome do carro
-            carro.registro = carro.registro.strftime('%d/%m/%Y') #corrige formato da data 
-            carro.preco = moedinha(carro.preco) # corrige formatação do valor monetário do carro
-            lst_marcas_carros.append(marca_nome_carro)
+        marca_nome_carro = str(carro.nome).replace(' ','-') #tira espaços do no nome do carro
+        carro.registro = carro.registro.strftime('%d/%m/%Y') #corrige formato da data 
+        carro.preco = moedinha(carro.preco) # corrige formatação do valor monetário do carro
+        lst_marcas_carros.append(marca_nome_carro)
 
             
     return render_template('carros.html',carros=carros,lst_marcas=lst_marcas,lst_marcas_carros=lst_marcas_carros)
