@@ -26,8 +26,6 @@ class Carros(db.Model):
     cor = db.Column(db.String(30))
     lugares = db.Column(db.Integer)
 
-
-
 class Clientes(db.Model):
     id = db.Column('id',db.Integer, primary_key=True, autoincrement=True)  
     nome  = db.Column(db.String(50))
@@ -86,36 +84,51 @@ def lay():
 def carros():
     lst_marcas_carros = []
     lst_marcas = []
+    carros = data_preco(Carros.query.all())
     anos = list(range(1956, 2025))
-    precos = list(range(30000,500001,2000)) 
-    quilometragem = list(range(1000,30001,2000))
-    for c in range(0,len(precos)):
-        precos[c] = moedinha(precos[c])
-    carros = Carros.query.all()
     for carro in carros:
         marca_carro = str(carro.nome.split()[0]) # pega somente a marca do carro
-        if marca_carro not in lst_marcas:
+        if marca_carro not in lst_marcas: #adiciona marcas de carros sem repetição
             lst_marcas.append(marca_carro)
         marca_nome_carro = str(carro.nome).replace(' ','-') #tira espaços do no nome do carro
-        carro.registro = carro.registro.strftime('%d/%m/%Y') #corrige formato da data 
-        carro.preco = moedinha(carro.preco) # corrige formatação do valor monetário do carro
         lst_marcas_carros.append(marca_nome_carro)
-    return render_template('carros.html',carros=carros,lst_marcas=lst_marcas,lst_marcas_carros=lst_marcas_carros,anos=anos,precos=precos,quilometragem=quilometragem)
+    return render_template('carros.html',carros=carros,lst_marcas=lst_marcas,lst_marcas_carros=lst_marcas_carros,anos=anos)
 
 @app.route('/processamento',methods=['POST'])
 def processar():
     data = request.form
     marcas = data.getlist('marcas')
+
     registro_inicio = data.get('select_registro_inicio')
     registro_fim = data.get('select_registro_fim')
+
     preco_inicio = data.get('select_preco_inicio')
     preco_fim = data.get('select_preco_fim')
-    quilometro_inicio = data.get('select_quilometro_fim')
+
+    quilometro_inicio = data.get('select_quilometro_inicio')
     quilometro_fim = data.get('select_quilometro_fim')
+
     combustivel = data.getlist('combustivel')
     estado = data.get('estado')
 
+    print('\n \n \n \n \n \n \n')
     print(f'marcas:{marcas} \nregistro:{registro_inicio}-{registro_fim} \npreço:{preco_inicio}-{preco_fim} \nquilometragem:{quilometro_inicio}-{quilometro_fim} \ncombustivel{combustivel} \nestado: {estado}')
+    print('\n \n \n \n \n \n \n')
+
+    query_dict = {}
+    if len(marcas) > 0:
+        query_dict['marcas'] = marcas
+    if registro_fim > registro_inicio:
+        query_dict['registro'] = [registro_inicio,registro_fim]
+    if preco_fim > preco_inicio:
+        query_dict['preco'] = [preco_inicio,preco_fim]
+    
+    
+    
+    
+    
+    print(query_dict)
+    print('\n \n \n \n \n \n \n')
     return redirect(url_for('carros'))
 
 @app.route('/carros/<string:carro_nome>',methods=['POST','GET'])

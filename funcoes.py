@@ -1,7 +1,13 @@
-def data_preco(obj_carro):
-    obj_carro.registro = obj_carro.registro.strftime('%d/%m/%Y')
-    obj_carro.preco = moedinha(obj_carro.preco)
-    return obj_carro
+def data_preco(objs):
+    try:
+        for obj in objs:
+            obj.registro = obj.registro.strftime('%d/%m/%Y')
+            obj.preco = moedinha(obj.preco)
+    except TypeError:
+        objs.registro = objs.registro.strftime('%d/%m/%Y')
+        objs.preco = moedinha(objs.preco)
+    finally:
+        return objs
 
 def moedinha(numero):
     numero_formatado = '{:.2f}'.format(numero)

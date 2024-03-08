@@ -130,6 +130,54 @@ div#quadro_pesquisa > form > div > div > select{
     margin: 5px 0px;
     text-align: center;
 }
+div.div_select > input[type="range"]{
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    height: 1px;
+    margin: 10px auto;
+    width: 75%;
+    background: rgb(40, 40, 40);
+    outline: none;
+}
+div.div_select > input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none; 
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: var(--cor-padrao);
+  cursor: pointer;
+  border-radius: 50%; 
+}
+.range::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 0 15px rgba(255,85,0, .1);
+    transition: 0.5s;
+  }
+
+  .range:active::-webkit-slider-thumb {
+    box-shadow: 0 0 0 13px rgba(255,85,0, .2)
+  }
+  .range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 10px rgba(255,85,0, .1)
+  }
+  p.p_aviso{
+        display: none;
+        width: 270px;
+        margin: 10px 0px -40px -10px;
+        font-size: 12px;
+        background-color: rgb(40,40,40);
+        color: red;
+        padding: 10px 0px;
+        font-family: "Playfair Display", serif
+  }
+  
+p.p_preco_quilometro{
+    font-size: 1.5em;
+    text-align: center;
+    color: var(--cor-padrao);
+    font-family: "Lora", serif;
+    font-weight: 600;
+}
 div#quadro_pesquisa > form > div{
     padding: 15px 0px;
 }
@@ -926,7 +974,6 @@ div#corpo_email > button{
 main#contatos > div{
     border: 1px solid black;
 }
-
 
 
 

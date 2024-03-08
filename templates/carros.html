@@ -21,7 +21,7 @@
                 <h3>MARCAS</h3>
                     {% for marca in lst_marcas %}
                     <div class="caixa_marcas">
-                        <label for="Marcas">{{marca}} </label>
+                        <label for="{{marca}}">{{marca}}</label>
                             <input type="checkbox" name="marcas" id="{{marca}}" class="input_marcas_carros" value="{{marca}}"> </label>
                     </div>
                     {% endfor %}
@@ -52,18 +52,13 @@
                 <h3>PREÇO</h3>
                 <div class="div_select">
                     <label for="select_preco_inicio">Desde:</label>
-                    <select name="select_preco_inicio" id="select_preco_inicio">
-                        {% for preco in precos %}
-                        <option value="{{preco}}">{{preco}}</option>
-                        {% endfor %}
-                    </select>
+                    <input type="range" name="select_preco_inicio" id="select_preco_inicio" min="10000" max="100000" step="500" class="range" onpointermove="aparece_valor(this)" onchange="att_fim(this,'select_preco_fim')" value="0">
+                    <p id="valor_select_preco_inicio" class="p_preco_quilometro">R$10.000,00</p>
                     <br>
                     <label for="select_preco_fim">Até:</label>
-                    <select name="select_preco_fim" id="select_preco_fim">
-                        {% for preco in precos %}
-                        <option value="{{preco}}" selected="2024">{{preco}}</option>
-                        {% endfor %}
-                    </select>
+                    <input type="range" name="select_preco_fim" id="select_preco_fim" min="10000" max="100000" step="500" class="range" onpointermove="aparece_valor(this)" value="0">
+                    <p id="valor_select_preco_fim" class="p_preco_quilometro">R$10.000,00</p>
+                    <p class="p_aviso preco-quilometro" id="p_preco"></p>
                 </div>
             </div>
 
@@ -72,18 +67,12 @@
                 <h3>QUILOMETRAGEM</h3>
                 <div class="div_select">
                     <label for="select_quilometro_inicio">Desde:</label>
-                    <select name="select_quilometro_inicio" id="select_quilometro_inicio">
-                        {% for km in quilometragem %}
-                        <option value="{{km}}" selected="2024">{{km}}km</option>
-                        {% endfor %}
-                    </select>
+                    <input type="range" name="select_quilometro_inicio" id="select_quilometro_inicio" min="0" max="10001" step="200" value="0" class="range" onpointermove="aparece_valor(this)" onchange="att_fim(this,'select_quilometro_fim')">
+                    <p id="valor_select_quilometro_inicio" class="p_preco_quilometro">0 KM</p>
                     <br>
                     <label for="select_quilometro_fim">Até:</label>
-                    <select name="select_quilometro_fim" id="select_quilometro_fim">
-                        {% for km in quilometragem %}
-                        <option value="{{km}}" selected="2024">{{km}}km</option>
-                        {% endfor %}
-                    </select>
+                    <input type="range" name="select_quilometro_fim" id="select_quilometro_fim" min="0" max="10001" step="200" class="range" value="0" onpointermove="aparece_valor(this)">
+                    <p id="valor_select_quilometro_fim" class="p_preco_quilometro">0 KM</p>
                 </div>
             </div>
 
@@ -196,7 +185,65 @@
     {% endfor %}
 </section>
 </main>
-
+<script>
+    function aparece_valor(e){
+        const input_range_value = parseInt(e.value)
+        const input_preco_inicio = document.getElementById('select_preco_inicio')
+        const input_quilometro_inicio = document.getElementById('select_quilometro_inicio')
+        var p = `valor_${e.name}`
+        if( e.id == 'select_preco_fim'){
+            if(e.value < input_preco_inicio.value){
+                e.value = input_preco_inicio.value
+                document.getElementById('p_preco').style.display = 'block'
+                document.getElementById('p_preco').innerText = 'valor máximo não pode ser menor que o mínimo'
+                setInterval(desaparecer,2500)
+            }
+        if( e.id == 'select_quilometro_fim'){
+        if(e.value < input_quilometro_inicio.value){
+            e.value = input_quilometro_inicio.value
+            document.getElementById('p_preco').style.display = 'block'
+            document.getElementById('p_preco').innerText = 'valor máximo não pode ser menor que o mínimo'
+            setInterval(desaparecer,2500)
+        }
+    }
+}
+        function desaparecer(){
+            document.querySelector('.p_aviso').style.display = 'none'
+        }
+        if(p === 'valor_select_preco_fim' || p === 'valor_select_preco_inicio'){
+            document.getElementById(p).innerText = moedinha(input_range_value)
+        }
+        if(p == 'valor_select_quilometro_fim' || p === 'valor_select_quilometro_inicio'){
+            document.getElementById(p).innerText = `${numerinho(input_range_value)} KM`
+        }
+    }
+    function att_fim(e,id_fim){
+        const input_fim = document.getElementById(id_fim)
+        const p_fim =  document.getElementById(`valor_${input_fim.name}`)
+        console.log(p_fim)
+        input_fim.value = e.value
+        if(p_fim.id == 'valor_select_preco_fim'){
+            p_fim.innerText = moedinha(parseInt(e.value))
+        }
+        if(p_fim.id == 'valor_select_quilometro_fim'){
+            p_fim.innerText = `${numerinho(parseInt(e.value))} KM`
+        }
+    }
+    function moedinha(numero) {
+    if (typeof numero === 'number' && !isNaN(numero)) {
+        let numeroFormatado = numero.toFixed(2);
+        let [parteInteira, parteDecimal] = numeroFormatado.split('.');
+        parteInteira = parseInt(parteInteira).toLocaleString('pt-BR');
+        let valorFormatado = `R$${parteInteira},${parteDecimal}`;
+        return valorFormatado;
+    } else {
+        return 'Erro: Valor não é um número';
+    }
+}
+    function numerinho(numero) {
+    return numero.toLocaleString('pt-BR')
+}
+</script>
 {% block footer%}
 {{ super() }}
 {% endblock%}
