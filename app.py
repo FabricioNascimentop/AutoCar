@@ -84,8 +84,8 @@ def lay():
 def carros():
     lst_marcas_carros = []
     lst_marcas = []
-    carros = data_preco(Carros.query.all())
     anos = list(range(1956, 2025))
+    carros = data_preco(Carros.query.all())
     for carro in carros:
         marca_carro = str(carro.nome.split()[0]) # pega somente a marca do carro
         if marca_carro not in lst_marcas: #adiciona marcas de carros sem repetição
@@ -97,36 +97,29 @@ def carros():
 @app.route('/processamento',methods=['POST'])
 def processar():
     data = request.form
-    marcas = data.getlist('marcas')
-
-    registro_inicio = data.get('select_registro_inicio')
-    registro_fim = data.get('select_registro_fim')
-
-    preco_inicio = data.get('select_preco_inicio')
-    preco_fim = data.get('select_preco_fim')
-
-    quilometro_inicio = data.get('select_quilometro_inicio')
-    quilometro_fim = data.get('select_quilometro_fim')
-
-    combustivel = data.getlist('combustivel')
-    estado = data.get('estado')
-
-    print('\n \n \n \n \n \n \n')
-    print(f'marcas:{marcas} \nregistro:{registro_inicio}-{registro_fim} \npreço:{preco_inicio}-{preco_fim} \nquilometragem:{quilometro_inicio}-{quilometro_fim} \ncombustivel{combustivel} \nestado: {estado}')
-    print('\n \n \n \n \n \n \n')
-
     query_dict = {}
-    if len(marcas) > 0:
-        query_dict['marcas'] = marcas
-    if registro_fim > registro_inicio:
-        query_dict['registro'] = [registro_inicio,registro_fim]
-    if preco_fim > preco_inicio:
-        query_dict['preco'] = [preco_inicio,preco_fim]
+
+    query_dict['marcas'] = data.getlist('marcas')
+    query_dict['registro'] = [data.get('select_registro_inicio'),data.get('select_registro_fim')]
+    query_dict['preco'] = [data.get('select_preco_inicio'),data.get('select_preco_fim')]
+    query_dict['quilometro'] = [data.get('select_quilometro_inicio'),data.get('select_quilometro_fim')]
+    if len(data.getlist('combustivel')) > 0:
+        query_dict['combustivel'] = data.getlist('combustivel')
+    else:
+         query_dict['combustivel'] = ["gasolina","etanol","diesel","biodiesel","GNV","eletricidade","hibrido","flex"]
+    if data.get('estado') == '':
+        query_dict['estado'] = data.get('estado')
+    else:
+        query_dict['estado'] = ['novo','usado']
+
+
     
     
     
     
     
+    
+    print('\n \n \n \n \n \n \n')
     print(query_dict)
     print('\n \n \n \n \n \n \n')
     return redirect(url_for('carros'))
