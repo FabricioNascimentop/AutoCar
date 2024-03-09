@@ -90,6 +90,8 @@ def carros():
         marca_carro = str(carro.nome.split()[0]) # pega somente a marca do carro
         if marca_carro not in lst_marcas: #adiciona marcas de carros sem repetição
             lst_marcas.append(marca_carro)
+
+
         marca_nome_carro = str(carro.nome).replace(' ','-') #tira espaços do no nome do carro
         lst_marcas_carros.append(marca_nome_carro)
     return render_template('carros.html',carros=carros,lst_marcas=lst_marcas,lst_marcas_carros=lst_marcas_carros,anos=anos)
@@ -98,30 +100,39 @@ def carros():
 def processar():
     data = request.form
     query_dict = {}
-
-    query_dict['marcas'] = data.getlist('marcas')
-    query_dict['registro'] = [data.get('select_registro_inicio'),data.get('select_registro_fim')]
-    query_dict['preco'] = [data.get('select_preco_inicio'),data.get('select_preco_fim')]
-    query_dict['quilometro'] = [data.get('select_quilometro_inicio'),data.get('select_quilometro_fim')]
+    lst_marcas = []
+    carros = Carros.query.all()
+    query_dict['registro'] = [int(data.get('select_registro_inicio')),int(data.get('select_registro_fim'))]
+    query_dict['preco'] = [float(data.get('select_preco_inicio')),float(data.get('select_preco_fim'))]
+    query_dict['quilometro'] = [int(data.get('select_quilometro_inicio')),int(data.get('select_quilometro_fim'))]
     if len(data.getlist('combustivel')) > 0:
         query_dict['combustivel'] = data.getlist('combustivel')
     else:
          query_dict['combustivel'] = ["gasolina","etanol","diesel","biodiesel","GNV","eletricidade","hibrido","flex"]
-    if data.get('estado') == '':
-        query_dict['estado'] = data.get('estado')
-    else:
+    if data.get('estado') == None:
         query_dict['estado'] = ['novo','usado']
+    else:
+        query_dict['estado'] = data.get('estado')
 
 
-    
-    
-    
-    
-    
-    
-    print('\n \n \n \n \n \n \n')
-    print(query_dict)
-    print('\n \n \n \n \n \n \n')
+    for carro in carros:
+        marca_carro = str(carro.nome.split()[0])
+        if marca_carro not in lst_marcas: 
+            lst_marcas.append(marca_carro)
+        if len(data.getlist('marcas')) == 0:
+            query_dict['marcas'] = lst_marcas
+        else:
+             query_dict['marcas'] =  data.getlist('marcas')
+        if query_dict['registro'][0] <= carro.registro.year <= query_dict['registro'][1]:
+            if query_dict['preco'][0] <= carro.preco <= query_dict['preco'][1]:
+                if query_dict['quilometro'][0] <= carro.quilometros <= query_dict['quilometro'][1]:
+                    print(f"""Marcas escolhidas:{query_dict['marcas']} - nome e marca{carro.nome}\n
+Registro:{query_dict['registro'][0]} <= {carro.registro.year} <= {query_dict['registro'][1]}\n
+Preço:{query_dict['preco'][0]} <= {carro.preco} <= {query_dict['preco'][1]}\n
+Quilometragem:{query_dict['quilometro'][0]} <= {carro.quilometros} <= {query_dict['quilometro'][1]}\n
+Combustíveis escolhidos:{query_dict['combustivel']} - combustível:{carro.combustivel}\n
+Estados escolhidos:{query_dict['estado']} - estado:{carro.estado}\n""")
+                    
     return redirect(url_for('carros'))
 
 @app.route('/carros/<string:carro_nome>',methods=['POST','GET'])
