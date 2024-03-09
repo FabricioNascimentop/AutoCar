@@ -52,11 +52,11 @@
                 <h3>PREÇO</h3>
                 <div class="div_select">
                     <label for="select_preco_inicio">Desde:</label>
-                    <input type="range" name="select_preco_inicio" id="select_preco_inicio" min="10000" max="100000" step="500" class="range" onpointermove="aparece_valor(this)" onchange="att_fim(this,'select_preco_fim')" value="0">
+                    <input type="range" name="select_preco_inicio" id="select_preco_inicio" min="10000" max="100000" step="500" class="range" onpointermove="aparece_valor(this)" value="0">
                     <p id="valor_select_preco_inicio" class="p_preco_quilometro">R$10.000,00</p>
                     <br>
                     <label for="select_preco_fim">Até:</label>
-                    <input type="range" name="select_preco_fim" id="select_preco_fim" min="10000" max="100000" step="500" class="range" onpointermove="aparece_valor(this)" value="0">
+                    <input type="range" name="select_preco_fim" id="select_preco_fim" min="10000" max="100000" step="500" class="range" onpointermove="aparece_valor(this)" value="100000">
                     <p id="valor_select_preco_fim" class="p_preco_quilometro">R$10.000,00</p>
                     <p class="p_aviso preco-quilometro" id="p_preco"></p>
                 </div>
@@ -67,12 +67,12 @@
                 <h3>QUILOMETRAGEM</h3>
                 <div class="div_select">
                     <label for="select_quilometro_inicio">Desde:</label>
-                    <input type="range" name="select_quilometro_inicio" id="select_quilometro_inicio" min="0" max="10001" step="200" value="0" class="range" onpointermove="aparece_valor(this)" onchange="att_fim(this,'select_quilometro_fim')">
+                    <input type="range" name="select_quilometro_inicio" id="select_quilometro_inicio" min="0" max="10000" step="200" value="0" class="range" onpointermove="aparece_valor(this)">
                     <p id="valor_select_quilometro_inicio" class="p_preco_quilometro">0 KM</p>
                     <br>
                     <label for="select_quilometro_fim">Até:</label>
-                    <input type="range" name="select_quilometro_fim" id="select_quilometro_fim" min="0" max="10001" step="200" class="range" value="0" onpointermove="aparece_valor(this)">
-                    <p id="valor_select_quilometro_fim" class="p_preco_quilometro">0 KM</p>
+                    <input type="range" name="select_quilometro_fim" id="select_quilometro_fim" min="0" max="10000" step="200" class="range" value="10000" onpointermove="aparece_valor(this)">
+                    <p id="valor_select_quilometro_fim" class="p_preco_quilometro">10000 KM</p>
                     <p class="p_aviso preco-quilometro" id="p_quilometro"></p>
                 </div>
             </div>
@@ -221,18 +221,7 @@
         function desaparecer2(){
             document.getElementById('p_quilometro').style.display = 'none'    
         }
-        
-    function att_fim(e,id_fim){
-        const input_fim = document.getElementById(id_fim)
-        const p_fim =  document.getElementById(`valor_${input_fim.name}`)
-        input_fim.value = e.value
-        if(p_fim.id == 'valor_select_preco_fim'){
-            p_fim.innerText = moedinha(parseInt(e.value))
-        }
-        if(p_fim.id == 'valor_select_quilometro_fim'){
-            p_fim.innerText = `${numerinho(parseInt(e.value))} KM`
-        }
-    }
+
     function moedinha(numero) {
     if (typeof numero === 'number' && !isNaN(numero)) {
         let numeroFormatado = numero.toFixed(2);

@@ -126,11 +126,11 @@ def processar():
         if query_dict['registro'][0] <= carro.registro.year <= query_dict['registro'][1]:
             if query_dict['preco'][0] <= carro.preco <= query_dict['preco'][1]:
                 if query_dict['quilometro'][0] <= carro.quilometros <= query_dict['quilometro'][1]:
-                    print(f"""Marcas escolhidas:{query_dict['marcas']} - nome e marca{carro.nome}\n
-Registro:{query_dict['registro'][0]} <= {carro.registro.year} <= {query_dict['registro'][1]}\n
-Preço:{query_dict['preco'][0]} <= {carro.preco} <= {query_dict['preco'][1]}\n
-Quilometragem:{query_dict['quilometro'][0]} <= {carro.quilometros} <= {query_dict['quilometro'][1]}\n
-Combustíveis escolhidos:{query_dict['combustivel']} - combustível:{carro.combustivel}\n
+                    print(f"""Marcas escolhidas:{query_dict['marcas']} - nome e marca: {carro.nome}
+Registro:{query_dict['registro'][0]} <= {carro.registro.year} <= {query_dict['registro'][1]}
+Preço:{query_dict['preco'][0]} <= {carro.preco} <= {query_dict['preco'][1]}
+Quilometragem:{query_dict['quilometro'][0]} <= {carro.quilometros} <= {query_dict['quilometro'][1]}
+Combustíveis escolhidos:{query_dict['combustivel']} - combustível:{carro.combustivel}
 Estados escolhidos:{query_dict['estado']} - estado:{carro.estado}\n""")
                     
     return redirect(url_for('carros'))
