@@ -47,7 +47,14 @@
     </header>
     {% endblock %}
     {% block login_criar_conta %}
-    <div class="caixa_div" style="display: none;" id="caixa_div_login">
+    <div class="caixa_div" style="display: block;" id="caixa_div_login">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <h2 class="flash" id="flash">{{ message}}</h2>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <div id="div_login" class="div_quadro">
             <div class="div_fechar" onclick="fechar(this)">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="black" stroke-width="2">
@@ -56,7 +63,6 @@
                 </svg>
             </div>
             <h2>Login</h2>
-            <br>
             <h3>Email:</h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
                 <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
@@ -66,7 +72,7 @@
             <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
             <text x="5%" y="50%" dominant-baseline="middle" fill="black" font-size="20"></text>
         </svg>
-        <form action="/logar" method="post">
+        <form action="/logar?alo=doação" method="post">
             <input type="email" name="email_login" id="email_login" class="svg_input"> <br>
             <input type="password" name="senha_login" id="senha_login" class="svg_input">
             <br>

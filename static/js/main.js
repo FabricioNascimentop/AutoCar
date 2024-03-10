@@ -1,3 +1,14 @@
+document.addEventListener('DOMContentLoaded', function () {
+    mataflash();
+});
+function mataflash() {
+    var flashMessage = document.querySelector('.flash');
+    if (flashMessage) {
+        setTimeout(function () {
+            flashMessage.style.display = 'none';
+        }, 3000);
+    }
+}
 function show_div(e){
     caixa_div_login = document.getElementById('caixa_div_login')
     div_criar_conta = document.getElementById('div_criar_conta')

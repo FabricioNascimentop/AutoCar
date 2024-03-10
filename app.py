@@ -1,12 +1,19 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import login_manager
 from funcoes import *
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3306/carros_e_clientes'
 db = SQLAlchemy(app)
+login_manager = login_manager()
+login_manager.init_app(app)
 app.secret_key = 'fabricio'
 
+@login_manager.user_loader
+def load_user(user_id):
+    return Clientes.get(user_id)
+    
 class Carros(db.Model):
     id = db.Column('id',db.Integer, primary_key=True, autoincrement=True) 
     nome = db.Column(db.String(60))
@@ -50,21 +57,18 @@ def home():
 
 @app.route('/logar',methods=['POST'])
 def processar_login():
-    c = 0
-    data = request.form
-    email_usuario = data.get('email_login')
-    senha_usuario = data.get('senha_login')
     usuarios = Clientes.query.all()
-
+    email = request.form.get('email_login')
+    senha = request.form.get('senha_login')
     for usuario in usuarios:
-        if email_usuario == usuario.email:
-            c += 1
-        if senha_usuario == usuario.senha:
-            c += 1
-    if c == 3:
-        return redirect(url_for('carros'))
-    else:
-        return redirect(url_for('home'))
+        if usuario.email == email and usuario.senha == senha:
+            session['login'] = usuario.nome
+            flash('tudo certo, meu bom')
+            return redirect(url_for('carros'))
+        else:
+            flash('algo deu errado')
+            return redirect(url_for('home'))
+   
 
 
 @app.route('/sobre nós')

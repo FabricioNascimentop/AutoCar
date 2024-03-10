@@ -585,6 +585,15 @@ div.caixa_div{
     bottom: 0;
     left: 0;
 }
+div.caixa_div > h2#flash{
+    font-family: "Noto Serif Georgian", serif;
+    color: black;
+    font-size: 1.25em;
+    background-color: rgb(255, 100, 100);
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+}
 div#div_login{
     display: block;
     max-width: 600px;
@@ -609,8 +618,8 @@ span.falso_link{
 div.div_quadro > h2{
     font-family: "Lora", serif;
     font-weight: 400;
-    margin-top: -25px;
-    margin-bottom: -10px;
+    margin-top: -40px;
+    margin-bottom: 10px;
     font-size: 2em;
 }
 div.div_quadro > h3{
