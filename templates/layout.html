@@ -145,30 +145,4 @@
 </footer>
 {% endblock %}
 </body>
-    <script>
-        function show_div(e){
-        caixa_div_login = document.getElementById('caixa_div_login')
-        div_criar_conta = document.getElementById('div_criar_conta')
-        console.log('alooo')
-        caixa_div_criar_conta = document.getElementById('caixa_div_criar_conta')
-        
-
-        if(e.id == 'login_pessoinha'){
-            caixa_div_login.style.display = 'block'
-
-        }
-        if(e.id == 'fake_link_criar_conta'){
-            caixa_div_login.style.display = 'none'
-            caixa_div_criar_conta.style.display = 'block'
-        }
-
-
-    }
-        function fechar(e){
-            const div_pai = e.parentNode
-            const div_avo = div_pai.parentNode
-            div_avo.style.display = 'none'
-
-        }
-    </script>
-    {% endblock %}
+{% endblock %}

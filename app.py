@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from funcoes import *
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Hf3g6cEEDgDAg56h6e-dGG51GEF3256e@viaduct.proxy.rlwy.net:30899/railway'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3306/carros_e_clientes'
 db = SQLAlchemy(app)
 app.secret_key = 'fabricio'
 
@@ -102,7 +102,7 @@ def carros():
         
         #se o método por POST veja as marcas escolhidas, se o total for 0 adicione todas
         if request.method == 'GET':
-            carros_escolha = carros_totalidade
+            carros_escolha = data_preco(carros_totalidade)
         else:
             if len(data.getlist('marcas')) == 0:
                         query_dict['marcas'] = lst_marcas
@@ -142,10 +142,9 @@ def carros():
                         if query_dict['registro'][0] <= carro.registro.year <= query_dict['registro'][1]:
                                 if query_dict['preco'][0] <= carro.preco <= query_dict['preco'][1]:
                                     if query_dict['quilometro'][0] <= carro.quilometros <= query_dict['quilometro'][1]:
-                                        lst_carros.append(carro)
+                                        lst_carros.append(data_preco(carro))
         carros_escolha = lst_carros
-        for carro in carros_escolha:
-            print(f"{carro.id}-{carro.nome}")
+
     
     #final
     return render_template('carros.html',carros=carros_escolha,lst_marcas=lst_marcas,diretorio_imagem_carro=diretorio_imagem_carro,anos=anos)

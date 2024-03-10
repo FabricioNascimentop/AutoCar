@@ -14,9 +14,14 @@
     <img src="../static/img/nao_eh_um_gol_quadrado.png" alt="" id="gol_d">
 <main>
     <aside id="aside_pesquisa">
+        <div id="pesquisa_reset">
+            <h2 style="display: inline;">PESQUISA</h2>
+            <form action="/carros" method="get" id="f_reset">
+                <button type="submit" name="reset_a" id="btn_reset">RESET</button>
+            </form>
+        </div>
         <div id="quadro_pesquisa">
             <form action="/carros" method="post" id="loucura">
-            <h2 style="display: inline;">PESQUISA</h2>
             <div id="marcas">
                 <h3>MARCAS</h3>
                     {% for marca in lst_marcas %}
@@ -52,13 +57,12 @@
                 <h3>PREÇO</h3>
                 <div class="div_select">
                     <label for="select_preco_inicio">Desde:</label>
-                    <input type="range" name="select_preco_inicio" id="select_preco_inicio" min="10000" max="100000" step="500" class="range" onpointermove="aparece_valor(this)" value="0">
-                    <p id="valor_select_preco_inicio" class="p_preco_quilometro">R$10.000,00</p>
+                    <input type="range" name="select_preco_inicio" id="select_preco_inicio" min="10000" max="100000" step="500" class="range preco inicio" onpointermove="aparece_valor(this)" value="0">
+                    <p id="valor_select_preco_inicio" class="p_preco_quilometro preco inicio">R$10.000,00</p>
                     <br>
                     <label for="select_preco_fim">Até:</label>
-                    <input type="range" name="select_preco_fim" id="select_preco_fim" min="10000" max="100000" step="500" class="range" onpointermove="aparece_valor(this)" value="100000">
-                    <p id="valor_select_preco_fim" class="p_preco_quilometro">R$100.000,00</p>
-                    <p class="p_aviso preco-quilometro" id="p_preco"></p>
+                    <input type="range" name="select_preco_fim" id="select_preco_fim" min="10000" max="100000" step="500" class="range preco fim" onpointermove="aparece_valor(this)" value="100000">
+                    <p id="valor_select_preco_fim" class="p_preco_quilometro preco fim">R$100.000,00</p>
                 </div>
             </div>
 
@@ -67,13 +71,13 @@
                 <h3>QUILOMETRAGEM</h3>
                 <div class="div_select">
                     <label for="select_quilometro_inicio">Desde:</label>
-                    <input type="range" name="select_quilometro_inicio" id="select_quilometro_inicio" min="0" max="10000" step="200" value="0" class="range" onpointermove="aparece_valor(this)">
-                    <p id="valor_select_quilometro_inicio" class="p_preco_quilometro">0 KM</p>
+                    <input type="range" name="select_quilometro_inicio" id="select_quilometro_inicio" min="0" max="40000" step="200" value="0" class="range quilometro inicio" onpointermove="aparece_valor(this)">
+                    <p id="valor_select_quilometro_inicio" class="p_preco_quilometro quilometro inicio">0 KM</p>
                     <br>
                     <label for="select_quilometro_fim">Até:</label>
-                    <input type="range" name="select_quilometro_fim" id="select_quilometro_fim" min="0" max="40000" step="200" class="range" value="40000" onpointermove="aparece_valor(this)">
-                    <p id="valor_select_quilometro_fim" class="p_preco_quilometro">40.000 KM</p>
-                    <p class="p_aviso preco-quilometro" id="p_quilometro"></p>
+                    <input type="range" name="select_quilometro_fim" id="select_quilometro_fim" min="0" max="40000" step="200" class="range quilometro fim" value="40000" onpointermove="aparece_valor(this)">
+                    <p id="valor_select_quilometro_fim" class="p_preco_quilometro quilometro fim">40.000 KM</p>
+    
                 </div>
             </div>
             
@@ -141,9 +145,7 @@
                 </div>
                 <button type="submit" id="pesquisar">Pesquisar</button>
             </form>
-            <form action="/carros" method="get">
-                <button type="submit" name="reset_a" id="aindamaisloucurakkkkk">reset</button>
-            </form>
+            
         </div>
     </aside>
     
@@ -189,60 +191,9 @@
     {% endfor %}
 </section>
 </main>
-<script>
-    function aparece_valor(e){
-        const input_range_value = parseInt(e.value)
-        const input_preco_inicio = document.getElementById('select_preco_inicio')
-        const input_quilometro_inicio = document.getElementById('select_quilometro_inicio')
-        var p = `valor_${e.name}`
-        if( e.id == 'select_preco_fim'){
-            if(e.value < input_preco_inicio.value){
-                e.value = input_preco_inicio.value
-                document.getElementById('p_preco').style.display = 'block'
-                document.getElementById('p_preco').innerText = 'valor máximo não pode ser menor que o mínimo'
-                setInterval(desaparecer,2500)
-            }
-        }
-        if( e.id == 'select_quilometro_fim'){
-            if(e.value < input_quilometro_inicio.value){
-                e.value = input_quilometro_inicio.value
-                document.getElementById('p_quilometro').style.display = 'block'
-                document.getElementById('p_quilometro').innerText = 'valor máximo não pode ser menor que o mínimo'
-                setInterval(desaparecer2,2500)
-        }
-}
-        if(p === 'valor_select_preco_fim' || p === 'valor_select_preco_inicio'){
-            document.getElementById(p).innerText = moedinha(input_range_value)
-        }
-        if(p == 'valor_select_quilometro_fim' || p === 'valor_select_quilometro_inicio'){
-            document.getElementById(p).innerText = `${numerinho(input_range_value)} KM`
-        }
-}
-        function desaparecer(){
-            document.getElementById('p_preco').style.display = 'none'    
-        }
-        function desaparecer2(){
-            document.getElementById('p_quilometro').style.display = 'none'    
-        }
-
-    function moedinha(numero) {
-    if (typeof numero === 'number' && !isNaN(numero)) {
-        let numeroFormatado = numero.toFixed(2);
-        let [parteInteira, parteDecimal] = numeroFormatado.split('.');
-        parteInteira = parseInt(parteInteira).toLocaleString('pt-BR');
-        let valorFormatado = `R$${parteInteira},${parteDecimal}`;
-        return valorFormatado;
-    } else {
-        return 'Erro: Valor não é um número';
-    }
-}
-    function numerinho(numero) {
-    return numero.toLocaleString('pt-BR')
-}
-</script>
 {% block footer%}
 {{ super() }}
 {% endblock%}
-
+<script src="../static/js/main.js"></script>
 {% endblock%}
  

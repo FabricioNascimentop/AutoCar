@@ -83,45 +83,13 @@
       </div>
     </div>
 </div>
-<script>
-let currentIndex = 0;
-let totalItems = document.querySelectorAll('.carousel-item').length;
-const carousel = document.getElementById('carousel');
-
-function showSlide(index) {
-  currentIndex = (index + totalItems) % totalItems;
-  const translateValue = -currentIndex * 100 + '%';
-  carousel.style.transform = 'translateX(' + translateValue + ')';
-}
-
-function changeSlide(offset) {
-  showSlide(currentIndex + offset);
-}
-
-function updateTotalItems() {
-  const updatedTotalItems = document.querySelectorAll('.carousel-item').length;
-
-  if (updatedTotalItems !== totalItems) {
-    currentIndex = 0;
-    totalItems = updatedTotalItems;
-    showSlide(currentIndex);
-  }
-}
-
-// Adiciona um ouvinte de evento para verificar a atualização quando o DOM for alterado
-const mutationObserver = new MutationObserver(updateTotalItems);
-mutationObserver.observe(carousel, { childList: true });
-
-// Chama a função de atualização ao carregar a página
-updateTotalItems();
-</script>
 {% block login_criar_conta %}
   {{super()}}
 {% endblock%}
 {% block footer%}
 {{ super() }}
 {% endblock%}
-
+<script src="../static/js/main.js"></script>
 
 
 

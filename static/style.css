@@ -100,6 +100,34 @@ div#quadro_pesquisa{
     display: inline-block;
     background-color: white;
 }
+div#pesquisa_reset{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 25px 0px;
+    background-color: var(--cor-padrao);
+    color: white;
+    border: 2px solid black;
+    border-top: none ;
+    border-bottom: none ;
+    width: 100%;
+}
+div#quadro_pesquisa > form#f_reset{
+    display: inline;
+    width: 100%;
+    height: 100%;
+}
+form#f_reset > button#btn_reset{
+    padding: 5px 10px;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    border-radius: 5px;
+    font-family: serif;
+}
+button#btn_reset:hover{
+    cursor: pointer;
+}
 div#quadro_pesquisa > form > div > h3{
     font-family: "Playfair Display", serif;
     font-weight: 100;
@@ -162,13 +190,14 @@ div.div_select > input[type="range"]::-webkit-slider-thumb{
   }
   p.p_aviso{
         display: none;
-        width: 270px;
+        width: 250px;
         margin: 10px 0px -40px -10px;
-        font-size: 12px;
+        font-size: 14.5px;
         background-color: rgb(40,40,40);
         color: red;
-        padding: 10px 0px;
-        font-family: "Playfair Display", serif
+        padding: 10px 10px;
+        font-family: "Playfair Display", serif;
+        text-align: center;
   }
   
 p.p_preco_quilometro{
@@ -578,20 +607,23 @@ span.falso_link{
     text-decoration: underline;
 }
 div.div_quadro > h2{
+    font-family: "Lora", serif;
     font-weight: 400;
     margin-top: -25px;
     margin-bottom: -10px;
+    font-size: 2em;
 }
 div.div_quadro > h3{
     font-family: "Montserrat", sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     margin: 5px 0px;
 }
 div.div_quadro > p, div.div_quadro > a {
     font-weight: 400;
     font-size: 1.25em;
 }
-div.div_quadro > form > button#submit{
+
+div.div_quadro > form > button#submit_logar{
     width: 150px;
     height: 50px;
     position: absolute;
@@ -643,7 +675,16 @@ input#nome_criar_conta{margin: -314px 0px 0px 30px;}
 input.svg_input:focus{outline: none;}
 input#senha_login{ margin: -71px -6px -6px 29px;}
 input#email_login{margin:-140px 0px 0px 30px;}
-
+div.div_quadro > form > button#submit_criar_conta{
+    width: 100px;
+    height: 40px;
+    border-radius: 3px;
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+    background-color: var(--cor-padrao);
+    margin: -25px 10px;
+}
 
 
 div#quadro_carro_esp{
@@ -977,18 +1018,7 @@ main#contatos > div{
 
 
 
-button#aindamaisloucurakkkkk{
-    padding: 5px 10px;
-    background-color: white;
-    color: black;
-    font-size: 20px;
-    font-family: "Montserrat", sans-serif;
-    border-radius: 5px;
-    font-weight: 600;
-    display: inline;
-    margin-left: auto;
-    margin-top: 10px;
-}
+
 button#aindamaisloucurakkkkk:hover{
     cursor: pointer;
     color: goldenrod;
