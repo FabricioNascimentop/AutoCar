@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager,login_user, UserMixin
+from flask_login import LoginManager,login_user, UserMixin, logout_user, login_required
 from funcoes import *
 
 app = Flask(__name__)
@@ -61,6 +61,26 @@ def home():
     return render_template('home.html',carro_da_semana=carro_da_semana, img_carro_da_semana=img_carro_da_semana,nome_carro_da_semana=nome_carro_da_semana)
 
 
+@app.route('/criar conta',methods=['POST'])
+def cria_conta():
+    nome = request.form.get('nome_criarconta')
+    sobrenome = request.form.get('sobrenome_criarconta')
+    email = request.form.get('email_criarconta')
+    numero = request.form.get('telefone_criarconta')
+    senha = request.form.get('senha_criarconta')
+    
+    if Clientes.query.filter_by(numero=numero).first():
+        flash('numero já cadastrado','error')
+    elif Clientes.query.filter_by(email=email).first():
+        print('a')
+        flash('email já cadastrado','error')
+    else:
+        cliente = Clientes(f"{nome} {sobrenome}",numero,email,senha)
+        db.session.add(cliente)
+        db.session.commit()
+    return redirect(url_for('home'))
+
+
 
 @app.route('/logar',methods=['POST'])
 def processar_login():
@@ -80,7 +100,13 @@ def processar_login():
          flash('este email não está cadastrado no sistema','error')
     return redirect(url_for('home'))
 
-   
+@app.route('/logoff',methods=['POST'])
+@login_required
+def logout():
+    logout_user()
+    flash('logout efetuado com sucesso','okay')
+    return redirect(url_for('home'))
+        
 
 
 @app.route('/sobre nós')

@@ -11,11 +11,15 @@ function mataflash() {
 }
 function show_div(e){
     console.log(e)
+    div_login = document.getElementById('div_login')
     caixa_div_login = document.getElementById('caixa_div_login')
     div_criar_conta = document.getElementById('div_criar_conta')
     caixa_div_criar_conta = document.getElementById('caixa_div_criar_conta')
-    
+    logoff = document.getElementById('div_logoff')
 
+    if(e.id == 'logoff'){
+        logoff.style.display = 'block'
+    }
     if(e.id == 'login_pessoinha'){
         caixa_div_login.style.display = 'block'
 
@@ -24,7 +28,6 @@ function show_div(e){
         caixa_div_login.style.display = 'none'
         caixa_div_criar_conta.style.display = 'block'
     }
-
 
 }
     function fechar(e){

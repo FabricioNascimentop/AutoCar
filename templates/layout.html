@@ -34,19 +34,29 @@
                     <line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
                 </a>
             </div>
-            <div class="header_image" id="login_pessoinha" onclick="show_div(this)">
+            {% if current_user.is_authenticated %}
+            <div class="header_image" id="logoff" onclick="show_div(this)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="11" r="4" />
                 <path d="M5 22s1.5-3.5 4-3.5h6c2.5 0 4 3.5 4 3.5"/></svg>
-                {% if current_user.is_authenticated %}
-                    <p>{{current_user.nome}}</p>
+                    <p onclick="show_div(this)" id="logoff" style="display: inline;">{{current_user.nome}}</p>
                 {% else %}
-                    <p>Login</p>
+                <div class="header_image" id="login_pessoinha" onclick="show_div(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="11" r="4" />
+                    <path d="M5 22s1.5-3.5 4-3.5h6c2.5 0 4 3.5 4 3.5"/></svg>
+                    <p id="p_logoff" style="display: inline;">Login</p>
                 {% endif %}
         </div>
-
         </nav>
     </header>
+    <div id="div_logoff" class="caixa_div">
+        <form action="/logoff" method="post">
+            <h2>Desejas sair?</h2>
+                <button type="submit" style="margin-right: auto;">Sair</button>
+                <button type="reset" onclick="fechar(this)" style="margin-left: 45px;">Voltar</button>
+        </form>
+    </div>
     {% with messages = get_flashed_messages(category_filter=['error']) %}
         {% if messages %}
             {% for message in messages %}
@@ -72,18 +82,12 @@
                 </svg>
             </div>
             <h2>Login</h2>
-            <h3>Email:</h3>
-            <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
-                <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
-            </svg>
-            <h3>Senha:</h3>
-            <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
-            <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
-            <text x="5%" y="50%" dominant-baseline="middle" fill="black" font-size="20"></text>
-        </svg>
-        <form action="/logar" method="post">
-            <input type="email" name="email_login" id="email_login" class="svg_input"> <br>
-            <input type="password" name="senha_login" id="senha_login" class="svg_input">
+            <form action="/logar" method="post">
+             <label for="email_login">Email:</label>   
+            <input type="email" name="email_login" id="email_login">
+            <br>
+            <label for="senha_login">Senha:</label>
+            <input type="password" name="senha_login" id="senha_login">
             <br>
             <button type="submit" id="submit_logar">Enviar</button> <br>
         </form>
@@ -99,37 +103,24 @@
             <line x1="16" y1="4" x2="4" y2="16" />
             </svg>
         </div>
-        <h2>Criar Conta</h2>
-                <br>
-                <h3>Nome:</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
-                        <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
-                    </svg>
-                <h3>Email:</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
-                        <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
-                    </svg>
-                <h3>Senha:</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
-                        <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
-                        <text x="5%" y="50%" dominant-baseline="middle" fill="black" font-size="20"></text>
-                    </svg>
-                <h3>Confirmar senha</h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="50" id="svg_email">
-                        <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
-                        <text x="5%" y="50%" dominant-baseline="middle" fill="black" font-size="20"></text>
-                    </svg>
-            <form action="/logar" method="post">
-                <input type="text" name="" id="nome_criar_conta" class="svg_input"> 
-                <br>
-                <input type="email" name="" id="email_criar_conta" class="svg_input"> 
-                <br>
-                <input type="password" name="" id="senha_criar_conta" class="svg_input">
-                <br>
-                <input type="password" name="" id="confirmar_senha_criar_conta" class="svg_input">
-                <button type="submit" id="submit_criar_conta">Enviar</button>
-                <br>
-            </form>
+        <h2 style="width: 175px;">Criar Conta</h2>
+        <form action="/criar conta" method="post">
+            <label for="nome_criarconta">Nome:</label>
+            <input type="text" name="nome_criarconta" id="nome_criarconta" required placeholder="seu primeiro nome" maxlength="15"> 
+            <br>
+            <label for="sobrenome_criarconta">Sobrenome:</label>
+            <input type="text" name="sobrenome_criarconta" id="sobrenome_criarconta" placeholder="seu sobrenome (opcional)" maxlength="15">
+            <br>
+            <label for="telefone_criarconta">Telefone:</label>
+            <input type="tel" name="telefone_criarconta" id="telefone_criarconta" required placeholder="seu telefone para entrarmos em contato">
+            <br>
+            <label for="email_criarconta">Email:</label>
+            <input type="email" name="email_criarconta" id="email_criarconta" required placeholder="seu melhor email">
+            <br>
+            <label for="senha_criarconta">Senha:</label>
+            <input type="password" name="senha_criarconta" id="senha_criarconta" minlength="6" maxlength="24" placeholder="entre 6 e 24 caracteres" required>
+            <button type="submit">Enviar</button>
+        </form>
     </div>
 </div>
 {% endblock %}

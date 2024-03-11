@@ -41,6 +41,46 @@ header{
 
 
 }
+div#div_logoff{
+    display: none;
+    width: 100%;
+    height: 115%;
+    background-color: rgba(0, 0, 0, 0.75);
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+div#div_logoff > form > h2{
+    color: black;
+    font-size: 2em;
+    text-align: center;
+}
+div#div_logoff > form{
+    width: 300px;
+    margin-top: 300px;
+    background-color: white;
+    padding: 100px;
+    margin: 100px auto;
+    height: 102px;
+}
+
+div#div_logoff > form > button{
+    width: 125px; 
+    height: 50px; 
+    background-color: rgb(193,85,0); 
+    border: 1px solid black; 
+    border-radius: 5px;
+    margin-top: 15px;
+    color: white;
+    font-size: 1.25em;
+    margin-left: auto;
+}
+div#div_logoff > form > div > button:hover{
+  cursor: pointer;
+}
 nav{
     display: inline;
 }
@@ -58,7 +98,6 @@ header > nav > div{
 div#login_pessoinha{
     display: flex;
 }
-
 header > nav > div:hover > a, header > nav > div:hover{
     color: goldenrod;
     transition-duration: 0.5s;
@@ -596,6 +635,7 @@ div.caixa_div{
     font-weight: 500;
     width: 100%;
     text-align: center;
+    position: absolute;
 }
 .flash.error{
     background-color: rgb(255, 100, 100);
@@ -605,7 +645,7 @@ div.caixa_div{
 }
 div#div_login{
     display: block;
-    max-width: 600px;
+    width: 600px;
     height: auto;
     background-color: white;
     padding: 50px;
@@ -614,10 +654,44 @@ div#div_login{
     margin-left: calc(50% - 300px);
     margin-top: 25px;
 }
+div#div_login > form > input{
+    width: 100%;
+    height: 25px;
+    display: block;
+    font-family: "Lora", serif;
+}
+div#div_login > form > label{
+    font-family: "Lora", serif;
+    font-weight: 500;
+    font-size: 1.25em;
+    margin: 5px 0px;
+}
+div#div_login > form > button#submit_logar{
+    width: 150px;
+    height: 50px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    color: black;
+    background-color: var(--cor-padrao);
+    box-shadow: 1px 1px black;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+div#div_login > form > button#submit_logar:hover{
+    cursor: pointer;
+    color: white;
+    box-shadow: 10px 10px black;
+    transition-duration: 0.5s;
+}
 div.div_fechar{
     margin-left: 95%;
     padding: 5px;
+}
+div.div_fechar:hover{
     cursor: pointer;
+    color: var(--cor-padrao);
+    transition-duration: 0.5s;
 }
 span.falso_link{
     color: -webkit-link;
@@ -641,34 +715,9 @@ div.div_quadro > p, div.div_quadro > a {
     font-size: 1.25em;
 }
 
-div.div_quadro > form > button#submit_logar{
-    width: 150px;
-    height: 50px;
-    position: absolute;
-    margin-top: -45px;
-    border-radius: 3px;
-    font-size: 20px;
-    font-family: "Montserrat", sans-serif;
-    color: white;
-    background-color: var(--cor-padrao);
-}
-div#div_quadro > form > button#submit:hover{
-    cursor: pointer;
-    animation: bordinha 2s infinite;
-}
-@keyframes bordinha {
-    0%{
-        border: red solid 1px;
-    }
-    50%{
-        border: yellow solid 1px;
-    }
-    100%{
-        border: red solid 1px;
-    }
-}
 
 div#div_criar_conta{
+    display: block;
     width: 600px;
     height: auto;
     background-color: white;
@@ -677,22 +726,34 @@ div#div_criar_conta{
     z-index: 2;
     margin-left: calc(50% - 353.3px);
     margin-top: 25px;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-
+    display: grid;
 }
-input.svg_input{
-    width: 387px;
+div#div_criar_conta > form > input{
+    width: 100%;
     height: 25px;
-    position: absolute;
-    border: none;
+    margin: 5px 0px;
 }
-input#email_criar_conta{margin: -245px 0px 0px 30px;}
-input#senha_criar_conta{margin: -176px 0px 0px 30px;}
-input#confirmar_senha_criar_conta{margin: -104px 0px 0px 30px;}
-input#nome_criar_conta{margin: -314px 0px 0px 30px;}
-input.svg_input:focus{outline: none;}
-input#senha_login{ margin: -71px -6px -6px 29px;}
-input#email_login{margin:-140px 0px 0px 30px;}
+div#div_criar_conta > form > label{
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 1.25em;
+}
+div#div_criar_conta > form > button{
+    width: 150px;
+    height: 50px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    color: black;
+    background-color: var(--cor-padrao);
+    box-shadow: 1px 1px black;
+    font-weight: 600;
+} 
+div#div_criar_conta > form > button:hover{
+    cursor: pointer;
+    color: white;
+    box-shadow: 1px 1px 20px 3px black;
+    transition-duration: 0.5s;
+}
 div.div_quadro > form > button#submit_criar_conta{
     width: 100px;
     height: 40px;
@@ -1024,7 +1085,7 @@ div#corpo_email > button{
     height: 40px;
     border-radius: 3px;
     font-size: 18px;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Lora", serif;
     color: white;
     background-color: var(--cor-padrao);
     margin: 5px 10px;
