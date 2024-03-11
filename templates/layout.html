@@ -28,33 +28,42 @@
                 <a href="/contatos">CONTATOS</a>
             </div>
             <div class="header_image" id="lupinha">
-
                 <a href="">
-                    
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 5px;">
                     <circle cx="11" cy="11" r="8" />
                     <line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-                    
                 </a>
-                
             </div>
             <div class="header_image" id="login_pessoinha" onclick="show_div(this)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="11" r="4" />
-                    <path d="M5 22s1.5-3.5 4-3.5h6c2.5 0 4 3.5 4 3.5"/></svg>
-            </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="11" r="4" />
+                <path d="M5 22s1.5-3.5 4-3.5h6c2.5 0 4 3.5 4 3.5"/></svg>
+                {% if current_user.is_authenticated %}
+                    <p>{{current_user.nome}}</p>
+                {% else %}
+                    <p>Login</p>
+                {% endif %}
+        </div>
+
         </nav>
     </header>
+    {% with messages = get_flashed_messages(category_filter=['error']) %}
+        {% if messages %}
+            {% for message in messages %}
+                <h2 class="flash error" id="flash">{{message}}</h2>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=['okay']) %}
+        {% if messages %}
+            {% for message in messages %}
+                <h2 class="flash okay" id="flash">{{message}}</h2>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     {% endblock %}
     {% block login_criar_conta %}
-    <div class="caixa_div" style="display: block;" id="caixa_div_login">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <h2 class="flash" id="flash">{{ message}}</h2>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+    <div class="caixa_div" id="caixa_div_login">
         <div id="div_login" class="div_quadro">
             <div class="div_fechar" onclick="fechar(this)">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="black" stroke-width="2">
@@ -72,7 +81,7 @@
             <polygon points="0,30 30,0 450,0 420,30" fill="white" stroke="black" stroke-width="1.3" />
             <text x="5%" y="50%" dominant-baseline="middle" fill="black" font-size="20"></text>
         </svg>
-        <form action="/logar?alo=doação" method="post">
+        <form action="/logar" method="post">
             <input type="email" name="email_login" id="email_login" class="svg_input"> <br>
             <input type="password" name="senha_login" id="senha_login" class="svg_input">
             <br>

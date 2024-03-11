@@ -49,11 +49,14 @@ header > nav{
     flex-wrap: wrap;
 }
 header > nav > div{
-    padding: 27px 20px;
+    padding: 0px 20px;
     align-self: center;
     font-family: "Montserrat", sans-serif;
     font-size: 1.15em;
     color: black;
+}
+div#login_pessoinha{
+    display: flex;
 }
 
 header > nav > div:hover > a, header > nav > div:hover{
@@ -575,6 +578,7 @@ div#terceiro{
 }
 
 div.caixa_div{
+    display: none;
     width: 100%;
     height: 115%;
     background-color: rgba(0, 0, 0, 0.75);
@@ -585,14 +589,19 @@ div.caixa_div{
     bottom: 0;
     left: 0;
 }
-div.caixa_div > h2#flash{
+.flash{
     font-family: "Noto Serif Georgian", serif;
     color: black;
     font-size: 1.25em;
-    background-color: rgb(255, 100, 100);
     font-weight: 500;
     width: 100%;
     text-align: center;
+}
+.flash.error{
+    background-color: rgb(255, 100, 100);
+}
+.flash.okay{
+    background-color: rgb(50, 128, 50);
 }
 div#div_login{
     display: block;

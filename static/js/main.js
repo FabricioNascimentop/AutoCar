@@ -6,10 +6,11 @@ function mataflash() {
     if (flashMessage) {
         setTimeout(function () {
             flashMessage.style.display = 'none';
-        }, 3000);
+        }, 2000);
     }
 }
 function show_div(e){
+    console.log(e)
     caixa_div_login = document.getElementById('caixa_div_login')
     div_criar_conta = document.getElementById('div_criar_conta')
     caixa_div_criar_conta = document.getElementById('caixa_div_criar_conta')
