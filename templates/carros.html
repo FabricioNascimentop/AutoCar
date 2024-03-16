@@ -145,8 +145,15 @@
                 </div>
                 <button type="submit" id="pesquisar">Pesquisar</button>
             </form>
-            
         </div>
+        {% if current_user.administrador  %}
+            <div id="add_carro" class="quadro_verificado">
+                <h3><a href="/adicionar carro">Adicionar novo carro</a></h3>
+            </div>
+            <div id="carro_semana" class="quadro_verificado">
+                <h3><a href="/carro semana" style="font-size: 14px;">modificar carro da semana</a></h3>
+            </div>
+        {% endif %}
     </aside>
     
     

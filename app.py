@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager,login_user, UserMixin, logout_user, login_required
 from funcoes import *
+from contextlib import contextmanager
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3306/carros_e_clientes'
@@ -37,25 +39,33 @@ class Clientes(db.Model,UserMixin):
     email = db.Column(db.String(100), nullable=False, unique=True)
     senha = db.Column(db.String(64), nullable=False)
     administrador = db.Column(db.Boolean, nullable=False, default=0)
-    def __init__(self,nome,numero,email,senha, is_admin=0):
+    def __init__(self,nome,numero,email,senha, administrador=0):
         self.nome = nome
         self.numero = numero
         self.email = email
         self.senha = senha
-        self.is_admin = is_admin
+        self.administrador = administrador
  
+
+
+
+
 @login_manager.user_loader
 def load_user(Clientes_id):
     return Clientes.query.filter_by(id=Clientes_id).first()
 
 
 
-nome_carro_da_semana = 'Kia Sorento'
-
-
 @app.route('/')
 def home():
-    #esta data_preco ajusta a data e os valores para o padrão brasileiro
+    from datetime import date
+    data_inicio = procura_carro(Inicio=True,br=False)
+    data_final = procura_carro(Fim=True,br=False)
+    hoje = date.today()
+
+    if data_inicio >= hoje <= data_final:
+        nome_carro_da_semana = procura_carro(Carro=True)
+    #este data_preco ajusta a data e os valores para o padrão brasileiro
     carro_da_semana = data_preco(Carros.query.filter_by(nome=nome_carro_da_semana).first())
     img_carro_da_semana = str(carro_da_semana.nome).replace(' ','-')
     return render_template('home.html',carro_da_semana=carro_da_semana, img_carro_da_semana=img_carro_da_semana,nome_carro_da_semana=nome_carro_da_semana)
@@ -68,6 +78,8 @@ def cria_conta():
     email = request.form.get('email_criarconta')
     numero = request.form.get('telefone_criarconta')
     senha = request.form.get('senha_criarconta')
+    administrador = request.form.get('administrador')
+    print(administrador)
     
     if Clientes.query.filter_by(numero=numero).first():
         flash('numero já cadastrado','error')
@@ -75,54 +87,67 @@ def cria_conta():
         print('a')
         flash('email já cadastrado','error')
     else:
-        cliente = Clientes(f"{nome} {sobrenome}",numero,email,senha)
+        nome = f"{nome} {sobrenome}"
+        if administrador:
+            print('alo')
+            cliente = Clientes(nome=nome,numero=numero,email=email,senha=senha,administrador=1)
+        else:
+            cliente = Clientes(nome=nome,numero=numero,email=email,senha=senha)
         db.session.add(cliente)
         db.session.commit()
+        flash('conta criada com sucesso','okay')
     return redirect(url_for('home'))
 
 
 
 @app.route('/logar',methods=['POST'])
 def processar_login():
-    usuarios = Clientes.query.all()
+    rota = request.args.get('rota')
+    if '<' in rota:
+        rota = request.url.replace('/',' ').split()[3]
     email = request.form.get('email_login')
     senha = request.form.get('senha_login')
     cliente = Clientes.query.filter_by(email=email).first()
     if cliente:
         if senha == cliente.senha:
-            from datetime import timedelta
             flash('parabéns, você está logado','okay')
-            login_user(cliente,remember=True,duration=timedelta(weeks=1),force=True,fresh=False)
+            login_user(cliente,remember=True)
             redirect(url_for('carros'))
         else:
             flash('senha incorreta','error')
     else:
          flash('este email não está cadastrado no sistema','error')
-    return redirect(url_for('home'))
+    return redirect(f"{rota}")
 
 @app.route('/logoff',methods=['POST'])
 @login_required
 def logout():
-    logout_user()
+    rota = request.args.get('rota')
+    if '<' in rota:
+        print(rota)
+        rota = request.url.replace('/',' ').split()[3]
+        print(rota)
+    btn = request.form.get('btn_supremo')
+    if btn:
+        return redirect('/')
+    else:
+        logout_user()
     flash('logout efetuado com sucesso','okay')
-    return redirect(url_for('home'))
+    return redirect(f"{rota}")
         
 
 
 @app.route('/sobre nós')
 def sobre():
+    print(load_user(session['_user_id']))
     return render_template('sobre.html')
 
-@app.route('/layout')
-def lay():
-    return render_template('layout.html')
-
-
-
-
+@app.route('/teste')
+def testar():
+    return render_template('teste.html')
 
 @app.route('/carros',methods=['GET','POST'])
-def carros(): 
+def carros():
     #Definições Geral
     anos = list(range(1956, 2025))
     carros_totalidade = Carros.query.all()
@@ -185,12 +210,61 @@ def carros():
     #final
     return render_template('carros.html',carros=carros_escolha,lst_marcas=lst_marcas,diretorio_imagem_carro=diretorio_imagem_carro,anos=anos)
 
+
+
 @app.route('/carros/<string:carro_nome>',methods=['POST','GET'])
 def carro_especifico(carro_nome):
     carro = data_preco(Carros.query.filter_by(nome=carro_nome).first())
     marca_nome_carro = str(carro.nome).replace(' ','-')
     marca_carro = str(carro.nome).split()[0]
     return render_template('carro_especifico.html',carro=carro,marca_nome_carro=marca_nome_carro,marca_carro=marca_carro)
+
+
+@app.route('/adicionar carro')
+@login_required
+def new_car():
+    return render_template('add_carro.html')
+@app.route('/carro semana',methods=['GET','POST'])
+@login_required
+def week_car():
+    import datetime
+    if request.method == 'GET':
+        carros = data_preco(Carros.query.all())
+        all_carros_nome = []
+        all_carros_inicio = []
+        all_carros_fim = []
+        carros_dict = {}
+        with open('carro_semanas.txt','r') as arquivo:
+            arquivo = arquivo.readlines()
+            for c in range(0,len(arquivo)): #um laço que percorre cada letra de cada linha do "carro_semanas.txt"
+                nome = arquivo[c].split()[0].replace('/',' ') #pega o primeiro item de cada linha (nome do carro) e o deixa legível
+                data_inicial = str_to_data(arquivo[c].split()[1]) #pega o segundo item de cada linha (data_inicial) 
+                data_final = str_to_data(arquivo[c].split()[2])#pega o terceiro item de cada linha (data_final) 
+               #str_to_data transforma o dado do tipo str para um do tipo date
+                all_carros_nome.append(nome)
+                all_carros_inicio.append(data_inicial)
+                all_carros_fim.append(data_final)
+        carros_dict['nomes'] = all_carros_nome
+        carros_dict['inicio'] = all_carros_inicio
+        carros_dict['fim'] = all_carros_fim
+        
+            
+
+        return render_template('modify_carro.html',carros=carros,carros_dict=carros_dict)
+    else:
+        comeco = str_to_data(request.form.get('dia_hoje'),br=False)
+        fim = str_to_data(request.form.get('dia_semanaqvem'),br=False)
+        carro = request.form.get('carro_semana')
+        hoje = datetime.date.today()
+        if hoje > comeco:
+             flash('data de início é posterior a data atual','error')
+             return redirect('/carro semana')
+        else:
+            with open('carro_semanas.txt','a') as arquivo:
+                arquivo.writelines(f"{carro.replace(' ','/')} {comeco} {fim}\n")
+            flash('até agora tudo certo')
+            return redirect('/')
+
 
 @app.route('/contatos')
 def contatos():

@@ -24,7 +24,7 @@ function show_div(e){
         caixa_div_login.style.display = 'block'
 
     }
-    if(e.id == 'fake_link_criar_conta'){
+    if(e.id == 'fake_link_criar_conta' || e.id == 'falso_button'){
         caixa_div_login.style.display = 'none'
         caixa_div_criar_conta.style.display = 'block'
     }
@@ -95,4 +95,5 @@ function show_div(e){
     function numerinho(numero) {
     return numero.toLocaleString('pt-BR')
 }
+
     updateTotalItems();

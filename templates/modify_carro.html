@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+<div id="esconde_esconde">
+  {% block all %}
+  {% block head %}
+  {{ super() }}
+  {% endblock %}
+  {% block header %}
+  {{ super() }}
+  {% endblock %}
+  {% block login_criar_conta %}
+    {{super()}}
+  {% endblock%}
+</div>
+
+<main id="selecionar_carros">
+  <div id="selecionar_carro_data">
+
+    <div id="label_select">
+      <label for="carro_semana">Selecione o carro:</label>
+      <form action="/carro semana" method="post" style="width: 100%;">
+        <select name="carro_semana" id="carro_semana" name="carro_semana" >
+          {% for carro in carros %}
+            <option value="{{carro.nome}}">{{carro.nome}}</option>
+           {% endfor%}
+        </select>
+      </div>
+        
+        <div id="input_data">
+          <label>De:<input type="date" name="dia_hoje" id="dia_hoje" style="margin-left: 30px;"></label>
+          <label>Até:<input type="date" name="dia_semanaqvem" id="dia_semanaqvem"></label>
+        </div>
+        
+        <button type="submit">Enviar</button>
+      </form>
+      <h2 style="text-align: center; font-size: 2.5em;">Carros anteriores</h2>
+    </div>
+  </div>
+  <div id="situacao_carros">
+    <div id="carros_todos">
+    {% for c in range(0,18) %}
+    <div class="carro_und">
+      <h4>{{carros_dict['nomes'][c]}}</h4><h4>{{carros_dict['inicio'][c]}}</h4><h4>{{carros_dict['fim'][c]}}</h4>
+    </div>
+    {% endfor %}
+</main>
+<script>
+  function setCurrentDateInput() {
+            var data = new Date();
+            var ano = data.getFullYear();
+            var mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Mês começa do zero
+            var dia = data.getDate().toString().padStart(2, '0'); // Dia do mês
+            var dia_hoje = ano + "-" + mes + "-" + dia;
+            var input_hoje = document.getElementById("dia_hoje");
+            var input_semanaqvem = document.getElementById("dia_semanaqvem");
+            input_hoje.value = dia_hoje;
+            input_semanaqvem.value = ano + "-" + mes + "-" + (parseInt(dia) + 7)
+        }
+        document.addEventListener("DOMContentLoaded", setCurrentDateInput);
+</script>
+{% block footer%}
+{{ super() }}
+{% endblock%}
+{% endblock%}

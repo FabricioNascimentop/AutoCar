@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Georgian:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root{
-    --cor-padrao: rgb(193,85,0);
+    --cor-padrao: #c15500;
     --cor-botton-header: rgba(245, 245, 245, 0.7);
 }
 
@@ -78,7 +78,7 @@ div#div_logoff > form > button{
     font-size: 1.25em;
     margin-left: auto;
 }
-div#div_logoff > form > div > button:hover{
+div#div_logoff > form > button:hover{
   cursor: pointer;
 }
 nav{
@@ -309,8 +309,36 @@ div#button_carros{
     height: 100px;
 }
 /* quadro pesquisa (bloco de seleções para ser pesquisado no backending) (fim) */
+/* adicionar novo carro (inicio) */
+
+.quadro_verificado {
+    background: var(--cor-padrao);
+    background: linear-gradient(45deg, #C25400 0%, #9E4500 100%);
+    border: none;
+    padding: 25px;
+    font-size: 16px;
+    font-family: "Playfair Display", serif;
+    margin-top: 25px;
+    font-weight: 100;
+    letter-spacing: 1.5px;
+    color: white;
+    border-radius: 5px;
+  }
+.quadro_verificado > h3 > a{
+    text-decoration: none;
+    color: white;
+    display: block;
+  }
+.quadro_verificado:hover {
+    cursor: pointer;
+    background-image: linear-gradient(-45deg, #753300 0%, #F06800 100%);
+    text-decoration: underline;
+  }
+  
 
 
+
+/* adicionar novo carro (final) */
 
 /* section carros (precisará ser trabalho no backending) (início) */
 section#carros{
@@ -654,6 +682,32 @@ div#div_login{
     margin-left: calc(50% - 300px);
     margin-top: 25px;
 }
+div#falso_button{
+    width: 100%;
+    height: 50px;
+    background-color: rgb(193,85,0);
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 15px;
+    color: white;
+    font-size: 1em;
+    margin-left: auto;
+    display: flex;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+div#falso_button:hover{
+    cursor: pointer;
+    -webkit-touch-callout: none;  /* iPhone OS, Safari */
+    -webkit-user-select: none;    /* Chrome, Safari 3 */
+    -khtml-user-select: none;     /* Safari 2 */
+    -moz-user-select: none;       /* Firefox */
+    -ms-user-select: none;        /* IE10+ */
+    user-select: none;            /* Possível implementação no futuro */
+}
 div#div_login > form > input{
     width: 100%;
     height: 25px;
@@ -747,12 +801,45 @@ div#div_criar_conta > form > button{
     background-color: var(--cor-padrao);
     box-shadow: 1px 1px black;
     font-weight: 600;
+    margin-bottom: -10px;
 } 
 div#div_criar_conta > form > button:hover{
     cursor: pointer;
     color: white;
-    box-shadow: 1px 1px 20px 3px black;
+    box-shadow: 10px 10px black;
     transition-duration: 0.5s;
+}
+div#decisao_adm{
+    display: block;
+}
+div#decisao_adm > h3{
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 1.25em;
+    font-weight: 500;
+    margin: 10px 0px -5px 5px;
+}
+div#decisao_adm > h4{
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 1em;
+    font-weight: 300;
+    margin-bottom: 15px;
+}
+div#decisao_adm > div#input_div{
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 1.5em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+div#input_div > label{
+    display: flex;
+    align-items: center;
+}
+div#input_div > label > input{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
 }
 div.div_quadro > form > button#submit_criar_conta{
     width: 100px;
@@ -995,12 +1082,6 @@ nav#elementos > div.quadro-elementos > a:hover{
     transition-duration: 0.5s;
 }
 
-
-
-
-
-
-
 main#contatos{
     height: 579px;
     background-color: white;
@@ -1102,4 +1183,167 @@ button#aindamaisloucurakkkkk:hover{
     cursor: pointer;
     color: goldenrod;
     transition-duration: 0.5s;
+}
+div#adicionar_carro{
+    display: grid;
+    width: 100%;
+    background-color: white;
+}
+div#adicionar_carro > form{
+    width: 30%;
+    margin: 20px 15px;
+}
+div#adicionar_carro > h2{
+    font-family: "Lora", serif;
+    font-size: 2em;
+}
+div#adicionar_carro > form > label{
+    font-family: "Lora", serif;
+    font-weight: 500;
+    font-size: 1.25em;
+    display: flex;
+    justify-content: space-between;
+    margin: -5px 0px;
+}
+div#adicionar_carro > form > label > input{
+    width: 100%;
+    height: 25px;
+    display: inline;
+    margin-left: 15px;
+}
+div#adicionar_carro > form > label > select{
+    height: 29px;
+    width: 100%;
+    text-align: center;
+    font-family: "Lora", serif;
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+label.estado{
+    display: flex;
+    align-items: center;
+}
+input.estado{
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+}
+div#adicionar_carro > form > button{
+    width: 150px;
+    height: 50px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    color: black;
+    background-color: var(--cor-padrao);
+    box-shadow: 1px 1px black;
+    font-weight: 600;
+    margin-top: 20px;
+} 
+div#adicionar_carro > form > button:hover{
+    cursor: pointer;
+    color: white;
+    box-shadow: 10px 10px black;
+    transition-duration: 0.5s;
+}
+main#selecionar_carros{
+    background-image: url(../static/img/fundo.png);
+    height: 1010px;
+    display: block;
+}
+main#selecionar_carros > div#selecionar_carro_data{
+    padding: 50px 20px;
+    background-color: white;
+}
+div#selecionar_carro_data > div#label_select{
+    display: flex;
+    height: 30px;
+    width: 80%;
+    margin-bottom: 40px;
+}
+div#selecionar_carro_data > div#input_data{
+    height: 60px;
+    margin-top: 10px;
+    display: block;
+    font-family: "Lora", serif;
+}
+div#input_data > label{
+    height: 30px;
+    margin: 15px 0px;
+}
+div#input_data > label > input{
+    height: 30px;
+    width: 200px;
+    margin-left: 20px;
+    font-size: 22px;
+    font-family: "Roboto", sans-serif;
+}
+main#selecionar_carros > div#selecionar_carro_data{
+    padding: 50px 20px;
+    border: 2px solid;
+}
+div#selecionar_carro_data > div#label_select > label{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 2em;
+    width: 400px;
+    font-family: "Lora", serif;
+}
+div#selecionar_carro_data > div#label_select > form > select{
+    width: 100%;
+    height: 35px;
+    text-align: center;
+    font-family: "Lora", serif;
+    font-size: 1.15em;
+    border: 2px solid;
+}
+div#selecionar_carro_data > div#input_data{
+   display: flex;
+}
+div#input_data > label{
+    height: 30px;
+    align-items: center;
+    font-size: 2em;
+    width: 400px;
+    font-family: "Lora", serif;
+}
+div#selecionar_carro_data > button{
+    width: 125px; 
+    height: 50px; 
+    background-color: rgb(193,85,0); 
+    border: 1px solid black; 
+    border-radius: 5px;
+    margin-top: 45px;
+    margin-bottom: -25px;
+    color: white;
+    font-size: 1.25em;
+    margin-left: auto;
+}
+main#selecionar_carros > div > button:hover{cursor: pointer;}
+
+
+
+main#selecionar_carros > div#situacao_carros{
+    display: grid;
+    background-color: white;
+    width: 100%;
+    overflow-y: scroll;
+    height: 650px;
+}
+div#situacao_carros > div#carros_todos{
+    display: grid;
+    padding: 0px 25px;
+}
+div#carros_todos > div.carro_und{
+    display: flex;
+}
+div#carros_todos > div.carro_und > h4{
+    display: inline;
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 1.5em;
+    margin: 10px 0px;
+    width: calc(100%/3);
+    text-align: center;
 }

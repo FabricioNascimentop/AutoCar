@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+<div id="esconde_esconde">
+  {% block all %}
+  {% block head %}
+  {{ super() }}
+  {% endblock %}
+  {% block header %}
+  {{ super() }}
+  {% endblock %}
+  {% block login_criar_conta %}
+    {{super()}}
+  {% endblock%}
+</div>
+<main style="width: 100%; height: 1000px;">
+    {% if current_user.administrador %}
+    <h1>ADMINISTRADOR</h1>
+    {% else %}
+    <h1> USUARIO COMUM </h1>
+    {% endif %}
+
+</main>
+{% block footer%}
+{{ super() }}
+{% endblock%}
+<script src="../static/js/main.js"></script>
+{% endblock%}
+ 

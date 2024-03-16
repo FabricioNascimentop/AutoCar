@@ -51,10 +51,13 @@
         </nav>
     </header>
     <div id="div_logoff" class="caixa_div">
-        <form action="/logoff" method="post">
+        <form action="/logoff?rota={{request.url}}" method="post">
             <h2>Desejas sair?</h2>
                 <button type="submit" style="margin-right: auto;">Sair</button>
                 <button type="reset" onclick="fechar(this)" style="margin-left: 45px;">Voltar</button>
+                {% if current_user.administrador %}
+                <div id="falso_button" onclick="show_div(this)" >Adicionar usuário administrador</div>
+                {% endif %}
         </form>
     </div>
     {% with messages = get_flashed_messages(category_filter=['error']) %}
@@ -82,15 +85,16 @@
                 </svg>
             </div>
             <h2>Login</h2>
-            <form action="/logar" method="post">
-             <label for="email_login">Email:</label>   
-            <input type="email" name="email_login" id="email_login">
-            <br>
-            <label for="senha_login">Senha:</label>
-            <input type="password" name="senha_login" id="senha_login">
-            <br>
-            <button type="submit" id="submit_logar">Enviar</button> <br>
-        </form>
+            <form action="/logar?rota={{request.url}}" method="post">
+                <label for="email_login">Email:</label>   
+                <input type="email" name="email_login" id="email_login">
+                <br>
+                <label for="senha_login">Senha:</label>
+                <input type="password" name="senha_login" id="senha_login">
+                <br>
+                <button type="submit" id="submit_logar">Enviar</button>
+                <br>
+            </form>
         <p>Esqueceu a senha? Clique <a href="">aqui</a></p>
         <p>Não tem conta? <span class="falso_link" id="fake_link_criar_conta" onclick="show_div(this)">Criar conta</span></p>
 </div>   
@@ -104,6 +108,9 @@
             </svg>
         </div>
         <h2 style="width: 175px;">Criar Conta</h2>
+        {% if current_user.administrador %}
+            <h3 style="margin-bottom: 5px;">-Administrador-</h3>
+        {% endif %}
         <form action="/criar conta" method="post">
             <label for="nome_criarconta">Nome:</label>
             <input type="text" name="nome_criarconta" id="nome_criarconta" required placeholder="seu primeiro nome" maxlength="15"> 
@@ -119,6 +126,17 @@
             <br>
             <label for="senha_criarconta">Senha:</label>
             <input type="password" name="senha_criarconta" id="senha_criarconta" minlength="6" maxlength="24" placeholder="entre 6 e 24 caracteres" required>
+            {% if current_user.is_authenticated %}
+            <div id="decisao_adm">
+                <h3>Este usuário será administrador?</h3>
+                <h4>-ele poderá adicionar novos carros e modificar os que já estão no estoque-</h4>
+                <div id="input_div">
+                    <label>Não<input type="radio" name="administrador" value="nao" class="inp_administrador" id="nao"></label>
+                    <label>Sim<input type="radio" name="administrador" value="sim" class="inp_administrador" id="sim"></label>
+                </div>
+            </div>
+            <br>
+            {% endif %}
             <button type="submit">Enviar</button>
         </form>
     </div>

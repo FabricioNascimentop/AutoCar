@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+<div id="esconde_esconde">
+  {% block all %}
+  {% block head %}
+  {{ super() }}
+  {% endblock %}
+  {% block header %}
+  {{ super() }}
+  {% endblock %}
+  {% block login_criar_conta %}
+    {{super()}}
+  {% endblock%}
+</div>
+<main style="padding: 0px;">
+    <div id="adicionar_carro">
+        <h2>Adicione novo carro</h2>
+        <form action="">
+        <label for="nome_add_carro">Nome:
+            <input type="text" name="nome_add_carro" id="nome_add_carro" placeholder="exemplo: Volkswagen Gol">
+        </label> 
+        <br>
+        <label for="modelo">Modelo:
+            <input type="text" name="modelo" id="modelo" placeholder="exemplo: G1">
+        </label>
+        <br>
+        <label for="preco">Preco:
+            <input type="number" id="preco" name="preco" step="0.01" min="0" placeholder="exemplo: 42000,00">
+        </label>
+        <br>
+        <label for="registro">Data:
+            <input type="date" id="registro" name="registro" placeholder="dd-mm-yyyy">
+        </label>
+    </label>
+        <br>
+        <label for="combustivel">Combustivel:
+            <select name="combustivel" id="combustivel">
+                <option value="gasolina">gasolina</option>
+                <option value="etanol">etanol</option>
+                <option value="diesel">diesel</option>
+                <option value="biodiesel">biodiesel</option>
+                <option value="GNV">GNV</option>
+                <option value="eletricidade">eletricidade</option>
+                <option value="hibrido">híbrido</option>
+                <option value="flex">flex</option>
+            </select>
+        </label>
+        <br>
+        <label for="motor">Motor:
+            <input type="text" name="motor" id="motor" placeholder="tipo do motor">
+        </label>
+        <br>
+        <label for="transmissao">Transmissão:
+            <select name="combustivel" id="combustivel">
+                <option value="manual">manual</option>
+                <option value="automatica">automática</option>
+                <option value="automatizada">automatizada</option>
+            </select>
+        </label>
+        <br>
+        <label for="origem">Origem:
+            <input type="text" name="origem" id="origem" placeholder="nacional ou importado(origem)">
+        </label>
+        <br>
+        <label for="co2">Co2:
+            <input type="text" name="co2" id="co2" placeholder="exemplo: 602">
+        </label>
+        <br>
+        <label for="estado">Estado:
+            <label class="estado">Novo:</h4><input type="radio" name="estado" class="estado" id="novo" value="novo"></label>
+            <label class="estado">Usado:</h4><input type="radio" name="estado" class="estado" id="usado" value="usado"></label>
+        </label>
+        <br>
+        <label for="quilometros">Quilometros:
+            <input type="number" id="quilometros" name="quilometros" step="1" min="0" placeholder="exemplo: 25000">
+        </label>
+        <br>
+        <label for="garantia">Garantia:
+            <input type="text" name="garantia" id="garantia" placeholder="exemplo: 18 meses">
+        </label>
+        <br>
+        <label for="tipo">Tipo:
+            <input type="text" name="tipo" id="tipo" placeholder="exemplo: SUV ou Sedan">
+        </label>
+        <br>
+        <label for="portas">Portas:
+            <input type="text" name="portas" id="portas" placeholder="número de portas">
+        </label>
+        <br>
+        <label for="cor">Cor:
+            <input type="text" name="cor" id="cor" placeholder="cor do veículo">
+        </label>
+        <br>
+        <label for="lugares">Lugares:
+            <input type="text" name="lugares" id="lugares" placeholder="número de lugares">
+        </label>
+        <button type="submit" id="submit_addcar">Adicionar</button>
+        </form>
+    </div>
+</main>
+{% block footer%}
+{{ super() }}
+{% endblock%}
+<script src="../static/js/main.js"></script>
+{% endblock%}
