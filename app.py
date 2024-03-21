@@ -136,60 +136,64 @@ def testar():
 
 @app.route('/carros',methods=['GET','POST'])
 def carros():
-    #Definições Geral
     anos = list(range(1956, 2025))
-    carros_totalidade = Carros.query.all()
-    #Definições GET
+    carros_geral = Carros.query.all()
     diretorio_imagem_carro = []
     lst_marcas = []
-    #Definições POST
-    query_dict = {}
-    lst_carros = []
-    data = request.form
-    
-    #laço percorrente os carros para buscar as marcas e o diretório da imagem
-    for carro in carros_totalidade:
-        marca_carro = str(carro.nome.split()[0]) # pega somente a marca do carro
-        diretorio_imagem_carro.append(str(carro.nome).replace(' ','-')) #lista com diretorio da imagem de seu carro
-        if marca_carro not in lst_marcas: #adiciona marcas de carros sem repetição
+
+
+    for carro in carros_geral:
+        marca_carro = str(carro.nome.split()[0])
+        if marca_carro not in lst_marcas:
             lst_marcas.append(marca_carro)
-        #se o método for GET a escolha de carros para aparecer são todos os carros
-        if request.method == 'GET':
-            carros_escolha = []
-            for carro in carros_totalidade:
-                carro = dict_db(carro,data_preco=True)
-                carros_escolha.append(carro)
+
+
+        diretorio_imagem_carro.append(str(carro.nome).replace(' ','-'))
+
+    if request.method == 'GET':
+        carros_escolha = []
+        for carro in carros_geral:
+            carros_escolha.append(dict_db(carro,data_preco=True))
 
 
 
-        #FIM DO LAÇO
     if request.method == 'POST':
-        if len(data.getlist('marcas')) == 0:
-                    query_dict['marcas'] = lst_marcas
-        else:
-            query_dict['marcas'] =  data.getlist('marcas')
-        #query_dict "registo,preço e quilômetro" estes sendo [0] como mínimo e [1] como máximo
-        query_dict['registro'] = [int(data.get('select_registro_inicio')),int(data.get('select_registro_fim'))]
-        query_dict['preco'] = [float(data.get('select_preco_inicio')),float(data.get('select_preco_fim'))]
-        query_dict['quilometro'] = [int(data.get('select_quilometro_inicio')),int(data.get('select_quilometro_fim'))]
-        #semelhante ao método das marcas veja os combustíveis escolhidos, se o total for 0 adicione todos
-        if len(data.getlist('combustivel')) > 0:
-            query_dict['combustivel'] = data.getlist('combustivel')
-        else:
-            query_dict['combustivel'] = ["gasolina","etanol","diesel","biodiesel","GNV","eletricidade","hibrido","flex"]
-        #se o input do estado do veículo for nenhum qualquer estado é válido, se não o estado é apenas o escolhido
-        if data.get('estado') == None:
-            query_dict['estado'] = ['novo','usado']
-        else:
-            query_dict['estado'] = data.get('estado')
-       
-        #laço que corre os bgl tudo e faz a verificação (melhorar depois) 
-        for carro in carros_totalidade:
-            print(carro.nome.split()[0])
-        #escolha de carros é igual a lista com query
-    carros_escolha = lst_carros
 
-    #final
+
+        data = request.form
+        carros_lst = []
+        marcas = data.getlist('marcas')
+
+
+        if len(data.getlist('combustivel')) > 0:
+            combustivel = data.getlist('combustivel')
+        else:
+            combustivel = ["gasolina","etanol","diesel","biodiesel","GNV","eletricidade","hibrido","flex"]
+
+        if data.get('estado') == None:
+            estado = ['novo','usado']
+        else:
+            estado = data.get('estado')
+        
+        
+        registro = [int(data.get('select_registro_inicio')),int(data.get('select_registro_fim'))]
+        preco = [float(data.get('select_preco_inicio')),float(data.get('select_preco_fim'))]
+        quilometro = [int(data.get('select_quilometro_inicio')),int(data.get('select_quilometro_fim'))]
+
+
+        for carro in carros_geral:
+            if carro.nome.split()[0] in marcas:
+                if registro[0] <= carro.registro.year and carro.registro.year <= registro[1]:
+                    if preco[0] <= carro.preco and carro.preco <= preco[1]:
+                        if quilometro[0] <= carro.quilometros and carro.quilometros <= quilometro[1]:
+                            if carro.combustivel in combustivel:
+                                if carro.estado in estado:
+                                    carros_lst.append(dict_db(carro,data_preco=True))
+
+        
+
+        print(carros_lst)
+        carros_escolha = carros_lst
     return render_template('carros.html',carros=carros_escolha,lst_marcas=lst_marcas,diretorio_imagem_carro=diretorio_imagem_carro,anos=anos)
 
 
