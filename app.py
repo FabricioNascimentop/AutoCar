@@ -37,7 +37,7 @@ class Clientes(db.Model,UserMixin):
     nome  = db.Column(db.String(50), nullable=False)
     numero = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
-    senha = db.Column(db.String(64), nullable=False)
+    senha = db.Column(db.String(63), nullable=False)
     administrador = db.Column(db.Boolean, nullable=False, default=0)
     def __init__(self,nome,numero,email,senha, administrador=0):
         self.nome = nome
@@ -58,13 +58,10 @@ def load_user(Clientes_id):
 
 @app.route('/')
 def home():
-    print('\n\n\n\n\n')
-    print(procura_carro())
-    print('\n\n\n\n\n')
     nome_carro_da_semana = procura_carro('carro')
-    #este data_preco ajusta a data e os valores para o padrão brasileiro
-    carro_da_semana = data_preco(Carros.query.filter_by(nome=nome_carro_da_semana).first())
-    img_carro_da_semana = str(carro_da_semana.nome).replace(' ','-')
+    carro_da_semana_class = Carros.query.filter_by(nome=nome_carro_da_semana).first()
+    carro_da_semana = dict_db(carro_da_semana_class,data_preco=True)
+    img_carro_da_semana = str(carro_da_semana['nome']).replace(' ','-')
     return render_template('home.html',carro_da_semana=carro_da_semana, img_carro_da_semana=img_carro_da_semana,nome_carro_da_semana=nome_carro_da_semana)
 
 
@@ -76,17 +73,14 @@ def cria_conta():
     numero = request.form.get('telefone_criarconta')
     senha = request.form.get('senha_criarconta')
     administrador = request.form.get('administrador')
-    print(administrador)
     
     if Clientes.query.filter_by(numero=numero).first():
         flash('numero já cadastrado','error')
     elif Clientes.query.filter_by(email=email).first():
-        print('a')
         flash('email já cadastrado','error')
     else:
         nome = f"{nome} {sobrenome}"
         if administrador:
-            print('alo')
             cliente = Clientes(nome=nome,numero=numero,email=email,senha=senha,administrador=1)
         else:
             cliente = Clientes(nome=nome,numero=numero,email=email,senha=senha)
@@ -121,9 +115,7 @@ def processar_login():
 def logout():
     rota = request.args.get('rota')
     if '<' in rota:
-        print(rota)
         rota = request.url.replace('/',' ').split()[3]
-        print(rota)
     btn = request.form.get('btn_supremo')
     if btn:
         return redirect('/')
@@ -163,21 +155,23 @@ def carros():
             lst_marcas.append(marca_carro)
         #se o método for GET a escolha de carros para aparecer são todos os carros
         if request.method == 'GET':
-            carros_escolha = data_preco(carros_totalidade)
-        #se o método for POST veja as marcas escolhidas, se o total for 0 adicione todas
-        if request.method == 'POST':
-            if len(data.getlist('marcas')) == 0:
-                        query_dict['marcas'] = lst_marcas
-            else:
-                query_dict['marcas'] =  data.getlist('marcas')
+            carros_escolha = []
+            for carro in carros_totalidade:
+                carro = dict_db(carro,data_preco=True)
+                carros_escolha.append(carro)
+
+
 
         #FIM DO LAÇO
     if request.method == 'POST':
+        if len(data.getlist('marcas')) == 0:
+                    query_dict['marcas'] = lst_marcas
+        else:
+            query_dict['marcas'] =  data.getlist('marcas')
         #query_dict "registo,preço e quilômetro" estes sendo [0] como mínimo e [1] como máximo
         query_dict['registro'] = [int(data.get('select_registro_inicio')),int(data.get('select_registro_fim'))]
         query_dict['preco'] = [float(data.get('select_preco_inicio')),float(data.get('select_preco_fim'))]
         query_dict['quilometro'] = [int(data.get('select_quilometro_inicio')),int(data.get('select_quilometro_fim'))]
-
         #semelhante ao método das marcas veja os combustíveis escolhidos, se o total for 0 adicione todos
         if len(data.getlist('combustivel')) > 0:
             query_dict['combustivel'] = data.getlist('combustivel')
@@ -191,17 +185,9 @@ def carros():
        
         #laço que corre os bgl tudo e faz a verificação (melhorar depois) 
         for carro in carros_totalidade:
-            #se a (variável) estiver dentro de sua respectiva parte do dicionário "query_dict" adicione na lista carro
-            if str(marca_carro) in query_dict['marcas']:
-                if carro.combustivel in query_dict['combustivel']:
-                    if carro.estado in query_dict['estado']:
-                        #se (variável) estiver entre o máximo e o mínimo de sua categoria adicione na lista carro
-                        if query_dict['registro'][0] <= carro.registro.year <= query_dict['registro'][1]:
-                                if query_dict['preco'][0] <= carro.preco <= query_dict['preco'][1]:
-                                    if query_dict['quilometro'][0] <= carro.quilometros <= query_dict['quilometro'][1]:
-                                        lst_carros.append(data_preco(carro))
+            print(carro.nome.split()[0])
         #escolha de carros é igual a lista com query
-        carros_escolha = lst_carros
+    carros_escolha = lst_carros
 
     #final
     return render_template('carros.html',carros=carros_escolha,lst_marcas=lst_marcas,diretorio_imagem_carro=diretorio_imagem_carro,anos=anos)
@@ -210,7 +196,7 @@ def carros():
 
 @app.route('/carros/<string:carro_nome>',methods=['POST','GET'])
 def carro_especifico(carro_nome):
-    carro = data_preco(Carros.query.filter_by(nome=carro_nome).first())
+    carro = Carros.query.filter_by(nome=carro_nome).first()
     marca_nome_carro = str(carro.nome).replace(' ','-')
     marca_carro = str(carro.nome).split()[0]
     return render_template('carro_especifico.html',carro=carro,marca_nome_carro=marca_nome_carro,marca_carro=marca_carro)
@@ -225,7 +211,7 @@ def new_car():
 def week_car():
     import datetime
     if request.method == 'GET':
-        carros = data_preco(Carros.query.all())
+        carros = Carros.query.all()
         all_carros_nome = []
         all_carros_inicio = []
         all_carros_fim = []

@@ -134,7 +134,7 @@
         <div id="svg_preco">
             <svg xmlns="http://www.w3.org/2000/svg" width="550" height="75"  id="svgpreco">
                 <polygon points="0,75 75,0 550,0 475,75" fill="rgb(193,85,0)" stroke="black" stroke-width="1" />
-                <text text-anchor="middle" x="275" y="50" fill="white" id="svg_semana">{{ carro_da_semana.preco }}</text>
+                <text text-anchor="middle" x="275" y="50" fill="white" id="svg_semana" onload="moedado(this)">{{ carro_da_semana.preco }}</text>
             </svg>
         </div>
         

@@ -8,6 +8,17 @@ def data_preco(objs):
         objs.preco = moedinha(objs.preco)
     finally:
         return objs
+def dict_db(self,data_preco=False):
+        dict = {}
+        for attr, value in self.__dict__.items():
+            dict[attr] = value
+            if data_preco == True:
+                if attr == 'registro':
+                    dict[attr] = value.strftime('%d/%m/%Y')
+                if attr == 'preco':
+                    dict['preco'] = moedinha(float(value))
+        return dict
+    
 
 def moedinha(numero):
     numero_formatado = '{:.2f}'.format(numero)

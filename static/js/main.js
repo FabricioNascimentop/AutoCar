@@ -1,6 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     mataflash();
 });
+document.addEventListener('DOMContentLoaded', function () {
+    moedado();
+});
+function moedado(){
+    
+}
 function mataflash() {
     var flashMessage = document.querySelector('.flash');
     if (flashMessage) {

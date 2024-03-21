@@ -243,6 +243,8 @@ div.quadro_carros{
     width: 900px;
     border: 2px solid var(--cor-padrao);
     margin: 15px auto;
+    position: sticky;
+    z-index: 1;
     
 }
 div.quadro_carros > a {text-decoration: none; color: black;}
