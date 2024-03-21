@@ -8,10 +8,11 @@
   {{ super() }}
   {% endblock %}
 </div>
+<link rel="stylesheet" href="../static/css/style.css">
 <img src="../static/img/nao_eh_um_gol_quadrado.png" id="gol_d" alt="">
-
-<div id="quadro_carro_esp">
-  <div id="carro_esp_img_nome_preco">
+<main id="carro_esp">
+  <div id="quadro_carro_esp">
+    <div id="carro_esp_img_nome_preco">
       <h2>{{carro.nome}}</h2>
       <div id="bostao_carousel">
         <div onclick="changeSlide(-1)" class="bostao" id="esq"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -83,8 +84,9 @@
       </div>
     </div>
 </div>
+</main>
 {% block login_criar_conta %}
-  {{super()}}
+{{super()}}
 {% endblock%}
 {% block footer%}
 {{ super() }}

@@ -44,31 +44,52 @@ def str_to_data(data_inicial,br=True):
     return data_inicial
 
 
-def procura_carro(Carro=False,Inicio=False,Fim=False,br=True):
+def procura_carro(*args,br=True):
+    lst = []
+    ret = []
+    for bgl in args:
+        print(bgl)
+        lst.append(bgl)
     arquivo = open('carro_semanas.txt','r')
     try:
         ultima_linha = arquivo.readlines()[len(arquivo.readlines())-1]
         carro = ultima_linha.split()[0].replace('/',' ')
         inicio = ultima_linha.split()[1]
         fim = ultima_linha.split()[2] 
-        if Carro:
-            return carro
-        if Inicio:
+        if args == ():
             if br:
-                return str_to_data(inicio)
+                ret.append(carro)
+                ret.append(inicio)
+                ret.append(fim)
             else:
-                return str_to_data(inicio,br=False)
-        if Fim:
+                ret.append(carro,br=False)
+                ret.append(inicio,br=False)
+                ret.append(fim,br=False)
+        if 'carro' in lst:
+            ret.append(carro)
+        if 'inicio' in lst:
             if br:
-                return str_to_data(fim)
+                ret.append(str_to_data(inicio))
             else:
-                return str_to_data(fim,br=False)
-        if not Carro and not Inicio and not Fim:
-            return 'nada escolhido'
+                ret.append(str_to_data(inicio,br=False))
+        if 'fim' in lst:
+            if br:
+                ret.append(str_to_data(fim))
+            else:
+                ret.append(str_to_data(fim,br=False))
     finally:
         arquivo.close()
+        if len(ret) == 1:
+            return ret[0]
+        else:
+            return ret
 
-def lista_carro_semanas(Carros=False,Inicios=False,Fims=False,br=False):
+def lista_carro_semanas(*args,br=False):
+    lst = []
+    ret = []
+    retado = []
+    for bgl in args:
+        lst.append(bgl)
     carros_nome = []
     carros_inicio = []
     carros_fim = []
@@ -85,11 +106,19 @@ def lista_carro_semanas(Carros=False,Inicios=False,Fims=False,br=False):
             else:
                 carros_inicio.append(data_inicio) # datas de início sem fortação Br
                 carros_fim.append(data_fim) # datas de fim sem formatação Br
-    if Carros:
+    if args == ():
+        for c in range(0,len(carros_nome)):
+            linha = f"{carros_nome[c].replace(' ','/')} {carros_inicio[c]} {carros_fim[c]}"
+            linha = linha.split()
+            linha[0] = linha[0].replace('/',' ')
+            linha_formatado = [linha[0],linha[1],linha[2]] 
+            retado.append(linha_formatado)
+        return retado
+    if 'carros' in lst:
         return carros_nome
-    if Inicios:
+    if 'inicio' in lst:
         return carros_inicio
-    if Fims:
+    if 'fim' in lst:
         return carros_fim
             
 

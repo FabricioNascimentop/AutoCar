@@ -1,27 +1,51 @@
-{% extends "layout.html" %}
-<div id="esconde_esconde">
-  {% block all %}
-  {% block head %}
-  {{ super() }}
-  {% endblock %}
-  {% block header %}
-  {{ super() }}
-  {% endblock %}
-  {% block login_criar_conta %}
-    {{super()}}
-  {% endblock%}
-</div>
-<main style="width: 100%; height: 1000px;">
-    {% if current_user.administrador %}
-    <h1>ADMINISTRADOR</h1>
-    {% else %}
-    <h1> USUARIO COMUM </h1>
-    {% endif %}
-
-</main>
-{% block footer%}
-{{ super() }}
-{% endblock%}
-<script src="../static/js/main.js"></script>
-{% endblock%}
- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste</title>
+  <link rel="stylesheet" href="../static/css/layout.css">
+</head>
+<body>
+  <header>                            
+    <img src="../static/img/logoconsilcar.png" alt="logomarca">
+    <nav>
+        <div>
+            <a href="/">HOME</a>
+        </div>
+        <div>
+            <a href="/sobre nós">SOBRE NÓS</a>
+        </div>
+        <div>
+            <a href="{{url_for('carros')}}">CARROS</a>
+        </div>
+        <div id="contatos_caixa">
+            <a href="/contatos">CONTATOS</a>
+        </div>
+        <div id="lupa_pessoa">
+            <div class="header_image" id="lupinha">
+                <a href="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 5px;">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+                </a>
+            </div>
+            {% if current_user.is_authenticated %}
+            <div class="header_image" id="logoff" onclick="show_div(this)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="11" r="4" />
+                <path d="M5 22s1.5-3.5 4-3.5h6c2.5 0 4 3.5 4 3.5"/></svg>
+                    <p onclick="show_div(this)" id="logoff" style="display: inline;">{{current_user.nome}}</p>
+                {% else %}
+                <div class="header_image" id="login_pessoinha" onclick="show_div(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="11" r="4" />
+                    <path d="M5 22s1.5-3.5 4-3.5h6c2.5 0 4 3.5 4 3.5"/></svg>
+                    <p id="p_logoff" style="display: inline;">Login</p>
+                {% endif %}
+                </div>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

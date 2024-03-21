@@ -1,0 +1,318 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+/* reset css (fim) */
+:root{
+    --cor-padrao: #c15500;
+    --cor-botton-header: rgba(245, 245, 245, 0.7);
+}
+
+html,body{
+    min-height: 100%;
+    overflow-x: hidden;
+}
+body{
+    background-color: rgb(25, 25, 25);
+    background-image: url(../img/fundo.png);
+    min-width: 310px;
+    width: 100%;
+}
+
+
+div#div_logoff{
+    display: none;
+    width: 100%;
+    height: 115%;
+    background-color: rgba(0, 0, 0, 0.75);
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+div#div_logoff > form > h2{
+    color: black;
+    font-size: 2em;
+    text-align: center;
+}
+div#div_logoff > form{
+    width: 300px;
+    margin-top: 300px;
+    background-color: white;
+    padding: 100px;
+    margin: 100px auto;
+    height: 102px;
+}
+div#div_logoff > form > div{
+    display: flex;
+    justify-content: space-between;
+}
+div#div_logoff > form > div > button{
+    width: 125px; 
+    height: 50px; 
+    background-color: rgb(193,85,0); 
+    border: 1px solid black; 
+    border-radius: 5px;
+    margin-top: 15px;
+    color: white;
+    font-size: 1.25em;
+}
+div#div_logoff > form > div > button:hover{
+    cursor: pointer;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: transparent;
+    padding: 5px;
+    height: auto;
+    border-top: none;
+    border-bottom: none;
+    background-color: var(--cor-botton-header);
+    position: relative;
+    z-index: 1;
+}
+nav{
+    display: inline;
+}
+header > nav{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: space-around
+}
+
+header > nav > div{
+    padding: 0px 20px;
+    align-self: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.15em;
+    color: black;
+}
+header > nav > div:hover > a, header > nav > div:hover{
+    color: goldenrod;
+    transition-duration: 0.5s;
+}
+header > nav > div > a{
+    text-decoration: none;
+    color: black;
+    background-color: transparent;
+}
+header > nav > div#div_image{
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    margin: 0px 15px;
+}
+header > nav > div.header_image:hover{
+    cursor: pointer;
+}
+header > img{
+    display: inline;
+    width: 400px;
+}
+div#login_pessoinha{
+    display: flex;
+    margin: auto;
+}
+div.caixa_div{
+    display: none;
+    justify-content: center;
+    width: 100%;
+    height: 115%;
+    background-color: rgba(0, 0, 0, 0.75);
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+div#div_login{
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    background-color: white;
+    padding: 50px;
+    position: fixed;
+    z-index: 2;
+    margin: 25px 55px;
+}
+div#falso_button{
+    width: 100%;
+    height: 50px;
+    background-color: rgb(193,85,0);
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 15px;
+    color: white;
+    font-size: 1em;
+    margin-left: auto;
+    display: flex;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+div#falso_button:hover{
+    cursor: pointer;
+    -webkit-touch-callout: none;  /* iPhone OS, Safari */
+    -webkit-user-select: none;    /* Chrome, Safari 3 */
+    -khtml-user-select: none;     /* Safari 2 */
+    -moz-user-select: none;       /* Firefox */
+    -ms-user-select: none;        /* IE10+ */
+    user-select: none;            /* Possível implementação no futuro */
+}
+div#div_login > form > input{
+    width: 95%;
+    height: 25px;
+    display: block;
+    font-family: "Lora", serif;
+}
+div#div_login > form > label{
+    font-family: "Lora", serif;
+    font-weight: 500;
+    font-size: 1.25em;
+    margin: 5px 0px;
+}
+div#div_login > form > button#submit_logar{
+    width: 150px;
+    height: 50px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    color: black;
+    background-color: var(--cor-padrao);
+    box-shadow: 1px 1px black;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+div#div_login > form > button#submit_logar:hover{
+    cursor: pointer;
+    color: white;
+    box-shadow: 10px 10px black;
+    transition-duration: 0.5s;
+}
+div.div_fechar{
+    margin-left: 95%;
+    padding: 5px;
+}
+div.div_fechar:hover{
+    cursor: pointer;
+    color: var(--cor-padrao);
+    transition-duration: 0.5s;
+}
+span.falso_link{
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+div.div_quadro > h2{
+    font-family: "Lora", serif;
+    font-weight: 400;
+    margin-top: -40px;
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+div.div_quadro > h3{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    margin: 5px 0px;
+}
+div.div_quadro > p, div.div_quadro > a {
+    font-weight: 400;
+    font-size: 1.25em;
+}
+
+
+div#div_criar_conta{
+    display: block;
+    width: 600px;
+    height: auto;
+    background-color: white;
+    padding: 50px;
+    position: absolute;
+    z-index: 2;
+    margin-left: calc(50% - 353.3px);
+    margin-top: 25px;
+    display: grid;
+}
+div#div_criar_conta > form > input{
+    width: 100%;
+    height: 25px;
+    margin: 5px 0px;
+}
+div#div_criar_conta > form > label{
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 1.25em;
+}
+div#div_criar_conta > form > button{
+    width: 150px;
+    height: 50px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    color: black;
+    background-color: var(--cor-padrao);
+    box-shadow: 1px 1px black;
+    font-weight: 600;
+    margin-bottom: -10px;
+} 
+div#div_criar_conta > form > button:hover{
+    cursor: pointer;
+    color: white;
+    box-shadow: 10px 10px black;
+    transition-duration: 0.5s;
+}
+@media only screen and (max-width: 600px){
+    header{
+        display: grid;
+        height: auto;
+        width: 100%;
+        min-width: 100px;
+        background-color: rgb(205,205,205);
+    }
+    header > img{
+        display: inline;
+        width: 300px;
+        margin: auto;
+    }
+    header > nav{
+        display: grid;
+    }
+    
+    header > nav > div{
+        align-self: center;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.15em;
+        color: black;
+        text-align: center;
+        padding: 5px 0px;
+    }
+    div#div_login{
+        margin-top: 150px;
+        max-width: 300px;
+        padding: 10%;
+    }
+    div#div_logoff > form{
+        width: 100%;
+        max-width: 150px;
+        height: auto;
+        display: grid;
+    }
+    div#div_logoff > form > div{
+        display: flex;
+        flex-direction: column;
+    }
+    div#div_logoff > form > div > button{
+        width: 100%;
+        margin: 0px;
+    }
+    
+}

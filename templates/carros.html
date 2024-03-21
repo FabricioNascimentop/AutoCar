@@ -11,152 +11,147 @@
     {{super()}}
   {% endblock%}
 </div>
+
+<link rel="stylesheet" href="../static/css/style.css">
     <img src="../static/img/nao_eh_um_gol_quadrado.png" alt="" id="gol_d">
-<main>
+<main id="carros">
     <aside id="aside_pesquisa">
-        <div id="pesquisa_reset">
-            <h2 style="display: inline;">PESQUISA</h2>
-            <form action="/carros" method="get" id="f_reset">
-                <button type="submit" name="reset_a" id="btn_reset">RESET</button>
-            </form>
-        </div>
-        <div id="quadro_pesquisa">
-            <form action="/carros" method="post" id="loucura">
-            <div id="marcas">
-                <h3>MARCAS</h3>
-                    {% for marca in lst_marcas %}
-                    <div class="caixa_marcas">
-                        <label for="{{marca}}">{{marca}}</label>
-                            <input type="checkbox" name="marcas" id="{{marca}}" class="input_marcas_carros" value="{{marca}}"> </label>
-                    </div>
-                    {% endfor %}
+        <div id="cacetinho2">
+            <div id="pesquisa_reset">
+                <h2 style="display: inline;">PESQUISA</h2>
+                <form action="/carros" method="get" id="f_reset">
+                    <button type="submit" name="reset_a" id="btn_reset">RESET</button>
+                </form>
             </div>
-
-            <div id="registro">
-                <h3>REGISTO</h3>
-                <div class="div_select">
-                    <label for="select_registro_inicio">Desde:</label> <br>
-                    <select name="select_registro_inicio" id="select_registro_inicio">
-                        {% for ano in anos %}
-                        <option value="{{ano}}">{{ano}}</option>
+            <div id="quadro_pesquisa">
+                <form action="/carros" method="post" id="loucura">
+                <div id="marcas">
+                    <h3>MARCAS</h3>
+                        {% for marca in lst_marcas %}
+                        <div class="caixa_marcas">
+                            <label for="{{marca}}">{{marca}}</label>
+                                <input type="checkbox" name="marcas" id="{{marca}}" class="input_marcas_carros" value="{{marca}}"> </label>
+                        </div>
                         {% endfor %}
-                    </select>
-                    <br>
-                    <label for="select_registro_fim">Até</label> <br>
-                    <select name="select_registro_fim" id="select_registro_fim">
-                        {% for ano in anos %}
-                        <option value="{{ano}}" selected="2024">{{ano}}</option>
-                        {% endfor %}
-                    </select>
-
                 </div>
-            </div>
-
+                <div id="registro">
+                    <h3>REGISTO</h3>
+                    <div class="div_select">
+                        <label for="select_registro_inicio">Desde:</label> <br>
+                        <select name="select_registro_inicio" id="select_registro_inicio">
+                            {% for ano in anos %}
+                            <option value="{{ano}}">{{ano}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <label for="select_registro_fim">Até</label> <br>
+                        <select name="select_registro_fim" id="select_registro_fim">
+                            {% for ano in anos %}
+                            <option value="{{ano}}" selected="2024">{{ano}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
             
-            <div id="preco">
-                <h3>PREÇO</h3>
-                <div class="div_select">
-                    <label for="select_preco_inicio">Desde:</label>
-                    <input type="range" name="select_preco_inicio" id="select_preco_inicio" min="10000" max="100000" step="500" class="range preco inicio" onpointermove="aparece_valor(this)" value="0">
-                    <p id="valor_select_preco_inicio" class="p_preco_quilometro preco inicio">R$10.000,00</p>
-                    <br>
-                    <label for="select_preco_fim">Até:</label>
-                    <input type="range" name="select_preco_fim" id="select_preco_fim" min="10000" max="100000" step="500" class="range preco fim" onpointermove="aparece_valor(this)" value="100000">
-                    <p id="valor_select_preco_fim" class="p_preco_quilometro preco fim">R$100.000,00</p>
+                <div id="preco">
+                    <h3>PREÇO</h3>
+                    <div class="div_select">
+                        <label for="select_preco_inicio">Desde:</label>
+                        <input type="range" name="select_preco_inicio" id="select_preco_inicio" min="10000" max="100000" step="500" class="range preco inicio" onpointermove="aparece_valor(this)" value="0">
+                        <p id="valor_select_preco_inicio" class="p_preco_quilometro preco inicio">R$10.000,00</p>
+                        <br>
+                        <label for="select_preco_fim">Até:</label>
+                        <input type="range" name="select_preco_fim" id="select_preco_fim" min="10000" max="100000" step="500" class="range preco fim" onpointermove="aparece_valor(this)" value="100000">
+                        <p id="valor_select_preco_fim" class="p_preco_quilometro preco fim">R$100.000,00</p>
+                    </div>
                 </div>
-            </div>
-
-
-            <div id="quilometro">
-                <h3>QUILOMETRAGEM</h3>
-                <div class="div_select">
-                    <label for="select_quilometro_inicio">Desde:</label>
-                    <input type="range" name="select_quilometro_inicio" id="select_quilometro_inicio" min="0" max="40000" step="200" value="0" class="range quilometro inicio" onpointermove="aparece_valor(this)">
-                    <p id="valor_select_quilometro_inicio" class="p_preco_quilometro quilometro inicio">0 KM</p>
-                    <br>
-                    <label for="select_quilometro_fim">Até:</label>
-                    <input type="range" name="select_quilometro_fim" id="select_quilometro_fim" min="0" max="40000" step="200" class="range quilometro fim" value="40000" onpointermove="aparece_valor(this)">
-                    <p id="valor_select_quilometro_fim" class="p_preco_quilometro quilometro fim">40.000 KM</p>
-    
+                <div id="quilometro">
+                    <h3>QUILOMETRAGEM</h3>
+                    <div class="div_select">
+                        <label for="select_quilometro_inicio">Desde:</label>
+                        <input type="range" name="select_quilometro_inicio" id="select_quilometro_inicio" min="0" max="40000" step="200" value="0" class="range quilometro inicio" onpointermove="aparece_valor(this)">
+                        <p id="valor_select_quilometro_inicio" class="p_preco_quilometro quilometro inicio">0 KM</p>
+                        <br>
+                        <label for="select_quilometro_fim">Até:</label>
+                        <input type="range" name="select_quilometro_fim" id="select_quilometro_fim" min="0" max="40000" step="200" class="range quilometro fim" value="40000" onpointermove="aparece_valor(this)">
+                        <p id="valor_select_quilometro_fim" class="p_preco_quilometro quilometro fim">40.000 KM</p>
+                    </div>
                 </div>
-            </div>
             
-
             
-
             
-            <div id="combustivel">
-                <h3>COMBUSTÍVEL</h3>
-                <div class="div_label_label">
-                    <div class="div_label_input">
-                        <label for="input_gasolina">Gasolina:</label>
-
-                        <input type="checkbox" name="combustivel" id="input_gasolina" value="gasolina">
-                    </div>
-                    
-                    <div class="div_label_input">
-                        <label for="input_etanol">Etanol:</label>
-                        <input type="checkbox" name="combustivel" id="input_etanol" value="etanol">
-                    </div>
-                    
-
-                    <div class="div_label_input">
-                        <label for="input_diesel">Diesel:</label>
-                        <input type="checkbox" name="combustivel" id="input_diesel" value="diesel">
-                    </div>
-                    
-                    <div class="div_label_input">
-                        <label for="input_biodisel">Biodiesel:</label>
-                        <input type="checkbox" name="combustivel" id="input_biodisel" value="biodiesel">
-                    </div>
-                    
-                    <div class="div_label_input">
-                        <label for="input_GNV">GNV:</label>
-                        <input type="checkbox" name="combustivel" id="input_GNV" value="GNV">
-                    </div>
-                
-                    <div class="div_label_input">
-                        <label for="input_eletricidade">Elétrico:</label>
-                        <input type="checkbox" name="combustivel" id="input_eletricidade" value="eletrico">
-                    </div>
-                    
-                    <div class="div_label_input">
-                        <label for="input_hibrido">Hibrido:</label>
-                        <input type="checkbox" name="combustivel" id="input_hibrido" value="hibrido">
-                    </div>
-                    
-                    <div class="div_label_input">
-                        <label for="input_flex">Flex:</label>
-                        <input type="checkbox" name="combustivel" id="input_flex" value="flex">
+                <div id="combustivel">
+                    <h3>COMBUSTÍVEL</h3>
+                    <div class="div_label_label">
+                        <div class="div_label_input">
+                            <label for="input_gasolina">Gasolina:</label>
+                            <input type="checkbox" name="combustivel" id="input_gasolina" value="gasolina">
+                        </div>
+            
+                        <div class="div_label_input">
+                            <label for="input_etanol">Etanol:</label>
+                            <input type="checkbox" name="combustivel" id="input_etanol" value="etanol">
+                        </div>
+            
+                        <div class="div_label_input">
+                            <label for="input_diesel">Diesel:</label>
+                            <input type="checkbox" name="combustivel" id="input_diesel" value="diesel">
+                        </div>
+            
+                        <div class="div_label_input">
+                            <label for="input_biodisel">Biodiesel:</label>
+                            <input type="checkbox" name="combustivel" id="input_biodisel" value="biodiesel">
+                        </div>
+            
+                        <div class="div_label_input">
+                            <label for="input_GNV">GNV:</label>
+                            <input type="checkbox" name="combustivel" id="input_GNV" value="GNV">
+                        </div>
+            
+                        <div class="div_label_input">
+                            <label for="input_eletricidade">Elétrico:</label>
+                            <input type="checkbox" name="combustivel" id="input_eletricidade" value="eletrico">
+                        </div>
+            
+                        <div class="div_label_input">
+                            <label for="input_hibrido">Hibrido:</label>
+                            <input type="checkbox" name="combustivel" id="input_hibrido" value="hibrido">
+                        </div>
+            
+                        <div class="div_label_input">
+                            <label for="input_flex">Flex:</label>
+                            <input type="checkbox" name="combustivel" id="input_flex" value="flex">
+                        </div>
                     </div>
                 </div>
+                <div id="estado">
+                    <h3>ESTADO</h3>
+                    <div class="div_label_input" style="width: 100px;">
+                            <label for="input_estado_usado">Usado:</label>
+                                <input type="radio" name="estado" id="input_estado_usado" class="input_radio" value="usado">
+                        </div>
+                        <br>
+                        <div class="div_label_input" style="width: 100px; margin-top: -10px;">
+                            <label for="input_estado_novo">Novo:</label>
+                            <input type="radio" name="estado" id="input_estado_novo" style="margin-left: 9px;" class="input_radio" value="novo">
+                        </div>
+                    </div>
+                    <button type="submit" id="pesquisar">Pesquisar</button>
+                </form>
             </div>
-            <div id="estado">
-                <h3>ESTADO</h3>
-                <div class="div_label_input" style="width: 100px;">
-                        <label for="input_estado_usado">Usado:</label>
-                            <input type="radio" name="estado" id="input_estado_usado" class="input_radio" value="usado">
-                    </div>
-                    <br>
-                    <div class="div_label_input" style="width: 100px; margin-top: -10px;">
-                        <label for="input_estado_novo">Novo:</label>
-                        <input type="radio" name="estado" id="input_estado_novo" style="margin-left: 9px;" class="input_radio" value="novo">
-                    </div>
+            {% if current_user.administrador  %}
+                <div id="add_carro" class="quadro_verificado">
+                    <h3><a href="/adicionar carro">Adicionar novo carro</a></h3>
                 </div>
-                <button type="submit" id="pesquisar">Pesquisar</button>
-            </form>
+                <div id="carro_semana" class="quadro_verificado">
+                    <h3><a href="/carro semana" style="font-size: 14px;">modificar carro da semana</a></h3>
+                </div>
+            {% endif %}
         </div>
-        {% if current_user.administrador  %}
-            <div id="add_carro" class="quadro_verificado">
-                <h3><a href="/adicionar carro">Adicionar novo carro</a></h3>
-            </div>
-            <div id="carro_semana" class="quadro_verificado">
-                <h3><a href="/carro semana" style="font-size: 14px;">modificar carro da semana</a></h3>
-            </div>
-        {% endif %}
+        <div id="setinha" onclick="show_div(this)">
+            <h2 id="setinha_h2">></h2>
+        </div>
     </aside>
-    
-    
     <section id="carros">
         {%for carro in carros %}
         <div class="quadro_carros">

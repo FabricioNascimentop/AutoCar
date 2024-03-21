@@ -2,11 +2,11 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager,login_user, UserMixin, logout_user, login_required
 from funcoes import *
-from contextlib import contextmanager
+
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3306/carros_e_clientes'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Hf3g6cEEDgDAg56h6e-dGG51GEF3256e@viaduct.proxy.rlwy.net:30899/railway'
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -58,13 +58,10 @@ def load_user(Clientes_id):
 
 @app.route('/')
 def home():
-    from datetime import date
-    data_inicio = procura_carro(Inicio=True,br=False)
-    data_final = procura_carro(Fim=True,br=False)
-    hoje = date.today()
-
-    if data_inicio >= hoje <= data_final:
-        nome_carro_da_semana = procura_carro(Carro=True)
+    print('\n\n\n\n\n')
+    print(procura_carro())
+    print('\n\n\n\n\n')
+    nome_carro_da_semana = procura_carro('carro')
     #este data_preco ajusta a data e os valores para o padrão brasileiro
     carro_da_semana = data_preco(Carros.query.filter_by(nome=nome_carro_da_semana).first())
     img_carro_da_semana = str(carro_da_semana.nome).replace(' ','-')
@@ -139,7 +136,6 @@ def logout():
 
 @app.route('/sobre nós')
 def sobre():
-    print(load_user(session['_user_id']))
     return render_template('sobre.html')
 
 @app.route('/teste')
@@ -236,7 +232,8 @@ def week_car():
         carros_dict = {}
         with open('carro_semanas.txt','r') as arquivo:
             arquivo = arquivo.readlines()
-            for c in range(0,len(arquivo)): #um laço que percorre cada letra de cada linha do "carro_semanas.txt"
+            qtn_itens = len(arquivo)
+            for c in range(0,qtn_itens): #um laço que percorre cada letra de cada linha do "carro_semanas.txt"
                 nome = arquivo[c].split()[0].replace('/',' ') #pega o primeiro item de cada linha (nome do carro) e o deixa legível
                 data_inicial = str_to_data(arquivo[c].split()[1]) #pega o segundo item de cada linha (data_inicial) 
                 data_final = str_to_data(arquivo[c].split()[2])#pega o terceiro item de cada linha (data_final) 
@@ -246,11 +243,8 @@ def week_car():
                 all_carros_fim.append(data_final)
         carros_dict['nomes'] = all_carros_nome
         carros_dict['inicio'] = all_carros_inicio
-        carros_dict['fim'] = all_carros_fim
-        
-            
-
-        return render_template('modify_carro.html',carros=carros,carros_dict=carros_dict)
+        carros_dict['fim'] = all_carros_fim        
+        return render_template('modify_carro.html',carros=carros,carros_dict=carros_dict,qtn_elementos=qtn_itens)
     else:
         comeco = str_to_data(request.form.get('dia_hoje'),br=False)
         fim = str_to_data(request.form.get('dia_semanaqvem'),br=False)

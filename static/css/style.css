@@ -4,137 +4,25 @@
     --cor-padrao: #c15500;
     --cor-botton-header: rgba(245, 245, 245, 0.7);
 }
-
-/* reset css (inicio)*/
-*{
-    margin: 0px;
-    padding: 0px;
-}
-/* reset css (fim) */
-body{
-    background-color: rgb(25, 25, 25);
-    background-image: url(../static/img/fundo.png);
-}
-
-
-/* main (inicio)*/
 main{
     width: auto;
     padding: 0px 10px;
     margin: 0px;
     display: flex;
-
 }
-
-/* main (fim)*/
-/* header (fim)*/
-header{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    background-color: transparent;
-    padding: 5px;
-    height: 64px;
-    border-top: none;
-    border-bottom: none;
-    background-color: var(--cor-botton-header);
-
-
-}
-div#div_logoff{
-    display: none;
-    width: 100%;
-    height: 115%;
-    background-color: rgba(0, 0, 0, 0.75);
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-}
-div#div_logoff > form > h2{
-    color: black;
-    font-size: 2em;
-    text-align: center;
-}
-div#div_logoff > form{
-    width: 300px;
-    margin-top: 300px;
-    background-color: white;
-    padding: 100px;
-    margin: 100px auto;
-    height: 102px;
-}
-
-div#div_logoff > form > button{
-    width: 125px; 
-    height: 50px; 
-    background-color: rgb(193,85,0); 
-    border: 1px solid black; 
-    border-radius: 5px;
-    margin-top: 15px;
-    color: white;
-    font-size: 1.25em;
-    margin-left: auto;
-}
-div#div_logoff > form > button:hover{
-  cursor: pointer;
-}
-nav{
-    display: inline;
-}
-header > nav{
-    display: flex;
-    flex-wrap: wrap;
-}
-header > nav > div{
-    padding: 0px 20px;
-    align-self: center;
-    font-family: "Montserrat", sans-serif;
-    font-size: 1.15em;
-    color: black;
-}
-div#login_pessoinha{
-    display: flex;
-}
-header > nav > div:hover > a, header > nav > div:hover{
-    color: goldenrod;
-    transition-duration: 0.5s;
-}
-header > nav > div > a{
-    text-decoration: none;
-    color: black;
-    background-color: transparent;
-}
-header > nav > div#div_image{
-    padding: 5px;
-    background-color: transparent;
-    border: none;
-    padding: 0px;
-    margin: 0px 15px;
-}
-header > nav > div.header_image:hover{
-    cursor: pointer;
-}
-header > img{
-    display: inline;
-    width: 400px;
-}
-
-/* header (fim) */
 img#gol_d{
     height: 260px;
     width: 100%;
     margin-left: auto;
     margin-bottom: -4px;
+    position: relative;
+    z-index: 1;
 }
-
 
 
 /* quadro pesquisa (bloco de seleções para ser pesquisado no backending) (início) */
 div#quadro_pesquisa{
-    width: 250px;
+    width: 23f0px;
     border: 2.5px solid black;
     border-top: none;
     border-bottom: none;
@@ -152,7 +40,8 @@ div#pesquisa_reset{
     border: 2px solid black;
     border-top: none ;
     border-bottom: none ;
-    width: 100%;
+    width: 98.5%;
+    font-family: "Playfair Display", serif;
 }
 div#quadro_pesquisa > form#f_reset{
     display: inline;
@@ -166,6 +55,7 @@ form#f_reset > button#btn_reset{
     font-size: 20px;
     border-radius: 5px;
     font-family: serif;
+    font-family: "Playfair Display", serif;
 }
 button#btn_reset:hover{
     cursor: pointer;
@@ -256,7 +146,7 @@ div#quadro_pesquisa > form > div#marcas{
     height: auto;
 }
 div.caixa_marcas{
-    width: 190px;
+    width: 200px;
     margin: 5px 0px;
     display: flex;
     justify-content: space-between;
@@ -344,15 +234,16 @@ div#button_carros{
 section#carros{
     display: block;
     width: 100%;
+    position: relative;
+    z-index: -2;
 }
-
 div.quadro_carros{
     background-color: white;
     display: flex;
     width: 900px;
     border: 2px solid var(--cor-padrao);
     margin: 15px auto;
-
+    
 }
 div.quadro_carros > a {text-decoration: none; color: black;}
 
@@ -428,15 +319,81 @@ div#carro_preco{
     color: white;
 }
 
+@media only screen and (max-width: 1000px){
+    div#div_carro_img_detalhes{
+        display: grid;
+        height: auto;
+        width: 300px;
+    }
+    div#div_img_carro_carros > img{
+        width: 300px;
+        height: auto;
+    }
+    div.quadro_carros{
+        width: 300px;
+    }
+    div#carro_caracteristicas{
+        border-top: 4px solid black;
+        border-left: none;
+        width: 100%;
+    }
+}
+
 
 /* section carros (precisará ser trabalho no backending) (fim) */
 aside#aside_pesquisa{
-    width: 270px;
+    display: block;
+}
+div#setinha{
+    display: none;
+}
+@media only screen and (max-width: 1200px){
+    aside#aside_pesquisa{
+        display: flex;
+        width: 330px;
+        height: 100%;
+        transition: margin-left 0.5s ease-out;
+        position: fixed;
+        margin-left: -270px;
+        top: 0;
+        overflow-y: scroll;
+        z-index: 0;
+    }
+    aside#aside_pesquisa.aberta{
+        margin-left: -10px;
+        z-index: 10;
+    }
+    div#cacetinho2{
+        overflow-y: scroll;
+    }
+    div#setinha{
+        display: flex;
+        background-color: rgb(0,0,0,0.5);
+        width: 50px;
+        height: auto;
+        justify-content: center;
+        position: relative;
+    }
+    div#setinha.active{
+        transform: scaleX(-1);
+        transition: transform 0.5s;
+        margin-left: -1px;
+        background-color: black;
+    }
+    h2#setinha_h2 {
+        margin-top: 120px;
+        color: white;
+        font-size: 3.5em;
+        text-align: center;
+        width: 100%;
+    }
 }
 
 main#home{
     display: block;
-
+    width: 100vw;
+    min-width: 320px;
+    padding: 0px;
 }
 /* Página Home (início)*/
 
@@ -474,8 +431,8 @@ div#nome_carro > h2{
     letter-spacing: 5px;
     color: var(--cor-padrao);
     text-shadow: 3px 3px black;
-    margin-left: 25px;
     text-transform: uppercase;
+    margin: auto;
 
 }
 div#nome_carro > h3{
@@ -486,15 +443,15 @@ div#nome_carro > h3{
     color: var(--cor-padrao);
     width: 450px;
     text-shadow: 2px 2px black;
-    margin-left: 25px;
-
+    margin: auto;
 }
 /* aside_esq (união da frase "desconto da semana" com o nome e modelo do carro (fim) */
 
 /* aside_img (união da div aside_esq com a div img) (início) */
 div#aside_img{
-    margin: 50px 0px;
+    margin-top: 50px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
 }
@@ -523,6 +480,7 @@ div#caixa_todos{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    flex-wrap: wrap;
 }
 div#svg_todos > div{
     align-self: center;
@@ -574,6 +532,7 @@ div.texto_ > h4{
 
 div#svg_preco_detalhe{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     margin: 25px 100px;
     align-items: center;
@@ -589,7 +548,6 @@ div#svg_preco > svg > text#svg_preco{
     font-weight: 700;
     font-size: 35px;
 }
-
 
 
 
@@ -644,18 +602,7 @@ div#terceiro{
     margin: 0px auto;
 }
 
-div.caixa_div{
-    display: none;
-    width: 100%;
-    height: 115%;
-    background-color: rgba(0, 0, 0, 0.75);
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-}
+
 .flash{
     font-family: "Noto Serif Georgian", serif;
     color: black;
@@ -671,144 +618,7 @@ div.caixa_div{
 .flash.okay{
     background-color: rgb(50, 128, 50);
 }
-div#div_login{
-    display: block;
-    width: 600px;
-    height: auto;
-    background-color: white;
-    padding: 50px;
-    position: fixed;
-    z-index: 2;
-    margin-left: calc(50% - 300px);
-    margin-top: 25px;
-}
-div#falso_button{
-    width: 100%;
-    height: 50px;
-    background-color: rgb(193,85,0);
-    border: 1px solid black;
-    border-radius: 5px;
-    margin-top: 15px;
-    color: white;
-    font-size: 1em;
-    margin-left: auto;
-    display: flex;
-    font-family: "Montserrat", sans-serif;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    font-weight: 500;
-}
-div#falso_button:hover{
-    cursor: pointer;
-    -webkit-touch-callout: none;  /* iPhone OS, Safari */
-    -webkit-user-select: none;    /* Chrome, Safari 3 */
-    -khtml-user-select: none;     /* Safari 2 */
-    -moz-user-select: none;       /* Firefox */
-    -ms-user-select: none;        /* IE10+ */
-    user-select: none;            /* Possível implementação no futuro */
-}
-div#div_login > form > input{
-    width: 100%;
-    height: 25px;
-    display: block;
-    font-family: "Lora", serif;
-}
-div#div_login > form > label{
-    font-family: "Lora", serif;
-    font-weight: 500;
-    font-size: 1.25em;
-    margin: 5px 0px;
-}
-div#div_login > form > button#submit_logar{
-    width: 150px;
-    height: 50px;
-    border-radius: 3px;
-    font-size: 20px;
-    font-family: "Montserrat", sans-serif;
-    color: black;
-    background-color: var(--cor-padrao);
-    box-shadow: 1px 1px black;
-    margin-bottom: 25px;
-    font-weight: 600;
-}
-div#div_login > form > button#submit_logar:hover{
-    cursor: pointer;
-    color: white;
-    box-shadow: 10px 10px black;
-    transition-duration: 0.5s;
-}
-div.div_fechar{
-    margin-left: 95%;
-    padding: 5px;
-}
-div.div_fechar:hover{
-    cursor: pointer;
-    color: var(--cor-padrao);
-    transition-duration: 0.5s;
-}
-span.falso_link{
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-div.div_quadro > h2{
-    font-family: "Lora", serif;
-    font-weight: 400;
-    margin-top: -40px;
-    margin-bottom: 10px;
-    font-size: 2em;
-}
-div.div_quadro > h3{
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    margin: 5px 0px;
-}
-div.div_quadro > p, div.div_quadro > a {
-    font-weight: 400;
-    font-size: 1.25em;
-}
 
-
-div#div_criar_conta{
-    display: block;
-    width: 600px;
-    height: auto;
-    background-color: white;
-    padding: 50px;
-    position: absolute;
-    z-index: 2;
-    margin-left: calc(50% - 353.3px);
-    margin-top: 25px;
-    display: grid;
-}
-div#div_criar_conta > form > input{
-    width: 100%;
-    height: 25px;
-    margin: 5px 0px;
-}
-div#div_criar_conta > form > label{
-    font-family: "Noto Serif Georgian", serif;
-    font-size: 1.25em;
-}
-div#div_criar_conta > form > button{
-    width: 150px;
-    height: 50px;
-    border-radius: 3px;
-    font-size: 20px;
-    font-family: "Montserrat", sans-serif;
-    color: black;
-    background-color: var(--cor-padrao);
-    box-shadow: 1px 1px black;
-    font-weight: 600;
-    margin-bottom: -10px;
-} 
-div#div_criar_conta > form > button:hover{
-    cursor: pointer;
-    color: white;
-    box-shadow: 10px 10px black;
-    transition-duration: 0.5s;
-}
 div#decisao_adm{
     display: block;
 }
@@ -856,9 +666,10 @@ div.div_quadro > form > button#submit_criar_conta{
 div#quadro_carro_esp{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
-    max-width: 85%;
-    height: 600px;
+    width: 100%;
+    height: a;
     margin: 50px auto;
 }
 
@@ -903,7 +714,7 @@ div.quadro_categoria_carro_esp{
     background-color: rgb(40,40,40);
     border-bottom: solid black 1.5px;
     padding: 10px 20px;
-
+    
 }
 div#carros_bgl > div >  h3{
     color: white;
@@ -970,7 +781,7 @@ div#bostao_carousel{
 }
 #dir > svg {
     animation: dir 1.5s infinite cubic-bezier(0.38, 0.38, 0.35, 1.29);
-
+    
 }
 @keyframes esq {
     0%,100%{transform: translateX(3px)}
@@ -1068,7 +879,7 @@ div#area_login{
     flex-direction: column;
 }
 div#area_login > div > a{
-  font-size: 1.15em;
+    font-size: 1.15em;
 }
 
 footer > div > a, footer > div > div > a{
@@ -1083,19 +894,30 @@ nav#elementos > div.quadro-elementos > a:hover{
 }
 
 main#contatos{
-    height: 579px;
     background-color: white;
     margin: 0px;
     padding: 0px;
     text-align: center;
+    flex-wrap: wrap;
+    height: 110%;
+    justify-content: space-between;
 }
-div#mensagem{
-    width: 50%;
+main#contatos > div{
+    border: 1px solid black;
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: auto;
+    height: 500px;
 }
+
 div#mensagem > div#head_msg_container{
     margin-top: 25px;
     display: grid;
     height: 400px;
+}
+div#mensagem > div#head_msg_container > div.head_msg{
+    padding: 5px 0px;
 }
 div#mensagem > div#head_msg_container div.head_msg > h2{
     font-size: 2em;
@@ -1154,15 +976,15 @@ div.email_content > input{
 }
 div#corpo_email{
     width: 100%;
-    height: 100%;
+    height: 222px;
 }
 div#corpo_email > textarea{
     margin: 0px 0.75%;
     width: 95%;
-    height: 298px;
+    height: 100%;
 }
 div#corpo_email > button{
-    width: 100px;
+    width: 250px;
     height: 40px;
     border-radius: 3px;
     font-size: 18px;
@@ -1170,11 +992,9 @@ div#corpo_email > button{
     color: white;
     background-color: var(--cor-padrao);
     margin: 5px 10px;
+    margin-left: calc(50% - 125px);
 }
 
-main#contatos > div{
-    border: 1px solid black;
-}
 
 
 
@@ -1192,6 +1012,7 @@ div#adicionar_carro{
 div#adicionar_carro > form{
     width: 30%;
     margin: 20px 15px;
+    min-width: 290px;
 }
 div#adicionar_carro > h2{
     font-family: "Lora", serif;
@@ -1249,40 +1070,23 @@ div#adicionar_carro > form > button:hover{
 }
 main#selecionar_carros{
     background-image: url(../static/img/fundo.png);
-    height: 1010px;
+    height: 110vw;
     display: block;
+    min-height: 1600px;    
 }
 main#selecionar_carros > div#selecionar_carro_data{
     padding: 50px 20px;
     background-color: white;
+    border: 2px solid black;
+    border-bottom: none;
+    min-width: 360px;
 }
 div#selecionar_carro_data > div#label_select{
     display: flex;
     height: 30px;
-    width: 80%;
-    margin-bottom: 40px;
+    width: 100%;
 }
-div#selecionar_carro_data > div#input_data{
-    height: 60px;
-    margin-top: 10px;
-    display: block;
-    font-family: "Lora", serif;
-}
-div#input_data > label{
-    height: 30px;
-    margin: 15px 0px;
-}
-div#input_data > label > input{
-    height: 30px;
-    width: 200px;
-    margin-left: 20px;
-    font-size: 22px;
-    font-family: "Roboto", sans-serif;
-}
-main#selecionar_carros > div#selecionar_carro_data{
-    padding: 50px 20px;
-    border: 2px solid;
-}
+
 div#selecionar_carro_data > div#label_select > label{
     height: 30px;
     display: flex;
@@ -1298,9 +1102,12 @@ div#selecionar_carro_data > div#label_select > form > select{
     font-family: "Lora", serif;
     font-size: 1.15em;
     border: 2px solid;
+    
 }
+
 div#selecionar_carro_data > div#input_data{
-   display: flex;
+    display: block;
+    margin: 50px 0px;
 }
 div#input_data > label{
     height: 30px;
@@ -1309,13 +1116,19 @@ div#input_data > label{
     width: 400px;
     font-family: "Lora", serif;
 }
+div#input_data > label > input{
+    height: 30px;
+    width: 200px;
+    margin-left: 20px;
+    font-size: 22px;
+    font-family: "Roboto", sans-serif;
+}
 div#selecionar_carro_data > button{
     width: 125px; 
     height: 50px; 
     background-color: rgb(193,85,0); 
     border: 1px solid black; 
     border-radius: 5px;
-    margin-top: 45px;
     margin-bottom: -25px;
     color: white;
     font-size: 1.25em;
@@ -1323,27 +1136,112 @@ div#selecionar_carro_data > button{
 }
 main#selecionar_carros > div > button:hover{cursor: pointer;}
 
-
+h2#moises{
+    text-align: center;
+    font-size: 2.5em;
+    background-color: whitesmoke;
+    border: 2px solid black;
+    min-width: 400px;
+}
 
 main#selecionar_carros > div#situacao_carros{
     display: grid;
     background-color: white;
     width: 100%;
-    overflow-y: scroll;
     height: 650px;
 }
-div#situacao_carros > div#carros_todos{
+div#situacao_carros > div#carros_totalidade{
     display: grid;
     padding: 0px 25px;
+    border: 2px solid black;
+    border-top: none;
+    background-color: white;
 }
-div#carros_todos > div.carro_und{
+div#carros_totalidade > div#outros_carros{
+    height: 470px;
+    overflow-y: auto;
+}
+div#carros_totalidade > div#mostruario{
+    height: auto;
+    text-align: center;
+    border: 2px solid black;
+}
+div#mostruario > h2{
+    font-size: 2em;
+    padding: 15px 0px;
+}
+div#head{
     display: flex;
 }
-div#carros_todos > div.carro_und > h4{
+div#mostruario > div#C5{
+    min-height: 300px;
+}
+h2#moises2{
+    text-align: center;
+    font-size: 2.5em;
+    margin: 10px 0px;
+}
+div#head > h3{
     display: inline;
+    width: calc(100%/3);
     font-family: "Noto Serif Georgian", serif;
     font-size: 1.5em;
-    margin: 10px 0px;
+    padding: 10px 0px;
+    text-align: center;
+}
+div.carro_und{
+    display: flex;
+}
+div.carro_und > h4{
+    display: inline;
+    font-family: "Noto Serif Georgian", serif;
     width: calc(100%/3);
     text-align: center;
+    color: rgba(0, 0, 0, 0.75);
+}
+div.carro_und.C5 > h4{
+    padding: 10px 0px;
+    font-size: 1.5em;
+    border-bottom: dashed 1px black;
+    color: black;
+}
+div#carros_totalidade > div.carro_und > h4.data_inicio{
+    border: solid 1px black;
+    border-top:none;
+}
+
+@media screen and (max-width: 600px){
+    div#oportunidade_da_semana > h2{
+        font-size: 30px;
+        margin-left: 50px;
+        margin: 0px;
+    }
+    div#nome_carro > h2{
+        max-width: 310px;
+        font-size: 30px;
+        text-align: center;
+}
+    div#nome_carro > h3{
+    width: 310px;
+    text-align: center;
+}
+    div#img_carro > img{
+        width: 90%;
+        height: 90%;
+        display: block;
+        margin: auto;
+    }
+    svg#svgpreco{
+        transform: scale(0.5);
+    }
+    svg#svgpreco > polygon{
+        width: 100px;
+    }
+    div#opt_svg_nome{
+        width: 90%;
+        text-align: center;
+    }
+    div#carro_esp_img_nome_preco > h2{
+        font-size: 2.5em;
+    }
 }

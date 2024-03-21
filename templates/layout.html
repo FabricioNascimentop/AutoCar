@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consilcar -BR-</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/layout.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 {% endblock %}
 <body>
@@ -26,13 +26,6 @@
             </div>
             <div id="contatos_caixa">
                 <a href="/contatos">CONTATOS</a>
-            </div>
-            <div class="header_image" id="lupinha">
-                <a href="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top: 5px;">
-                    <circle cx="11" cy="11" r="8" />
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-                </a>
             </div>
             {% if current_user.is_authenticated %}
             <div class="header_image" id="logoff" onclick="show_div(this)">
@@ -53,8 +46,10 @@
     <div id="div_logoff" class="caixa_div">
         <form action="/logoff?rota={{request.url}}" method="post">
             <h2>Desejas sair?</h2>
-                <button type="submit" style="margin-right: auto;">Sair</button>
-                <button type="reset" onclick="fechar(this)" style="margin-left: 45px;">Voltar</button>
+                <div id="bostoes">
+                    <button type="submit">Sair</button>
+                    <button type="reset" onclick="fechar(this)" id="voltar">Voltar</button>
+                </div>
                 {% if current_user.administrador %}
                 <div id="falso_button" onclick="show_div(this)" >Adicionar usuário administrador</div>
                 {% endif %}
@@ -169,4 +164,5 @@
 </footer>
 {% endblock %}
 </body>
+</html>
 {% endblock %}

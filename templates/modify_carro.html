@@ -11,7 +11,7 @@
     {{super()}}
   {% endblock%}
 </div>
-
+<link rel="stylesheet" href="../static/css/style.css">
 <main id="selecionar_carros">
   <div id="selecionar_carro_data">
 
@@ -27,22 +27,57 @@
         
         <div id="input_data">
           <label>De:<input type="date" name="dia_hoje" id="dia_hoje" style="margin-left: 30px;"></label>
+          <br>
+          <br>
           <label>Até:<input type="date" name="dia_semanaqvem" id="dia_semanaqvem"></label>
         </div>
         
         <button type="submit">Enviar</button>
       </form>
-      <h2 style="text-align: center; font-size: 2.5em;">Carros anteriores</h2>
     </div>
+    <h2 id="moises">Carros anteriores</h2>
   </div>
   <div id="situacao_carros">
-    <div id="carros_todos">
-    {% for c in range(0,18) %}
-    <div class="carro_und">
-      <h4>{{carros_dict['nomes'][c]}}</h4><h4>{{carros_dict['inicio'][c]}}</h4><h4>{{carros_dict['fim'][c]}}</h4>
+    <div id="carros_totalidade">
+    <div id="mostruario">
+
+      <h2>Ultimos 5 carros</h2>
+
+      <div id="head">
+        <h3 class="nome">Nome</h3>
+        <h3 class="data_inicio">Data Inicial</h3>
+        <h3 class="data_final">Data Final</h3>
+      </div>
+
+      <div id="C5">
+      {% for c in range(0, 5) %}
+      <div class="carro_und C5">
+        <h4 class="nome C5">{{carros_dict['nomes'][c]}}</h4>
+        <h4 class="data_inicio C5">{{carros_dict['inicio'][c]}}</h4>
+        <h4 class="data_final C5">{{carros_dict['fim'][c]}}</h4>
+      </div>
+      {% endfor %}
+      </div>
     </div>
-    {% endfor %}
-</main>
+    <h2 id="moises2">Histórico Carros</h2>
+    <div id="head">
+      <h3 class="nome">Nome</h3>
+      <h3 class="data_inicio">Data Inicial</h3>
+      <h3 class="data_final">Data Final</h3>
+    </div>
+    <div id="outros_carros">
+    {% for c in range(5, qtn_elementos) %}
+      <div class="carro_und">
+        <h4 class="nome">{{carros_dict['nomes'][c]}}</h4>
+        <h4 class="data_inicio">{{carros_dict['inicio'][c]}}</h4>
+        <h4 class="data_final">{{carros_dict['fim'][c]}}</h4>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+  </main>
+
 <script>
   function setCurrentDateInput() {
             var data = new Date();
@@ -55,8 +90,18 @@
             input_hoje.value = dia_hoje;
             input_semanaqvem.value = ano + "-" + mes + "-" + (parseInt(dia) + 7)
         }
-        document.addEventListener("DOMContentLoaded", setCurrentDateInput);
+    function mataflash() {
+      var flashMessage = document.querySelector('.flash');
+      if (flashMessage) {
+        setTimeout(function () {
+          flashMessage.style.display = 'none';
+        }, 2000);
+      }
+}
+document.addEventListener("DOMContentLoaded", setCurrentDateInput);
+document.addEventListener('DOMContentLoaded', mataflash);
 </script>
+
 {% block footer%}
 {{ super() }}
 {% endblock%}

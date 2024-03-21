@@ -16,17 +16,23 @@ function show_div(e){
     div_criar_conta = document.getElementById('div_criar_conta')
     caixa_div_criar_conta = document.getElementById('caixa_div_criar_conta')
     logoff = document.getElementById('div_logoff')
+    quadro_pesquisa = document.getElementById('aside_pesquisa')
 
     if(e.id == 'logoff'){
         logoff.style.display = 'block'
     }
     if(e.id == 'login_pessoinha'){
-        caixa_div_login.style.display = 'block'
+        caixa_div_login.style.display = 'flex'
 
     }
     if(e.id == 'fake_link_criar_conta' || e.id == 'falso_button'){
         caixa_div_login.style.display = 'none'
         caixa_div_criar_conta.style.display = 'block'
+    }
+    if(e.id == 'setinha'){
+        quadro_pesquisa.classList.toggle("aberta");
+        e.classList.toggle("active")
+         
     }
 
 }
