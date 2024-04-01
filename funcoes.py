@@ -1,13 +1,3 @@
-def data_preco(objs):
-    try:
-        for obj in objs:
-            obj.registro = obj.registro.strftime('%d/%m/%Y')
-            obj.preco = moedinha(obj.preco)
-    except TypeError:
-        objs.registro = objs.registro.strftime('%d/%m/%Y')
-        objs.preco = moedinha(objs.preco)
-    finally:
-        return objs
 def dict_db(self,data_preco=False):
         dict = {}
         for attr, value in self.__dict__.items():
@@ -52,86 +42,67 @@ def str_to_data(data_inicial,br=True):
                 )
     if br:
         data_inicial = data_inicial.strftime('%d/%m/%Y')
+    else:
+        data_inicial = data_inicial.strftime('%Y/%m/%d')
     return data_inicial
-
-
-def procura_carro(*args,br=True):
+class CarrosMeus:
+    def __init__(self,nome,data_inicio,data_final):
+        from datetime import date
+        hoje = date.today()
+        self.nome = nome
+        self.data_inicio = data_inicio
+        self.data_final = data_final
+        self.tempo = hoje - data_inicio
+    def __repr__(self) -> str:
+        return '<'+self.nome+'>'
+        
+def carros_fila():
     lst = []
-    ret = []
-    for bgl in args:
-        print(bgl)
-        lst.append(bgl)
-    arquivo = open('carro_semanas.txt','r')
-    try:
-        ultima_linha = arquivo.readlines()[len(arquivo.readlines())-1]
-        carro = ultima_linha.split()[0].replace('/',' ')
-        inicio = ultima_linha.split()[1]
-        fim = ultima_linha.split()[2] 
-        if args == ():
-            if br:
-                ret.append(carro)
-                ret.append(inicio)
-                ret.append(fim)
-            else:
-                ret.append(carro,br=False)
-                ret.append(inicio,br=False)
-                ret.append(fim,br=False)
-        if 'carro' in lst:
-            ret.append(carro)
-        if 'inicio' in lst:
-            if br:
-                ret.append(str_to_data(inicio))
-            else:
-                ret.append(str_to_data(inicio,br=False))
-        if 'fim' in lst:
-            if br:
-                ret.append(str_to_data(fim))
-            else:
-                ret.append(str_to_data(fim,br=False))
-    finally:
-        arquivo.close()
-        if len(ret) == 1:
-            return ret[0]
-        else:
-            return ret
+    from datetime import date
+    hoje = date.today()
+    for c in range(0,len(lista_carro_semanas())):
+        if hoje <= lista_carro_semanas()[c][1]:
+            nome = lista_carro_semanas()[c][0]
+            nome = str(nome).replace('/',' ') 
+            data_inicio = lista_carro_semanas()[c][1] 
+            data_fim = lista_carro_semanas()[c][2]
+            tempo = data_inicio - hoje
+            carro = CarrosMeus(nome,data_inicio,data_fim,tempo)
+            lst.append(carro)
+            
+    if len(lst) > 0:
+        return lst
+    else:
+        return 'não há carros a adicionar'
 
-def lista_carro_semanas(*args,br=False):
+def lista_carro_semanas(*args):
+    from datetime import date
     lst = []
-    ret = []
-    retado = []
-    for bgl in args:
-        lst.append(bgl)
-    carros_nome = []
-    carros_inicio = []
-    carros_fim = []
     with open('carro_semanas.txt','r') as arquivo:
         arquivo = arquivo.readlines()
-        for c in range(0,len(arquivo)):
-            carro = arquivo[c].split()[0].replace('/',' ')
-            data_inicio = arquivo[c].split()[1]
-            data_fim = arquivo[c].split()[2]
-            carros_nome.append(carro) #nome tratado dos carros
-            if br:
-                carros_inicio.append(str_to_data(data_inicio)) # datas de início com fortação Br
-                carros_fim.append(str_to_data(data_fim)) # datas de fim com formatação Br
-            else:
-                carros_inicio.append(data_inicio) # datas de início sem fortação Br
-                carros_fim.append(data_fim) # datas de fim sem formatação Br
-    if args == ():
-        for c in range(0,len(carros_nome)):
-            linha = f"{carros_nome[c].replace(' ','/')} {carros_inicio[c]} {carros_fim[c]}"
-            linha = linha.split()
-            linha[0] = linha[0].replace('/',' ')
-            linha_formatado = [linha[0],linha[1],linha[2]] 
-            retado.append(linha_formatado)
-        return retado
-    if 'carros' in lst:
-        return carros_nome
-    if 'inicio' in lst:
-        return carros_inicio
-    if 'fim' in lst:
-        return carros_fim
-            
+        for elemento in arquivo:
+            elemento = elemento.split() 
+            elemento[0] = elemento[0].replace('/', ' ') #nome
+            elemento[1] = date.fromisoformat(elemento[1])#data inicial
+            elemento[2] =  date.fromisoformat(elemento[2])#data final
 
+            carro = CarrosMeus(elemento[0],elemento[1],elemento[2])
+            lst.append(carro)
+    return lst
+
+def carros_fila(*args):
+    from datetime import date
+    hoje = date.today()
+    lst = []
+    for carro in lista_carro_semanas():
+        if (hoje - carro.data_inicio).days <= 0:
+            lst.append(carro)
+    if args == ():
+        return lst
+    if 'ultimo' in args:
+        return lst[-1]
+
+
+            
 
     

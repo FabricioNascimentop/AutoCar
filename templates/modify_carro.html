@@ -19,8 +19,8 @@
       <label for="carro_semana">Selecione o carro:</label>
       <form action="/carro semana" method="post" style="width: 100%;">
         <select name="carro_semana" id="carro_semana" name="carro_semana" >
-          {% for carro in carros %}
-            <option value="{{carro.nome}}">{{carro.nome}}</option>
+          {% for carro in carros_lista %}
+            <option value="{{carro.nome}}">{{carro.nome}}&nbsp;&nbsp;&nbsp;-{{carro.preco}}-</option>
            {% endfor%}
         </select>
       </div>
@@ -35,26 +35,25 @@
         <button type="submit">Enviar</button>
       </form>
     </div>
-    <h2 id="moises">Carros anteriores</h2>
   </div>
   <div id="situacao_carros">
     <div id="carros_totalidade">
     <div id="mostruario">
 
-      <h2>Ultimos 5 carros</h2>
+      <h2>Próximos carros</h2>
 
       <div id="head">
         <h3 class="nome">Nome</h3>
-        <h3 class="data_inicio">Data Inicial</h3>
-        <h3 class="data_final">Data Final</h3>
+        <h3 class="data_inicio">Data para aparecer</h3>
+        <h3 class="data_final">Data para ser trocado</h3>
       </div>
 
       <div id="C5">
-      {% for c in range(0, 5) %}
+      {% for carro in prox_carros %}
       <div class="carro_und C5">
-        <h4 class="nome C5">{{carros_dict['nomes'][c]}}</h4>
-        <h4 class="data_inicio C5">{{carros_dict['inicio'][c]}}</h4>
-        <h4 class="data_final C5">{{carros_dict['fim'][c]}}</h4>
+        <h4 class="nome C5">{{carro.nome}}</h4>
+        <h4 class="data_inicio C5">{{carro.data_inicio}} +({{carro.tempo.days * -1}} dias)</h4>
+        <h4 class="data_final C5">{{carro.data_final}}</h4>
       </div>
       {% endfor %}
       </div>
@@ -66,11 +65,11 @@
       <h3 class="data_final">Data Final</h3>
     </div>
     <div id="outros_carros">
-    {% for c in range(5, qtn_elementos) %}
+    {% for carro in hist_carros %}
       <div class="carro_und">
-        <h4 class="nome">{{carros_dict['nomes'][c]}}</h4>
-        <h4 class="data_inicio">{{carros_dict['inicio'][c]}}</h4>
-        <h4 class="data_final">{{carros_dict['fim'][c]}}</h4>
+        <h4 class="nome">{{carro.nome}}</h4>
+        <h4 class="data_inicio">{{carro.data_inicio}}</h4>
+        <h4 class="data_final">{{carro.data_final}}</h4>
       </div>
       {% endfor %}
     </div>
@@ -79,17 +78,33 @@
   </main>
 
 <script>
-  function setCurrentDateInput() {
-            var data = new Date();
-            var ano = data.getFullYear();
-            var mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Mês começa do zero
-            var dia = data.getDate().toString().padStart(2, '0'); // Dia do mês
-            var dia_hoje = ano + "-" + mes + "-" + dia;
-            var input_hoje = document.getElementById("dia_hoje");
-            var input_semanaqvem = document.getElementById("dia_semanaqvem");
-            input_hoje.value = dia_hoje;
-            input_semanaqvem.value = ano + "-" + mes + "-" + (parseInt(dia) + 7)
-        }
+function setCurrentDateInput() {
+    // Obter a data atual
+    var data = new Date();
+    var ano = data.getFullYear(); // Obter o ano
+    var mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Obter o mês (adicionando 1 pois os meses começam em zero) e preencher com zero se necessário
+    var dia = data.getDate().toString().padStart(2, '0'); // Obter o dia do mês e preencher com zero se necessário
+
+    // Formatar a data atual como "AAAA-MM-DD"
+    var dia_hoje = ano + "-" + mes + "-" + dia;
+
+    // Calcular a data para o mesmo dia da próxima semana
+    var proximaSemana = new Date(data);
+    proximaSemana.setDate(proximaSemana.getDate() + 7);
+    var anoProximaSemana = proximaSemana.getFullYear();
+    var mesProximaSemana = (proximaSemana.getMonth() + 1).toString().padStart(2, '0'); // Obter o mês (adicionando 1 pois os meses começam em zero) e preencher com zero se necessário
+    var diaProximaSemana = proximaSemana.getDate().toString().padStart(2, '0'); // Obter o dia do mês e preencher com zero se necessário
+
+    // Formatar a data para o mesmo dia da próxima semana como "AAAA-MM-DD"
+    var dia_semanaqvem = anoProximaSemana + "-" + mesProximaSemana + "-" + diaProximaSemana;
+
+    // Definir os valores dos campos de entrada
+    var input_hoje = document.getElementById("dia_hoje");
+    var input_semanaqvem = document.getElementById("dia_semanaqvem");
+    input_hoje.value = dia_hoje;
+    input_semanaqvem.value = dia_semanaqvem;
+}
+
     function mataflash() {
       var flashMessage = document.querySelector('.flash');
       if (flashMessage) {

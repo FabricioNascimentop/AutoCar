@@ -4,8 +4,8 @@
 }
 /* reset css (fim) */
 :root{
-    --cor-padrao: #c15500;
-    --cor-botton-header: rgba(245, 245, 245, 0.7);
+    --cor-padrao: rgb(249, 233, 135);
+    --cor-botton-header: rgba(20, 20, 20, 0.7);
 }
 
 html,body{
@@ -14,7 +14,7 @@ html,body{
 }
 body{
     background-color: rgb(25, 25, 25);
-    background-image: url(../img/fundo.png);
+    background-image: url(../img/fundo4.png);
     min-width: 310px;
     width: 100%;
 }
@@ -23,10 +23,10 @@ body{
 div#div_logoff{
     display: none;
     width: 100%;
-    height: 115%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.75);
-    position: absolute;
-    z-index: 2;
+    position: fixed;
+    z-index: 3;
     top: 0;
     right: 0;
     bottom: 0;
@@ -52,12 +52,12 @@ div#div_logoff > form > div{
 div#div_logoff > form > div > button{
     width: 125px; 
     height: 50px; 
-    background-color: rgb(193,85,0); 
+    background-color: var(--cor-padrao); 
     border: 1px solid black; 
     border-radius: 5px;
     margin-top: 15px;
-    color: white;
-    font-size: 1.25em;
+    color: black;
+    font-size: 1.5em;
 }
 div#div_logoff > form > div > button:hover{
     cursor: pointer;
@@ -90,7 +90,7 @@ header > nav > div{
     align-self: center;
     font-family: "Montserrat", sans-serif;
     font-size: 1.15em;
-    color: black;
+    color: white;
 }
 header > nav > div:hover > a, header > nav > div:hover{
     color: goldenrod;
@@ -98,7 +98,7 @@ header > nav > div:hover > a, header > nav > div:hover{
 }
 header > nav > div > a{
     text-decoration: none;
-    color: black;
+    color: white;
     background-color: transparent;
 }
 header > nav > div#div_image{
@@ -125,8 +125,8 @@ div.caixa_div{
     width: 100%;
     height: 115%;
     background-color: rgba(0, 0, 0, 0.75);
-    position: absolute;
-    z-index: 2;
+    position: fixed;
+    z-index: 4;
     top: 0;
     right: 0;
     bottom: 0;
@@ -146,19 +146,16 @@ div#div_login{
 div#falso_button{
     width: 100%;
     height: 50px;
-    background-color: rgb(193,85,0);
+    background-color: var(--cor-padrao);
     border: 1px solid black;
     border-radius: 5px;
     margin-top: 15px;
-    color: white;
-    font-size: 1em;
     margin-left: auto;
-    display: flex;
     font-family: "Montserrat", sans-serif;
     text-align: center;
-    justify-content: center;
     align-items: center;
     font-weight: 500;
+    font-size: 20px;
 }
 div#falso_button:hover{
     cursor: pointer;
@@ -276,7 +273,9 @@ div#div_criar_conta > form > button:hover{
         height: auto;
         width: 100%;
         min-width: 100px;
-        background-color: rgb(205,205,205);
+        background-color: rgb(35, 31, 32);
+        position: relative;
+        z-index: 2;
     }
     header > img{
         display: inline;
@@ -291,7 +290,6 @@ div#div_criar_conta > form > button:hover{
         align-self: center;
         font-family: "Montserrat", sans-serif;
         font-size: 1.15em;
-        color: black;
         text-align: center;
         padding: 5px 0px;
     }
@@ -315,4 +313,74 @@ div#div_criar_conta > form > button:hover{
         margin: 0px;
     }
     
+}
+footer{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    width: 100%;
+    background-color: var(--cor-botton-header);
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding: 15px 0px;
+    border-top: 2px black solid;
+}
+div#linha{
+    position: absolute;
+    width: 100%;
+    height: 32px;
+    background-color: rgb(40,40,40);
+    z-index: 1;
+}
+footer > div > h2{
+    font-family: "Playfair Display", serif;
+    font-size: 1.5em;
+    color: var(--cor-padrao);
+    z-index: 2;
+    margin-bottom: 10px;
+}
+div#elementos{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+div#elementos > div.quadro-elementos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2px 0px;
+}
+div#fale_conosco{
+    text-align: center;
+    display: grid;
+    border: solid 2px var(--cor-padrao);
+    border-bottom: none;
+    border-top: none;
+    z-index: 3;
+    padding: 0px 5%;
+}
+div#fale_conosco > p{
+    font-family: "Lora", serif;
+    text-align: center;
+    font-size: 1.1em;
+}
+div#area_login{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+div#area_login > div > a{
+    font-size: 1.15em;
+}
+
+footer > div > a, footer > div > div > a{
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1em;
+    color: white;
+    text-decoration: none;
+}
+nav#elementos > div.quadro-elementos > a:hover{
+    color: var(--cor-padrao);
+    transition-duration: 0.5s;
 }

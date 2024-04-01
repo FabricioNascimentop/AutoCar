@@ -13,7 +13,7 @@
 <body>
     {% block header %}
     <header>                            
-        <img src="../static/img/logoconsilcar" alt="logomarca">
+        <img src="../static/img/img_logo/logo1.png" alt="logomarca">
         <nav>
             <div>
                 <a href="/">HOME</a>
@@ -48,7 +48,7 @@
             <h2>Desejas sair?</h2>
                 <div id="bostoes">
                     <button type="submit">Sair</button>
-                    <button type="reset" onclick="fechar(this)" id="voltar">Voltar</button>
+                    <button type="reset" onclick="closer('div_logoff')" id="voltar">Voltar</button>
                 </div>
                 {% if current_user.administrador %}
                 <div id="falso_button" onclick="show_div(this)" >Adicionar usuário administrador</div>
@@ -152,8 +152,8 @@
     </div>
     <div id="fale_conosco">
         <h2>Fale conosco</h2>
-        <p>+55 79 9603-1896</p>
-        <p>emailconsilcar@consilcar.com</p>
+        <a href="" style="font-family: 'Times New Roman', Times, serif;">+55 79 9603-1896</a>
+        <a href="mailto:emailconsilcar@consilcar.com" style="font-family: 'Times New Roman', Times, serif;">emailconsilcar@consilcar.com</a>
     </div>
     <div id="area_login">
         <h2>Área Pessoal</h2>

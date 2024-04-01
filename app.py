@@ -5,7 +5,7 @@ from funcoes import *
 
 
 
-app = Flask(__name__)
+app = Flask(__name__) 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Hf3g6cEEDgDAg56h6e-dGG51GEF3256e@viaduct.proxy.rlwy.net:30899/railway'
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -58,7 +58,7 @@ def load_user(Clientes_id):
 
 @app.route('/')
 def home():
-    nome_carro_da_semana = procura_carro('carro')
+    nome_carro_da_semana = carros_fila('ultimo').nome
     carro_da_semana_class = Carros.query.filter_by(nome=nome_carro_da_semana).first()
     carro_da_semana = dict_db(carro_da_semana_class,data_preco=True)
     img_carro_da_semana = str(carro_da_semana['nome']).replace(' ','-')
@@ -200,9 +200,10 @@ def carros():
 
 @app.route('/carros/<string:carro_nome>',methods=['POST','GET'])
 def carro_especifico(carro_nome):
-    carro = Carros.query.filter_by(nome=carro_nome).first()
-    marca_nome_carro = str(carro.nome).replace(' ','-')
-    marca_carro = str(carro.nome).split()[0]
+    car = Carros.query.filter_by(nome=carro_nome).first()
+    carro = dict_db(car,data_preco=True)
+    marca_nome_carro = str(car.nome).replace(' ','-')
+    marca_carro = str(car.nome).split()[0]
     return render_template('carro_especifico.html',carro=carro,marca_nome_carro=marca_nome_carro,marca_carro=marca_carro)
 
 
@@ -210,44 +211,36 @@ def carro_especifico(carro_nome):
 @login_required
 def new_car():
     return render_template('add_carro.html')
+
+
 @app.route('/carro semana',methods=['GET','POST'])
 @login_required
 def week_car():
-    import datetime
+    lst = []
     if request.method == 'GET':
         carros = Carros.query.all()
-        all_carros_nome = []
-        all_carros_inicio = []
-        all_carros_fim = []
-        carros_dict = {}
-        with open('carro_semanas.txt','r') as arquivo:
-            arquivo = arquivo.readlines()
-            qtn_itens = len(arquivo)
-            for c in range(0,qtn_itens): #um laço que percorre cada letra de cada linha do "carro_semanas.txt"
-                nome = arquivo[c].split()[0].replace('/',' ') #pega o primeiro item de cada linha (nome do carro) e o deixa legível
-                data_inicial = str_to_data(arquivo[c].split()[1]) #pega o segundo item de cada linha (data_inicial) 
-                data_final = str_to_data(arquivo[c].split()[2])#pega o terceiro item de cada linha (data_final) 
-               #str_to_data transforma o dado do tipo str para um do tipo date
-                all_carros_nome.append(nome)
-                all_carros_inicio.append(data_inicial)
-                all_carros_fim.append(data_final)
-        carros_dict['nomes'] = all_carros_nome
-        carros_dict['inicio'] = all_carros_inicio
-        carros_dict['fim'] = all_carros_fim        
-        return render_template('modify_carro.html',carros=carros,carros_dict=carros_dict,qtn_elementos=qtn_itens)
-    else:
-        comeco = str_to_data(request.form.get('dia_hoje'),br=False)
-        fim = str_to_data(request.form.get('dia_semanaqvem'),br=False)
-        carro = request.form.get('carro_semana')
-        hoje = datetime.date.today()
-        if hoje > comeco:
-             flash('data de início é posterior a data atual','error')
-             return redirect('/carro semana')
-        else:
-            with open('carro_semanas.txt','a') as arquivo:
-                arquivo.writelines(f"{carro.replace(' ','/')} {comeco} {fim}\n")
-            flash('até agora tudo certo')
-            return redirect('/')
+        for carro in carros:
+            lst.append(dict_db(carro,data_preco=True))
+
+        prox_carros = carros_fila()
+        qtn_carros = len(carros)
+        hist_carros = lista_carro_semanas()
+        return render_template('modify_carro.html',qtn_carros=qtn_carros,carros_lista=lst,prox_carros=prox_carros,hist_carros=hist_carros)
+    if request.method == 'POST':
+        from datetime import date
+        carro_semana = request.form.get('carro_semana')
+        
+        inicio = request.form.get('dia_hoje')
+        inicio = date.fromisoformat(inicio)
+
+        fim = request.form.get('dia_semanaqvem')
+        fim = date.fromisoformat(fim)
+
+
+        with open('carro_semanas.txt','a') as arquivo :
+            arquivo.write(F"{carro_semana.replace(' ','/')} {inicio} {fim}\n")
+
+        return redirect('/carro semana')
 
 
 @app.route('/contatos')

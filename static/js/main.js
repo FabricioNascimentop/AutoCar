@@ -48,6 +48,10 @@ function show_div(e){
         div_avo.style.display = 'none'
 
     }
+    function closer(id){
+        var alvo = document.getElementById(id)
+        alvo.style.display = 'none'
+    }
     let currentIndex = 0;
     let totalItems = document.querySelectorAll('.carousel-item').length;
     const carousel = document.getElementById('carousel');
