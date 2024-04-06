@@ -113,3 +113,61 @@ function show_div(e){
 }
 
     updateTotalItems();
+
+    document.getElementById("add_images").innerHTML = `<label for="fileInput" id="label-div" tabindex="0">Adicionar fotos</label>
+    <input type="file" id="fileInput" multiple accept="image/*,video/*" />`;
+    
+    const fileInput = document.querySelector("#fileInput");
+    const pictureImage = document.querySelector(".picture_image");
+    const uploadFile = (files) => {
+        const API_ENDPOINT = "/processar_midia";
+        const request = new XMLHttpRequest();
+        const formData = new FormData();
+      
+        request.open("POST", API_ENDPOINT, true);
+        request.onreadystatechange = () => {
+          if (request.readyState === 4 && request.status === 200) {
+          }
+        };
+        request.getAllResponseHeaders()
+        for (let i = 0; i < files.length; i++) {
+          formData.append(`${files[i].name}`, files[i])
+          formData.append('size',files[0].size)
+        }
+        request.send(formData);
+      };
+      fileInput.addEventListener("change", event => {
+        const files = event.target.files;
+        const ler = new FileReader()
+        ler.readAsDataURL(files[0])
+        ler.addEventListener("load", function (e) {
+            const readerTarget = e.target;
+            const tipo = e.target.result.substring(5, 10)
+            if(tipo == 'image'){
+                const img = document.createElement("img");
+                const img_text = document.createElement("p")
+                img_text.innerText = `${files[0].name} ${(files[0].size/1000000).toFixed(2)}Mb`
+                img.src = readerTarget.result;
+                img.classList.add("img");
+                pictureImage.appendChild(img);
+                pictureImage.appendChild(img_text)
+            }
+            if(tipo == 'video'){
+                const video = document.createElement("video");
+                const video_text = document.createElement("p");
+                video_text.innerText = `${files[0].name} ${(files[0].size/1000000).toFixed(2)}Mb`;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    video.src = event.target.result;
+                    video.classList.add("video");
+                    video.setAttribute("controls", "");
+                    pictureImage.appendChild(video);
+                    pictureImage.appendChild(video_text);
+                };
+                
+                reader.readAsDataURL(files[0]); // Lê o arquivo como URL de dados
+            }
+    });
+        uploadFile(files);
+      });
+    

@@ -12,24 +12,24 @@
   {% endblock%}
 </div>
 <link rel="stylesheet" href="../static/css/style.css">
-<main style="padding: 0px;">
+<main id="add_carro">
     <div id="adicionar_carro">
         <h2>Adicione novo carro</h2>
-        <form action="">
+        <form action="/processar_carro" method="post" name="dados_carros" id="form_dados_carros">
         <label for="nome_add_carro">Nome:
-            <input type="text" name="nome_add_carro" id="nome_add_carro" placeholder="exemplo: Volkswagen Gol">
+            <input type="text" name="nome" id="nome" placeholder="exemplo: Volkswagen Gol" autocomplete="off"  maxlength="60">
         </label> 
         <br>
         <label for="modelo">Modelo:
-            <input type="text" name="modelo" id="modelo" placeholder="exemplo: G1">
+            <input type="text" name="modelo" id="modelo" placeholder="exemplo: G1" autocomplete="off"  maxlength="60">
         </label>
         <br>
         <label for="preco">Preco:
-            <input type="number" id="preco" name="preco" step="0.01" min="0" placeholder="exemplo: 42000,00">
+            <input type="number" id="preco" name="preco" step="0.01" min="0" placeholder="exemplo: 42000,00" autocomplete="off" >
         </label>
         <br>
         <label for="registro">Data:
-            <input type="date" id="registro" name="registro" placeholder="dd-mm-yyyy">
+            <input type="date" id="registro" name="registro" placeholder="dd-mm-yyyy" autocomplete="off" >
         </label>
     </label>
         <br>
@@ -47,11 +47,11 @@
         </label>
         <br>
         <label for="motor">Motor:
-            <input type="text" name="motor" id="motor" placeholder="tipo do motor">
+            <input type="text" name="motor" id="motor" placeholder="tipo do motor" autocomplete="off"  maxlength="20">
         </label>
         <br>
         <label for="transmissao">Transmissão:
-            <select name="combustivel" id="combustivel">
+            <select name="transmissao" id="transmissao">
                 <option value="manual">manual</option>
                 <option value="automatica">automática</option>
                 <option value="automatizada">automatizada</option>
@@ -59,43 +59,56 @@
         </label>
         <br>
         <label for="origem">Origem:
-            <input type="text" name="origem" id="origem" placeholder="nacional ou importado(origem)">
+            <input type="text" name="origem" id="origem" placeholder="nacional ou importado(origem)" autocomplete="off"  maxlength="40">
         </label>
         <br>
         <label for="co2">Co2:
-            <input type="text" name="co2" id="co2" placeholder="exemplo: 602">
+            <input type="number" name="co2" id="co2" placeholder="exemplo: 602" autocomplete="off" >
         </label>
         <br>
         <label for="estado">Estado:
-            <label class="estado">Novo:</h4><input type="radio" name="estado" class="estado" id="novo" value="novo"></label>
-            <label class="estado">Usado:</h4><input type="radio" name="estado" class="estado" id="usado" value="usado"></label>
+            <select name="estado" id="estado">
+                <option value="novo">Novo</option>
+                <option value="usado">Usado</option>
+            </select>
         </label>
         <br>
         <label for="quilometros">Quilometros:
-            <input type="number" id="quilometros" name="quilometros" step="1" min="0" placeholder="exemplo: 25000">
+            <input type="number" id="quilometros" name="quilometros" step="1" min="0" placeholder="exemplo: 25000" autocomplete="off" maxlength="8388607" minlength="0">
         </label>
         <br>
         <label for="garantia">Garantia:
-            <input type="text" name="garantia" id="garantia" placeholder="exemplo: 18 meses">
+            <input type="text" name="garantia" id="garantia" placeholder="exemplo: 18 meses" autocomplete="off"  maxlength="40">
         </label>
         <br>
         <label for="tipo">Tipo:
-            <input type="text" name="tipo" id="tipo" placeholder="exemplo: SUV ou Sedan">
+            <input type="text" name="tipo" id="tipo" placeholder="exemplo: SUV ou Sedan" autocomplete="off"  maxlength="30">
         </label>
         <br>
         <label for="portas">Portas:
-            <input type="text" name="portas" id="portas" placeholder="número de portas">
+            <input type="number" name="portas" id="portas" placeholder="número de portas" autocomplete="off" >
         </label>
         <br>
         <label for="cor">Cor:
-            <input type="text" name="cor" id="cor" placeholder="cor do veículo">
+            <input type="text" name="cor" id="cor" placeholder="cor do veículo" autocomplete="off"  maxlength="30">
         </label>
         <br>
         <label for="lugares">Lugares:
-            <input type="text" name="lugares" id="lugares" placeholder="número de lugares">
+            <input type="number" name="lugares" id="lugares" placeholder="número de lugares" autocomplete="off" >
         </label>
+        <input type="hidden" name="form_name" value="form_dados_carros">
+        <div id="add_images"></div>
+        <div>
+            {% with messages = get_flashed_messages() %}
+                    {% for message in messages %}
+                        <h2 class="flash error" id="flash">{{message}}</h2>
+                    {% endfor %}
+            {% endwith %}
+        </div>
+        <div class="picture_image"></div>
         <button type="submit" id="submit_addcar">Adicionar</button>
         </form>
+        
     </div>
 </main>
 {% block footer%}

@@ -42,7 +42,7 @@ div#pesquisa_reset{
     border: 2px solid black;
     border-top: none ;
     border-bottom: none ;
-    width: 98.5%;
+    width: 100%;
     font-family: "Playfair Display", serif;
 }
 div#pesquisa_reset > h2{
@@ -345,7 +345,7 @@ div#setinha{
     aside#aside_pesquisa{
         display: flex;
         width: 330px;
-        height: 100%;
+        height: 110%;
         transition: margin-left 0.5s ease-out;
         position: fixed;
         margin-left: -270px;
@@ -359,10 +359,11 @@ div#setinha{
     }
     div#cacetinho2{
         overflow-y: scroll;
+        width: 78%;
+        background-color: white;
     }
     div#setinha{
         display: flex;
-        background-color: rgb(0,0,0,0.5);
         width: 50px;
         height: auto;
         justify-content: center;
@@ -375,9 +376,9 @@ div#setinha{
         background-color: black;
     }
     h2#setinha_h2 {
-        margin-top: 120px;
+        margin-top: 230px;
         color: white;
-        font-size: 3.5em;
+        font-size: 5em;
         text-align: center;
         width: 100%;
     }
@@ -944,6 +945,9 @@ button#aindamaisloucurakkkkk:hover{
     color: goldenrod;
     transition-duration: 0.5s;
 }
+main#add_carro{
+    padding: 0px;
+}
 div#adicionar_carro{
     display: grid;
     width: 100%;
@@ -990,6 +994,33 @@ input.estado{
     height: 20px;
     margin-left: 20px;
 }
+div#adicionar_carro > form > div#add_images{
+    width: 300px;
+    height: 50px;
+    margin: 15px 0px;
+}
+div#add_images > input{
+    display: none;
+}
+div#add_images > label{
+    background-color: gray;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+div#add_images > label:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+div#add_images > div.picture_image, .img,.video{
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 16/9;
+
+}
 div#adicionar_carro > form > button{
     width: 150px;
     height: 50px;
@@ -1000,7 +1031,6 @@ div#adicionar_carro > form > button{
     background-color: var(--cor-padrao);
     box-shadow: 1px 1px black;
     font-weight: 600;
-    margin-top: 20px;
 } 
 div#adicionar_carro > form > button:hover{
     cursor: pointer;

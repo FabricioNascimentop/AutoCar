@@ -1,16 +1,20 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager,login_user, UserMixin, logout_user, login_required
 from funcoes import *
+from werkzeug.utils import secure_filename
+from time import sleep
 
 
 
 app = Flask(__name__) 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Hf3g6cEEDgDAg56h6e-dGG51GEF3256e@viaduct.proxy.rlwy.net:30899/railway'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:vWBwGMbsQIGFAqzFZsaiDYjJJnGpggpR@viaduct.proxy.rlwy.net:44033/railway'
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 app.secret_key = 'fabricio'
+
+
 
 
 class Carros(db.Model):
@@ -58,7 +62,10 @@ def load_user(Clientes_id):
 
 @app.route('/')
 def home():
-    nome_carro_da_semana = carros_fila('ultimo').nome
+    try:
+        nome_carro_da_semana = carros_fila('ultimo').nome
+    except:
+        nome_carro_da_semana = Carros.query.filter_by(id=1)
     carro_da_semana_class = Carros.query.filter_by(nome=nome_carro_da_semana).first()
     carro_da_semana = dict_db(carro_da_semana_class,data_preco=True)
     img_carro_da_semana = str(carro_da_semana['nome']).replace(' ','-')
@@ -140,7 +147,7 @@ def carros():
     carros_geral = Carros.query.all()
     diretorio_imagem_carro = []
     lst_marcas = []
-
+    carros_escolha = [] 
 
     for carro in carros_geral:
         marca_carro = str(carro.nome.split()[0])
@@ -149,17 +156,12 @@ def carros():
 
 
         diretorio_imagem_carro.append(str(carro.nome).replace(' ','-'))
-
     if request.method == 'GET':
-        carros_escolha = []
         for carro in carros_geral:
             carros_escolha.append(dict_db(carro,data_preco=True))
 
 
-
     if request.method == 'POST':
-
-
         data = request.form
         carros_lst = []
         marcas = data.getlist('marcas')
@@ -192,7 +194,6 @@ def carros():
 
         
 
-        print(carros_lst)
         carros_escolha = carros_lst
     return render_template('carros.html',carros=carros_escolha,lst_marcas=lst_marcas,diretorio_imagem_carro=diretorio_imagem_carro,anos=anos)
 
@@ -206,12 +207,66 @@ def carro_especifico(carro_nome):
     marca_carro = str(car.nome).split()[0]
     return render_template('carro_especifico.html',carro=carro,marca_nome_carro=marca_nome_carro,marca_carro=marca_carro)
 
-
 @app.route('/adicionar carro')
 @login_required
 def new_car():
     return render_template('add_carro.html')
 
+@app.route('/processar_carro',methods=['POST'])
+@login_required
+def processa_carro():
+    import os
+    from pathlib import Path
+    #pega dados dos inputs e faz um commit para o banco de dados
+    #----------------------------------------------------------------------------------------------------------------------------------- 
+    CD = request.form.to_dict()
+    carro = Carros(
+    nome=CD['nome'],modelo=CD['modelo'],preco=CD['preco'],registro=CD['registro'],combustivel=CD['combustivel'],
+    motor=CD['motor'],transmissao=CD['transmissao'],origem=CD['origem'],Co2=CD['co2'],estado=CD['estado'],
+    quilometros=CD['quilometros'],garantia=CD['garantia'],tipo=CD['tipo'],portas=CD['portas'],cor=CD['cor'],
+    lugares=CD['lugares']
+   )
+    db.session.add(carro)
+    db.session.commit()
+    #cria diretório com nome do carro na pasta "Carros/SRC", arrasta imagens vindas da pasta temp (adicionadas pela rota processar_midia)
+    #-----------------------------------------------------------------------------------------------------------------------------------
+    pasta_atual = Path(__file__).parent
+    CarrosSRC = Path(pasta_atual/'static'/'img'/'CarrosSRC')     
+    
+    #cria diretório com nome do carro
+    nome = request.form.get('nome')
+    nome = nome.replace(' ','-')
+    if not os.path.exists(f"{CarrosSRC}/{nome}"):
+        os.mkdir(f"{CarrosSRC}/{nome}")
+    
+    #arrasta arquivos de "temp" para diretório
+        arquivos_temp = os.listdir(f"{CarrosSRC}/temp") #arquivos na pasta temp
+        c = 0
+        for arquivoTemp in arquivos_temp:
+            c += 1
+            os.chdir(f"{CarrosSRC}/temp")
+            extensao = os.path.splitext(arquivoTemp)[1]
+            os.rename(arquivoTemp,f"{CarrosSRC}/{nome}/{nome}-{c}.{extensao}")
+    #-----------------------------------------------------------------------------------------------------------------------------------
+    return redirect('/adicionar carro')
+
+
+
+
+@app.route('/processar_midia',methods=['POST'])
+@login_required
+def processa_midia():
+    import os 
+    from pathlib import Path
+    pasta_atual = Path(__file__).parent
+    CarrosSRC = Path(pasta_atual/'static'/'img'/'CarrosSRC')
+    
+    #coloca arquivos na pasta temp
+    arquivos = request.files.values()
+    for file in arquivos:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(CarrosSRC/'temp', filename))
+    return redirect(url_for('new_car'))
 
 @app.route('/carro semana',methods=['GET','POST'])
 @login_required

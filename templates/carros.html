@@ -158,9 +158,8 @@
         <a href="{{url_for('carro_especifico',carro_nome=carro.nome)}}">
             <div id="div_carro_img_detalhes">
                 <div id="div_img_carro_carros">
-                    <img src="../static/img/imagens_carro/{{diretorio_imagem_carro[carro.id-1]}}.jpeg" alt="">
+                    <img src="../static/img/CarrosSRC/{{diretorio_imagem_carro[diretorio_imagem_carro.index((carro.nome).replace(' ','-'))]}}/{{diretorio_imagem_carro[ diretorio_imagem_carro.index((carro.nome).replace(' ','-')) ]}}-1.png" alt="">
                 </div>
-
                     <div id="carro_caracteristicas">
                         <div id="carro_nome">
                             <h3>{{carro.nome}}</h3>
