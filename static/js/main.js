@@ -46,6 +46,7 @@ function show_div(e){
         const div_pai = e.parentNode
         const div_avo = div_pai.parentNode
         div_avo.style.display = 'none'
+        console.log(div_avo)
 
     }
     function closer(id){
@@ -170,4 +171,16 @@ function show_div(e){
     });
         uploadFile(files);
       });
-    
+      function toggleFullScreen(e) {
+        var elem = document.getElementById(e.id);
+        console.log(e.id)
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { /* Firefox */
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE/Edge */
+            elem.msRequestFullscreen();
+        }
+    }

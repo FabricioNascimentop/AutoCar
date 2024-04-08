@@ -224,6 +224,18 @@ def editar_carro(carro_nome):
     CarrosSRC = Path(pasta_atual/'static'/'img'/'CarrosSRC')  
     carrinho = str(carro_nome).replace(' ','-')
     qtn_arquivos = len(os.listdir(CarrosSRC/carrinho))
+
+    apagar = request.args.get('apagar_img')
+    if apagar:
+        try:
+           os.remove(f"{CarrosSRC}/{carrinho}/{carrinho}-{apagar}.jpeg")
+        except FileNotFoundError:
+           print('arquivo já apagado')
+    c = 0
+    for arquivo in os.listdir(f"{CarrosSRC}/{carrinho}"):
+        c += 1 
+        os.chdir(f"{CarrosSRC}/{carrinho}")
+        os.rename(arquivo,f"{remover_numeros(arquivo.split('.')[0])}{c}.jpeg")
     return render_template('editar_carro.html',carro=carro,qtn_arquivos=qtn_arquivos,marca_nome_carro=marca_nome_carro)
 
 
@@ -235,8 +247,7 @@ def edit_car():
     id = request.form.get('id')
     id = int(id)
     carro = Carros.query.filter_by(id=id).first()
-    
-    
+        
     
     carro.nome = nome
     carro.modelo = request.form.get('modelo')
@@ -258,8 +269,40 @@ def edit_car():
     db.session.add(carro)
     db.session.commit()
 
+
+
     return redirect(url_for('editar_carro',carro_nome=nome,id=id))
 
+@app.route('/add_img_editar',methods=['POST'])
+def editar_img_add():
+    from pathlib import Path
+    import os
+    pasta_atual = Path(__file__).parent
+    CarrosSRC = Path(pasta_atual/'static'/'img'/'CarrosSRC')
+    arquivos_temp = os.listdir(f"{CarrosSRC}/temp")
+    c = 0
+    extensoes_img = ['.jpg', '.jpeg','.png','.gif','.bmp']
+    extensoes_videos = ['.mp4', '.avi', '.mov', '.mkv', '.wmv']   
+    nome = request.form.get('nome')
+    id = request.form.get('id')
+    nome = nome.replace(' ','-')
+    for arquivoTemp in arquivos_temp:
+            c += 1
+            os.chdir(f"{CarrosSRC}/temp")
+            extensao = os.path.splitext(arquivoTemp)[1]
+            if extensao in extensoes_img:
+                try:
+                    os.rename(arquivoTemp,f"{CarrosSRC}/{nome}/{nome}-{c}.jpeg")
+                except FileExistsError:
+                    print('alo')
+                    pass
+            if extensao in extensoes_videos:
+                try:
+                    os.rename(arquivoTemp,f"{CarrosSRC}/{nome}/{nome}-{c}.mp4")
+                except FileExistsError:
+                    pass
+    return redirect(url_for('editar_carro',carro_nome=nome,id=id))
+    
 @app.route('/adicionar carro')
 @login_required
 def new_car():

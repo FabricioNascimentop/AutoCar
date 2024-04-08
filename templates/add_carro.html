@@ -97,8 +97,7 @@
             <input type="number" name="lugares" id="lugares" placeholder="número de lugares" autocomplete="off" >
         </label>
         <input type="hidden" name="form_name" value="form_dados_carros">
-        <div id="add_images"></div>
-        <div>
+        <div id="add_images"></div><div>
             {% with messages = get_flashed_messages() %}
                     {% for message in messages %}
                         <h2 class="flash error" id="flash">{{message}}</h2>

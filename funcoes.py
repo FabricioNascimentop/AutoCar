@@ -104,6 +104,12 @@ def carros_fila(*args):
     if 'ultimo' in args:
         return lst[-1]
 
+def remover_numeros(texto):
+    texto_sem_numeros = ''
+    for caractere in texto:
+        if not caractere.isdigit():
+            texto_sem_numeros += caractere
+    return texto_sem_numeros
 
         
             
