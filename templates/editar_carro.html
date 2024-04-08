@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+<div id="esconde_esconde">
+  {% block all %}
+  {% block head %}
+  {{ super() }}
+  {% endblock %}
+  {% block header %}
+  {{ super() }}
+  {% endblock %}
+  {% block login_criar_conta %}
+  {{super()}}
+  {% endblock%}
+</div>
+<main id="editar_carro">
+  
+  <div id="dados_editar_carros">
+    <h2>Adicione novo carro</h2>
+    <form action="/editar_carro" method="post" name="dados_carros" id="form_dados_carros">
+      <label for="nome_add_carro">Nome:
+            <input type="text" name="nome" id="nome" value="{{carro.nome}}" autocomplete="off"  maxlength="60">
+        </label> 
+        <br>
+        <label for="modelo">Modelo:
+            <input type="text" name="modelo" id="modelo" value="{{carro.modelo}}" autocomplete="off"  maxlength="60">
+        </label>
+        <br>
+        <label for="preco">Preco:
+            <input type="number" id="preco" name="preco" step="0.01" min="0" value="{{carro.preco}}" autocomplete="off" >
+        </label>
+        <br>
+        <label for="registro">Data:
+          <input type="date" id="registro" name="registro" value="{{carro.registro}}" autocomplete="off" >
+        </label>
+    </label>
+        <br>
+        <label for="combustivel">Combustivel:
+          <select name="combustivel" id="combustivel" value="{{carro.combustivel}}">
+                <option value="gasolina">gasolina</option>
+                <option value="etanol">etanol</option>
+                <option value="diesel">diesel</option>
+                <option value="biodiesel">biodiesel</option>
+                <option value="GNV">GNV</option>
+                <option value="eletricidade">eletricidade</option>
+                <option value="hibrido">híbrido</option>
+                <option value="flex">flex</option>
+              </select>
+        </label>
+        <br>
+        <label for="motor">Motor:
+            <input type="text" name="motor" id="motor" value="{{carro.motor}}" autocomplete="off"  maxlength="20">
+        </label>
+        <br>
+        <label for="transmissao">Transmissão:
+          <select name="transmissao" id="transmissao">
+            <option value="manual">manual</option>
+            <option value="automatica">automática</option>
+            <option value="automatizada">automatizada</option>
+          </select>
+        </label>
+        <br>
+        <label for="origem">Origem:
+          <input type="text" name="origem" id="origem" value="{{carro.origem}}" autocomplete="off"  maxlength="40">
+        </label>
+        <br>
+        <label for="co2">Co2:
+            <input type="number" name="co2" id="co2" value="{{carro.Co2}}" autocomplete="off" >
+        </label>
+        <br>
+        <label for="estado">Estado:
+            <select name="estado" id="estado">
+                <option value="novo">Novo</option>
+                <option value="usado">Usado</option>
+            </select>
+        </label>
+        <br>
+        <label for="quilometros">Quilometros:
+          <input type="number" id="quilometros" name="quilometros" step="1" min="0" value="{{carro.quilometros}}" autocomplete="off" maxlength="8388607" minlength="0">
+        </label>
+        <br>
+        <label for="garantia">Garantia:
+            <input type="text" name="garantia" id="garantia" value="{{carro.garantia}}" autocomplete="off"  maxlength="40">
+          </label>
+        <br>
+        <label for="tipo">Tipo:
+          <input type="text" name="tipo" id="tipo" value="{{carro.tipo}}" autocomplete="off"  maxlength="30">
+        </label>
+        <br>
+        <label for="portas">Portas:
+          <input type="number" name="portas" id="portas" value="{{carro.portas}}" autocomplete="off" >
+        </label>
+        <br>
+        <label for="cor">Cor:
+            <input type="text" name="cor" id="cor" value="{{carro.cor}}" autocomplete="off"  maxlength="30">
+          </label>
+        <br>
+        <label for="lugares">Lugares:
+          <input type="number" name="lugares" id="lugares" value="{{carro.lugares}}" autocomplete="off" >
+        </label>
+        <input type="hidden" name="id" value="{{carro.id}}">
+        <button type="submit">Enviar</button>
+        
+</div>
+<div id="imgs_carros_editar">
+  {% for c in range(1,qtn_arquivos+1)%}
+  <div class="carros_editar">
+    <div id="img_carros_editar">
+      <img src="../static/img/CarrosSRC/{{marca_nome_carro}}/{{marca_nome_carro}}-{{c}}.jpeg" alt="Imagem {{c}} de {{marca_nome_carro}}">
+    </div>
+    <div id="svg">
+      <svg fill="#000000" width="64px" height="64px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>apagar imagem</title> <path d="M30 7.249h-5.598l-3.777-5.665c-0.137-0.202-0.366-0.334-0.625-0.334h-8c-0 0-0.001 0-0.001 0-0.259 0-0.487 0.131-0.621 0.331l-0.002 0.003-3.777 5.665h-5.599c-0.414 0-0.75 0.336-0.75 0.75s0.336 0.75 0.75 0.75v0h3.315l1.938 21.319c0.036 0.384 0.356 0.682 0.747 0.682 0 0 0 0 0.001 0h16c0 0 0.001 0 0.001 0 0.39 0 0.71-0.298 0.745-0.679l0-0.003 1.938-21.319h3.316c0.414 0 0.75-0.336 0.75-0.75s-0.336-0.75-0.75-0.75v0zM12.401 2.75h7.196l2.999 4.499h-13.195zM23.314 29.25h-14.63l-1.863-20.5 18.358-0.001zM11 11.25c-0.414 0-0.75 0.336-0.75 0.75v0 14c0 0.414 0.336 0.75 0.75 0.75s0.75-0.336 0.75-0.75v0-14c-0-0.414-0.336-0.75-0.75-0.75v0zM16 11.25c-0.414 0-0.75 0.336-0.75 0.75v0 14c0 0.414 0.336 0.75 0.75 0.75s0.75-0.336 0.75-0.75v0-14c-0-0.414-0.336-0.75-0.75-0.75v0zM21 11.25c-0.414 0-0.75 0.336-0.75 0.75v0 14c0 0.414 0.336 0.75 0.75 0.75s0.75-0.336 0.75-0.75v0-14c-0-0.414-0.336-0.75-0.75-0.75v0z"></path> </g></svg>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</main>
+{% block footer%}
+{{ super() }}
+{% endblock%}
+<script src="../static/js/main.js"></script>
+{% endblock %}

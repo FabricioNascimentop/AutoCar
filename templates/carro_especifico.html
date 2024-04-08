@@ -20,14 +20,11 @@
         </svg></div>
         <div class="carousel-container">
           <div class="carousel" id="carousel">
-            <div class="carousel-item"><img src="../static/img/img_carro/{{marca_nome_carro}}.jpeg" alt="Imagem 1"></div>
-            <div class="carousel-item"><img src="../static/img/img_carro/{{marca_nome_carro}}.jpeg" alt="Imagem 1"></div>
-            <div class="carousel-item"><img src="../static/img/img_carro/{{marca_nome_carro}}.jpeg" alt="Imagem 1"></div>
-            <div class="carousel-item"><img src="../static/img/img_carro/{{marca_nome_carro}}.jpeg" alt="Imagem 1"></div>
-            <div class="carousel-item"><img src="../static/img/img_carro/{{marca_nome_carro}}.jpeg" alt="Imagem 1"></div>
-            <div class="carousel-item"><img src="../static/img/img_carro/{{marca_nome_carro}}.jpeg" alt="Imagem 1"></div>
-            <div class="carousel-item"><img src="../static/img/img_carro/{{marca_nome_carro}}.jpeg" alt="Imagem 1"></div>
-            <div class="carousel-item"><img src="../static/img/img_carro/Kia-Sorento.jpeg" alt="Imagem 4"></div>
+            {% for c in range(1,qtn_arquivos+1)%}
+            <div class="carousel-item">
+              <img src="../static/img/CarrosSRC/{{marca_nome_carro}}/{{marca_nome_carro}}-{{c}}.jpeg" alt="Imagem 1">
+            </div>
+            {% endfor %}
           </div>
         </div>
         <div onclick="changeSlide(1)" class="bostao" id="dir"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -85,6 +82,11 @@
     </div>
 </div>
 </main>
+{% if current_user.administrador %}
+<div id="editar" class="quadro_verificado">
+  <h4><a href="{{url_for('editar_carro',carro_nome=carro.nome,id=carro.id)}}">editar</a></h4>
+</div>
+{% endif %}
 {% block login_criar_conta %}
 {{super()}}
 {% endblock%}

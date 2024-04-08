@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager,login_user, UserMixin, logout_user, login_required
 from funcoes import *
 from werkzeug.utils import secure_filename
-from time import sleep
 
 
 
@@ -198,11 +197,68 @@ def carros():
 
 @app.route('/carros/<string:carro_nome>',methods=['POST','GET'])
 def carro_especifico(carro_nome):
+    import os
+    from pathlib import Path
     car = Carros.query.filter_by(nome=carro_nome).first()
     carro = dict_db(car,data_preco=True)
     marca_nome_carro = str(car.nome).replace(' ','-')
     marca_carro = str(car.nome).split()[0]
-    return render_template('carro_especifico.html',carro=carro,marca_nome_carro=marca_nome_carro,marca_carro=marca_carro)
+
+    pasta_atual = Path(__file__).parent
+    CarrosSRC = Path(pasta_atual/'static'/'img'/'CarrosSRC')  
+    carrinho = str(carro_nome).replace(' ','-')
+    qtn_arquivos = len(os.listdir(CarrosSRC/carrinho))
+    
+    
+    return render_template('carro_especifico.html',carro=carro,marca_nome_carro=marca_nome_carro,marca_carro=marca_carro,qtn_arquivos=qtn_arquivos)
+
+
+@app.route('/editar/<string:carro_nome>')
+def editar_carro(carro_nome):
+    import os
+    from pathlib import Path
+    id = request.args.get('id')
+    carro = Carros.query.filter_by(id=id).first()
+    marca_nome_carro = str(carro.nome).replace(' ','-')
+    pasta_atual = Path(__file__).parent
+    CarrosSRC = Path(pasta_atual/'static'/'img'/'CarrosSRC')  
+    carrinho = str(carro_nome).replace(' ','-')
+    qtn_arquivos = len(os.listdir(CarrosSRC/carrinho))
+    return render_template('editar_carro.html',carro=carro,qtn_arquivos=qtn_arquivos,marca_nome_carro=marca_nome_carro)
+
+
+@app.route('/editar_carro',methods=['POST'])
+def edit_car():
+    Carro_att_dict = request.form.to_dict()
+    nome = request.form.get('nome')
+    modelo = request.form.get('modelo')
+    id = request.form.get('id')
+    id = int(id)
+    carro = Carros.query.filter_by(id=id).first()
+    
+    
+    
+    carro.nome = nome
+    carro.modelo = request.form.get('modelo')
+    carro.preco = request.form.get('preco')
+    carro.registro = request.form.get('registro')
+    carro.combustivel = request.form.get('combustivel')
+    carro.motor = request.form.get('motor')
+    carro.transmissao = request.form.get('transmissao')
+    carro.origem = request.form.get('origem')
+    carro.Co2 = request.form.get('co2')
+    carro.estado = request.form.get('estado')
+    carro.quilometros = request.form.get('quilometros')
+    carro.garantia = request.form.get('nome')
+    carro.tipo = request.form.get('tipo')
+    carro.portas = request.form.get('portas')
+    carro.cor = request.form.get('cor')
+    carro.lugares = request.form.get('lugares')
+    
+    db.session.add(carro)
+    db.session.commit()
+
+    return redirect(url_for('editar_carro',carro_nome=nome,id=id))
 
 @app.route('/adicionar carro')
 @login_required
