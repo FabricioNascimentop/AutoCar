@@ -44,7 +44,7 @@
 
       <div id="head">
         <h3 class="nome">Nome</h3>
-        <h3 class="data_inicio">Data para aparecer</h3>
+        <h3 class="data_inicio">Data de aparecimento</h3>
         <h3 class="data_final">Data para ser trocado</h3>
       </div>
 
@@ -52,8 +52,8 @@
       {% for carro in prox_carros %}
       <div class="carro_und C5">
         <h4 class="nome C5">{{carro.nome}}</h4>
-        <h4 class="data_inicio C5">{{carro.data_inicio}} +({{carro.tempo.days * -1}} dias)</h4>
-        <h4 class="data_final C5">{{carro.data_final}}</h4>
+        <h4 class="data_inicio C5">{{carro.data_inicio}} ({{carro.tempo_inicio.days}} dias)</h4>
+        <h4 class="data_final C5">{{carro.data_final}} ({{carro.tempo_fim.days}} dias)</h4>
       </div>
       {% endfor %}
       </div>

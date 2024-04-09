@@ -143,9 +143,7 @@ def testar():
 
 @app.route('/carros',methods=['GET','POST'])
 def carros():
-    anos = list(range(1956, 2025))
     carros_geral = Carros.query.all()
-    diretorio_imagem_carro = []
     lst_marcas = []
     carros_escolha = [] 
 
@@ -155,7 +153,6 @@ def carros():
             lst_marcas.append(marca_carro)
 
 
-        diretorio_imagem_carro.append(str(carro.nome).replace(' ','-'))
     if request.method == 'GET':
         for carro in carros_geral:
             carros_escolha.append(dict_db(carro,data_preco=True))
@@ -195,7 +192,7 @@ def carros():
         
 
         carros_escolha = carros_lst
-    return render_template('carros.html',carros=carros_escolha,lst_marcas=lst_marcas,diretorio_imagem_carro=diretorio_imagem_carro,anos=anos)
+    return render_template('carros.html',carros=carros_escolha,lst_marcas=lst_marcas,anos=list(range(1956, 2025)))
 
 
 
@@ -242,11 +239,17 @@ def processa_carro():
     #arrasta arquivos de "temp" para diretório
         arquivos_temp = os.listdir(f"{CarrosSRC}/temp") #arquivos na pasta temp
         c = 0
+        extensoes_img = ['.jpg', '.jpeg','.png','.gif','.bmp']
+        extensoes_videos = ['.mp4', '.avi', '.mov', '.mkv', '.wmv']
+
         for arquivoTemp in arquivos_temp:
             c += 1
             os.chdir(f"{CarrosSRC}/temp")
             extensao = os.path.splitext(arquivoTemp)[1]
-            os.rename(arquivoTemp,f"{CarrosSRC}/{nome}/{nome}-{c}.{extensao}")
+            if extensao in extensoes_img:
+                os.rename(arquivoTemp,f"{CarrosSRC}/{nome}/{nome}-{c}.jpeg")
+            if extensao in extensoes_videos:
+                os.rename(arquivoTemp,f"{CarrosSRC}/{nome}/{nome}-{c}.mp4")
     #-----------------------------------------------------------------------------------------------------------------------------------
     return redirect('/adicionar carro')
 

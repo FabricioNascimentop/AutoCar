@@ -52,7 +52,9 @@ class CarrosMeus:
         self.nome = nome
         self.data_inicio = data_inicio
         self.data_final = data_final
-        self.tempo = hoje - data_inicio
+        
+        self.tempo_inicio = data_inicio - hoje
+        self.tempo_fim = data_final - hoje
     def __repr__(self) -> str:
         return '<'+self.nome+'>'
         
@@ -95,14 +97,16 @@ def carros_fila(*args):
     hoje = date.today()
     lst = []
     for carro in lista_carro_semanas():
-        if (hoje - carro.data_inicio).days <= 0:
+        if (hoje - carro.data_inicio).days <= 0 or hoje <= carro.data_final:
             lst.append(carro)
     if args == ():
         return lst
     if 'ultimo' in args:
         return lst[-1]
 
+print(carros_fila('ultimo'))
 
+        
             
 
     
