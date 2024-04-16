@@ -14,6 +14,7 @@ login_manager.init_app(app)
 app.secret_key = 'fabricio'
 
 
+print('alo')
 
 
 class Carros(db.Model):
@@ -61,6 +62,7 @@ def load_user(Clientes_id):
 
 @app.route('/')
 def home():
+    print('alo,cliente')
     try:
         nome_carro_da_semana = carros_fila('ultimo').nome
     except:
