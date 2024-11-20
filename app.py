@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__) 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:vWBwGMbsQIGFAqzFZsaiDYjJJnGpggpR@viaduct.proxy.rlwy.net:44033/railway'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3306/carros_e_clientes'
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -62,7 +62,7 @@ def load_user(Clientes_id):
 @app.route('/')
 def home():
     try:
-        nome_carro_da_semana = carros_fila('ultimo').nome
+        nome_carro_da_semana = 'Ford Explorer'
     except:
         nome_carro_da_semana = Carros.query.filter_by(id=1)
     carro_da_semana_class = Carros.query.filter_by(nome=nome_carro_da_semana).first()
@@ -412,6 +412,11 @@ def processar_email():
     corpo = request.form.get('email_corpo')
     enviar_email(assunto=f'-{selecao}- {titulo}',texto=f"{corpo}<br><br><br>{remetente} aguarda resposta",remetente='testeconsilcar@gmail.com',destinatário='testeconsilcar@gmail.com')
     return redirect(url_for('contatos'))
+
+@app.route('/erro')
+def error():
+    return render_template('erro.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)

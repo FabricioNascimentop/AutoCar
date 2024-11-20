@@ -93,10 +93,12 @@ def lista_carro_semanas(*args):
     return lst
 
 def carros_fila(*args):
+    #coloca todos os carros a ir pra página principal em uma lista
     from datetime import date
     hoje = date.today()
     lst = []
     for carro in lista_carro_semanas():
+        #se a data já passou ou se a data em que o carro sumir for depois de hoje
         if (hoje - carro.data_inicio).days <= 0 or hoje <= carro.data_final:
             lst.append(carro)
     if args == ():
