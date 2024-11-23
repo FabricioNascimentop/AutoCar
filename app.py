@@ -373,29 +373,28 @@ def processa_midia():
 @app.route('/carro semana',methods=['GET','POST'])
 @login_required
 def week_car():
-    lst = []
     if request.method == 'GET':
-        carros = Carros.query.all()
-        for carro in carros:
-            lst.append(dict_db(carro,data_preco=True))
-
-        prox_carros = carros_fila()
-        qtn_carros = len(carros)
-        hist_carros = lista_carro_semanas()
-        return render_template('modify_carro.html',qtn_carros=qtn_carros,carros_lista=lst,prox_carros=prox_carros,hist_carros=hist_carros)
+        lst_carros = Carros.query.all()
+        carro_semana = Carros.query.filter_by(id=31).first()
+        print()
+        return render_template('modify_carro.html',lst_carros=lst_carros,carro_semana=carro_semana)
     if request.method == 'POST':
-        from datetime import date
-        carro_semana = request.form.get('carro_semana')
+        import csv
+        from collections import namedtuple
+        nome_carro = request.form.get('carro_semana')
+        data_inicio_carro = request.form.get('dia_hoje')
+        data_saida_carro = request.form.get('dia_semanaqvem')
         
-        inicio = request.form.get('dia_hoje')
-        inicio = date.fromisoformat(inicio)
+        with open('Carro_semanas.csv','a',newline='') as carro_semanas:
+             fieldnames = ['Nome_carro', 'Data_entrada', 'Data_saida']
+             writer = csv.DictWriter(carro_semanas, fieldnames=fieldnames)
+             carro_dict = {
+                 'Nome_carro':nome_carro,
+                 'Data_entrada':data_inicio_carro,
+                 'Data_saida':data_saida_carro
+             }
+             writer.writerow(carro_dict)
 
-        fim = request.form.get('dia_semanaqvem')
-        fim = date.fromisoformat(fim)
-
-
-        with open('carro_semanas.txt','a') as arquivo :
-            arquivo.write(F"{carro_semana.replace(' ','/')} {inicio} {fim}\n")
 
         return redirect('/carro semana')
 

@@ -1151,28 +1151,27 @@ div#adicionar_carro > form > button:hover{
 }
 main#selecionar_carros{
     background-image: url(../static/img/fundo.png);
-    height: 110vw;
-    display: block;
-    min-height: 1600px;    
+    display: flex;
 }
 main#selecionar_carros > div#selecionar_carro_data{
     padding: 50px 20px;
     background-color: white;
-    border: 2px solid black;
     border-bottom: none;
     min-width: 360px;
+    width: 50%;
 }
 div#selecionar_carro_data > div#label_select{
     display: flex;
     height: 30px;
     width: 100%;
+    margin-top: 15px;
 }
 
 div#selecionar_carro_data > div#label_select > label{
     height: 30px;
     display: flex;
     align-items: center;
-    font-size: 2em;
+    font-size: 1.5em;
     width: 400px;
     font-family: "Lora", serif;
 }
@@ -1189,6 +1188,25 @@ div#selecionar_carro_data > div#label_select > form > select{
 div#selecionar_carro_data > div#input_data{
     display: block;
     margin: 50px 0px;
+}
+main#selecionar_carros > div#Carro_em_destaque{
+    background-color: white;
+    height: 600px;
+    width: 50%;
+}
+div#Carro_em_destaque > h2,div#Carro_em_destaque > div#quadro > h2{
+    text-align: center;
+    font-family: "Lora", serif;;
+    font-size: 35px;
+    font-weight: 300;
+}
+div#Carro_em_destaque > div#quadro > h2{
+    font-family: "Lora","Serif";
+}
+div#Carro_em_destaque > div#quadro > div#img{
+    background-color: #231f20;
+    width: 600px;
+    height: 400px;
 }
 div#input_data > label{
     height: 30px;

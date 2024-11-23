@@ -45,66 +45,32 @@ def str_to_data(data_inicial,br=True):
     else:
         data_inicial = data_inicial.strftime('%Y/%m/%d')
     return data_inicial
-class CarrosMeus:
-    def __init__(self,nome,data_inicio,data_final):
-        from datetime import date
-        hoje = date.today()
-        self.nome = nome
-        self.data_inicio = data_inicio
-        self.data_final = data_final
-        
-        self.tempo_inicio = data_inicio - hoje
-        self.tempo_fim = data_final - hoje
-    def __repr__(self) -> str:
-        return '<'+self.nome+'>'
-        
-def carros_fila():
-    lst = []
-    from datetime import date
-    hoje = date.today()
-    for c in range(0,len(lista_carro_semanas())):
-        if hoje <= lista_carro_semanas()[c][1]:
-            nome = lista_carro_semanas()[c][0]
-            nome = str(nome).replace('/',' ') 
-            data_inicio = lista_carro_semanas()[c][1] 
-            data_fim = lista_carro_semanas()[c][2]
-            tempo = data_inicio - hoje
-            carro = CarrosMeus(nome,data_inicio,data_fim,tempo)
-            lst.append(carro)
-            
-    if len(lst) > 0:
-        return lst
-    else:
-        return 'não há carros a adicionar'
 
-def lista_carro_semanas(*args):
-    from datetime import date
-    lst = []
-    with open('carro_semanas.txt','r') as arquivo:
-        arquivo = arquivo.readlines()
-        for elemento in arquivo:
-            elemento = elemento.split() 
-            elemento[0] = elemento[0].replace('/', ' ') #nome
-            elemento[1] = date.fromisoformat(elemento[1])#data inicial
-            elemento[2] =  date.fromisoformat(elemento[2])#data final
 
-            carro = CarrosMeus(elemento[0],elemento[1],elemento[2])
-            lst.append(carro)
-    return lst
 
-def carros_fila(*args):
-    #coloca todos os carros a ir pra página principal em uma lista
-    from datetime import date
-    hoje = date.today()
-    lst = []
-    for carro in lista_carro_semanas():
-        #se a data já passou ou se a data em que o carro sumir for depois de hoje
-        if (hoje - carro.data_inicio).days <= 0 or hoje <= carro.data_final:
-            lst.append(carro)
-    if args == ():
-        return lst
-    if 'ultimo' in args:
-        return lst[-1]
+
+def busca_carros_semana(passados=False):
+    #retorna lista de carros no bagulho das semanas lá
+    #passado ou futuro pra filtrar se a lista vai retornar todos ou só alguns
+    import csv
+    from collections import namedtuple
+    from datetime import date,datetime
+    prox_carros = []
+    pass_carros = []
+    Carro_semana = namedtuple('Carro_semana',['Nome_carro','Data_entrada','Data_saida'])
+    with open('carro_semanas.csv','r') as carros_semana:
+        reader = csv.DictReader(carros_semana)
+        for linha in reader:
+            dado = Carro_semana(Nome_carro=linha['Nome_carro'], Data_entrada=linha['Data_entrada'],Data_saida=linha['Data_saida'])
+            print(dado.Nome_carro,dado.Data_entrada)
+            if datetime.strptime(dado.Data_entrada,"%Y-%m-%d").date() > date.today():
+                print('vai aparecer \n')
+            if datetime.strptime(dado.Data_entrada,"%Y-%m-%d").date() == date.today():
+                print('está aparecendo \n')
+            else:
+                print('já apareceu \n')
+    
+        return prox_carros
 
 def remover_numeros(texto):
     texto_sem_numeros = ''

@@ -82,7 +82,9 @@ header > nav{
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;
-    justify-content: space-around
+    justify-content: space-around;
+    width: 650px;
+    margin-right: auto;
 }
 
 header > nav > div{
@@ -113,7 +115,8 @@ header > nav > div.header_image:hover{
 }
 header > img{
     display: inline;
-    width: 400px;
+    width: 200px;
+    margin: auto;
 }
 div#login_pessoinha{
     display: flex;

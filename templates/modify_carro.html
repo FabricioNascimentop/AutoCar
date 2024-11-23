@@ -19,8 +19,8 @@
       <label for="carro_semana">Selecione o carro:</label>
       <form action="/carro semana" method="post" style="width: 100%;">
         <select name="carro_semana" id="carro_semana" name="carro_semana" >
-          {% for carro in carros_lista %}
-            <option value="{{carro.nome}}">{{carro.nome}}&nbsp;&nbsp;&nbsp;-{{carro.preco}}-</option>
+          {% for carro in lst_carros %}
+            <option value="{{carro.nome}}">{{carro.nome}}&nbsp;&nbsp;&nbsp;-R${{carro.preco}}-</option>
            {% endfor%}
         </select>
       </div>
@@ -35,45 +35,13 @@
         <button type="submit">Enviar</button>
       </form>
     </div>
-  </div>
-  <div id="situacao_carros">
-    <div id="carros_totalidade">
-    <div id="mostruario">
-
-      <h2>Próximos carros</h2>
-
-      <div id="head">
-        <h3 class="nome">Nome</h3>
-        <h3 class="data_inicio">Data de aparecimento</h3>
-        <h3 class="data_final">Data para ser trocado</h3>
-      </div>
-
-      <div id="C5">
-      {% for carro in prox_carros %}
-      <div class="carro_und C5">
-        <h4 class="nome C5">{{carro.nome}}</h4>
-        <h4 class="data_inicio C5">{{carro.data_inicio}} ({{carro.tempo_inicio.days}} dias atrás)</h4>
-        <h4 class="data_final C5">{{carro.data_final}} ({{carro.tempo_fim.days}} dias)</h4>
-      </div>
-      {% endfor %}
+    <div id="Carro_em_destaque">
+      <h2>Carro em destaque:</h2>
+      <div id="quadro">
+      <div id="img">.</div>
+      <h2>{{carro_semana.nome}}</h2>
       </div>
     </div>
-    <h2 id="moises2">Histórico Carros</h2>
-    <div id="head">
-      <h3 class="nome">Nome</h3>
-      <h3 class="data_inicio">Data Inicial</h3>
-      <h3 class="data_final">Data Final</h3>
-    </div>
-    <div id="outros_carros">
-    {% for carro in hist_carros %}
-      <div class="carro_und">
-        <h4 class="nome">{{carro.nome}}</h4>
-        <h4 class="data_inicio">{{carro.data_inicio}}</h4>
-        <h4 class="data_final">{{carro.data_final}}</h4>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
   </div>
   </main>
 
