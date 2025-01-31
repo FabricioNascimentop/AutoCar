@@ -154,10 +154,10 @@
     <section id="carros">
         {%for carro in carros %}
         <div class="quadro_carros">
-        <a href="{{url_for('carro_especifico',carro_nome=carro.nome,id=carro.id)}}">
+        <a href="{{url_for('cars.carro_especifico',carro_nome=carro.nome,id=carro.id)}}">
             <div id="div_carro_img_detalhes">
                 <div id="div_img_carro_carros">
-                    <img src="../static/img/CarrosSRC/{{(carro.nome).replace(' ','-')}}/{{ (carro.nome).replace(' ','-') }}-1.jpeg" alt="">
+                    <img src="../static/img/CarrosSRC/{{carro.id}}-{{(carro.nome).replace(' ','-')}}/{{ (carro.nome).replace(' ','-') }}-1.jpeg" alt="">
                 </div>
                     <div id="carro_caracteristicas">
                         <div id="carro_nome">

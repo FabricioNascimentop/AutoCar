@@ -6,8 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consilcar -BR-</title>
-    <link rel="stylesheet" href="../static/css/layout.css">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 {% endblock %}
 <body>
@@ -22,7 +23,7 @@
                 <a href="/sobre nós">SOBRE NÓS</a>
             </div>
             <div>
-                <a href="{{url_for('carros')}}">CARROS</a>
+                <a href="/carros">CARROS</a>
             </div>
             <div id="contatos_caixa">
                 <a href="/contatos">CONTATOS</a>
@@ -146,7 +147,7 @@
             <a href="">Sobre nós</a>
         </div>
         <div id="quadro-2" class="quadro-elementos">
-            <a href="">Carros</a>
+            <a href="/carros">Carros</a>
             <a href="" style="margin-right: 3.5px;">Contatos</a>
         </div>
     </div>

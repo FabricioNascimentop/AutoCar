@@ -9,7 +9,6 @@
   {% endblock %}
 </div>
 <link rel="stylesheet" href="../static/css/style.css">
-<img src="../static/img/nao_eh_um_gol_quadrado.png" id="gol_d" alt="">
 <main id="carro_esp">
   <div id="quadro_carro_esp">
     <div id="carro_esp_img_nome_preco">
@@ -20,9 +19,9 @@
         </svg></div>
         <div class="carousel-container">
           <div class="carousel" id="carousel">
-            {% for c in range(1,qtn_arquivos+1)%}
+            {% for image in images %}
             <div class="carousel-item">
-              <img src="../static/img/CarrosSRC/{{marca_nome_carro}}/{{marca_nome_carro}}-{{c}}.jpeg" alt="Imagem 1" onclick="toggleFullScreen(this)" id="{{marca_nome_carro}}-{{c}}">
+              <img src="../static/img/CarrosSRC/{{carro.id}}-{{carro.nome.replace(' ','-')}}/{{image}}" alt="Image not found {{carro.nome}}-{{c}}" onclick="toggleFullScreen(this)" id="{{carro.nome.replace(' ','-')}}-{{c}}">
             </div>
             {% endfor %}
           </div>
@@ -84,7 +83,14 @@
 </main>
 {% if current_user.administrador %}
 <div id="editar" class="quadro_verificado">
-  <h4><a href="{{url_for('editar_carro',carro_nome=carro.nome,id=carro.id)}}">editar</a></h4>
+  <h4><a href="{{url_for('cars.editar_carro',carro_nome=carro.nome,id=carro.id)}}">editar</a></h4>
+</div>
+<div id="apagar" class="quadro_verificado">
+  <form action="{{url_for('cars.apagar_carro')}}" method="post">
+    <input type="hidden" name="carro_nome" value="{{carro.nome}}">
+    <input type="hidden" name="id" value="{{carro.id}}">
+    <button type="submit">apagar</button>
+  </form>
 </div>
 {% endif %}
 {% block login_criar_conta %}

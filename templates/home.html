@@ -26,12 +26,12 @@
                     </div>
                 </div>
                     <div id="nome_carro">
-                        <h2>{{carro_da_semana.nome}}</h2>
-                        <h3>{{carro_da_semana.modelo}}</h3>
+                        <h2>{{carro_semana.nome}}</h2>
+                        <h3>{{carro_semana.modelo}}</h3>
                     </div>
             </div>
                     <div id="img_carro">
-                        <img src="../static/img/CarrosSRC/{{img_carro_da_semana}}/{{img_carro_da_semana}}-1.jpeg" alt="">
+                        <img src="../static/img/CarrosSRC/{{carro_semana.id}}-{{(carro_semana['nome']).replace(' ','-')}}/{{(carro_semana['nome']).replace(' ','-')}}-1.jpeg" alt="">
                     </div>
         </div>
 
@@ -54,7 +54,7 @@
                   <div id="texto_calendario" class="texto_">
 
                       <h3>Data De Registro</h3>
-                      <h4>{{ carro_da_semana.registro }}</h4>
+                      <h4>{{ carro_semana.registro }}</h4>
 
                   </div>
 
@@ -75,7 +75,7 @@
                   <div id="texto_acelerometro" class="texto_">
 
                       <h3>Quilômetros Rodados</h3>
-                      <h4>{{ carro_da_semana.quilometros }} KM</h4>
+                      <h4>{{ carro_semana.quilometros }} KM</h4>
 
                   </div>
 
@@ -101,7 +101,7 @@
 
                     <div id="texto_combustivel" class="texto_">
                         <h3>Tipo De Abastecimento</h3>
-                        <h4>{{ carro_da_semana.combustivel }}</h4>
+                        <h4>{{ carro_semana.combustivel }}</h4>
                     </div>
                   </div>
 
@@ -125,7 +125,7 @@
                       <div id="texto_garantia" class="texto_">
 
                           <h3>Tempo De Garantia</h3>
-                          <h4> {{ carro_da_semana.garantia }}</h4>
+                          <h4> {{ carro_semana.garantia }}</h4>
 
                       </div>
                   </div>
@@ -134,14 +134,14 @@
         <div id="svg_preco">
             <svg xmlns="http://www.w3.org/2000/svg" width="550" height="75"  id="svgpreco">
                 <polygon points="0,75 75,0 550,0 475,75" fill="rgb(250, 232, 134)" stroke="black" stroke-width="1" />
-                <text text-anchor="middle" x="275" y="50" fill="black" id="svg_semana" onload="moedado(this)">{{ carro_da_semana.preco }}</text>
+                <text text-anchor="middle" x="275" y="50" fill="black" id="svg_semana" onload="moedado(this)">{{ carro_semana.preco }}</text>
             </svg>
         </div>
         
             <div id="svg_detalhe" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="60"  id="svgdetalhes">
                     <polygon points="0,60 60,0 300,0 250,60" fill="gray" stroke="black" stroke-width="1"/>
-                        <text text-anchor="middle" x="150" y="40" fill="white" stoke="black" id="svg_semana"><a href="{{url_for('carro_especifico',carro_nome=nome_carro_da_semana)}}" style="color: black;">ver mais</a></text>
+                        <text text-anchor="middle" x="150" y="40" fill="white" stoke="black" id="svg_semana"><a href="{{url_for('cars.carro_especifico',carro_nome=carro_semana['nome'],id=carro_semana['id'])}}" style="color: black;">ver mais</a></text>
                     </svg>
             </div>
     </div>

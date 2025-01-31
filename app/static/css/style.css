@@ -1,0 +1,1364 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Georgian:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root{
+    --cor-padrao: #f9e987;
+    --cor-de-fundo:#231f20;
+    --cor-botton-: #231f20;
+    --gradient: linear-gradient(90deg,#c49c3e,#c59e40,#f3df7e,#c39b3d);
+}
+main{
+    width: auto;
+    padding: 0px 10px;
+    margin: 0px;
+    display: flex;
+}
+img#gol_d{
+    height: 260px;
+    width: 100%;
+    margin-left: auto;
+    margin-bottom: -4px;
+    position: relative;
+    z-index: 2;
+}
+
+
+/* quadro pesquisa (bloco de seleções para ser pesquisado no backending) (início) */
+div#quadro_pesquisa{
+    width: 23f0px;
+    border: 2.5px solid black;
+    border-top: none;
+    border-bottom: none;
+    padding: 10px;
+    display: inline-block;
+    background-color: white;
+}
+div#pesquisa_reset{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 25px 0px;
+    background-color: black;
+    color: black;
+    border: 2px solid black;
+    border-top: none ;
+    border-bottom: none ;
+    width: 100%;
+    font-family: "Playfair Display", serif;
+}
+div#pesquisa_reset > h2{
+    color: white;
+}
+div#quadro_pesquisa > form#f_reset{
+    display: inline;
+    width: 100%;
+    height: 100%;
+}
+form#f_reset > button#btn_reset{
+    padding: 5px 10px;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    border-radius: 5px;
+    font-family: serif;
+    font-family: "Playfair Display", serif;
+}
+button#btn_reset:hover{
+    cursor: pointer;
+}
+div#quadro_pesquisa > form > div > h3{
+    font-family: "Playfair Display", serif;
+    font-weight: 100;
+    font-size: 25px;
+    letter-spacing: 1.5px;
+}
+div.caixa_itens{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+div#quadro_pesquisa > form > div > div.div_select > label{
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+div#quadro_pesquisa > form > div > div > select{
+    width: 100%;
+    height: 35px;
+    border: black 1px solid;
+    font-size: 20px;
+    color: black;
+    font-family: "Noto Serif Georgian", serif;
+    font-weight: 550;
+    border: 1.5px black solid;
+    margin: 5px 0px;
+    text-align: center;
+}
+div.div_select > input[type="range"]{
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    height: 1px;
+    margin: 10px auto;
+    width: 75%;
+    background: rgb(40, 40, 40);
+    outline: none;
+}
+div.div_select > input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none; 
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: black;
+  cursor: pointer;
+  border-radius: 50%; 
+}
+.range::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 0 15px rgba(255,85,0, .1);
+    transition: 0.5s;
+  }
+
+  .range:active::-webkit-slider-thumb {
+    box-shadow: 0 0 0 13px rgba(255,85,0, .2)
+  }
+  .range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 10px rgba(255,85,0, .1)
+  }
+
+p.p_preco_quilometro{
+    font-size: 1.5em;
+    text-align: center;
+    color: black;
+    font-family: "Lora", serif;
+    font-weight: 600;
+}
+div#quadro_pesquisa > form > div{
+    padding: 15px 0px;
+}
+div#quadro_pesquisa > form > div#marcas{
+    height: auto;
+}
+div.caixa_marcas{
+    width: 200px;
+    margin: 5px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+div.caixa_marcas > label{
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+}
+div.div_select{
+    margin: 10px 0px;
+}
+div#div_input-label_combustivel{
+    width: 100px;
+}
+div.div_label_input{
+    width: 190px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0px;
+}
+div.div_label_input > label{
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 19px;
+}
+div.div_label_input > input, div.caixa_marcas > input{
+    width: 20px;
+    height: 20px;
+}
+input#input_gasolina{
+    border: 5px -- solid;
+}
+input.input_radio{
+    width: 20px;
+    height: 20px;
+}
+button#pesquisar{
+    width: 150px;
+    height: 50px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Noto Serif Georgian", serif;
+    font-weight: 600;
+    color: white;
+    background-color: black;
+}
+div#button_carros{
+    height: 100px;
+}
+/* quadro pesquisa (bloco de seleções para ser pesquisado no backending) (fim) */
+/* adicionar novo carro (inicio) */
+
+.quadro_verificado {
+    background: white;
+    border: none;
+    padding: 25px;
+    font-size: 16px;
+    font-family: "Playfair Display", serif;
+    margin-top: 25px;
+    font-weight: 100;
+    letter-spacing: 1.5px;
+    color: white;
+    border-radius: 5px;
+  }
+.quadro_verificado > h4 > a{
+    text-decoration: none;
+    color: black;
+    display: block;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.25em;
+    font-weight: 400;
+  }
+
+  
+
+
+
+/* adicionar novo carro (final) */
+
+/* section carros (precisará ser trabalho no backending) (início) */
+section#carros{
+    display: block;
+    width: 100%;
+    position: relative;
+    z-index: 0;
+}
+div.quadro_carros{
+    background-color: white;
+    display: flex;
+    width: 900px;
+    border: 2px solid black;
+    margin: 15px auto;
+    position: sticky;
+    z-index: 1;
+    
+}
+div.quadro_carros > a {text-decoration: none; color: black;}
+
+div#div_carro_img_detalhes{
+    width: 900px;
+    height: 305px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+}
+div#div_img_carro_carros > img{
+    width: 460px;
+    height: 305px;
+}
+div#carros > div{
+    width: 495px;
+    margin: 25px;
+}
+div#carro_caracteristicas{
+    width: 460px;
+    height: 305px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-left: black 4px solid;
+}
+
+div#carro_nome{
+    text-align: center;
+    margin-top: 25px;
+}
+div#carro_nome > h3{
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 2em;
+    color: black;
+}
+div#carro_nome > p{
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 1.25em;
+    color: black;
+}
+div#carro_detalhes{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+}
+div#carro_detalhes > div{
+    height: 50px;
+}
+div#carro_detalhes > div > h4{
+    font-family: "Noto Serif Georgian", serif;
+    font-weight: 300;
+    font-size: 1.5em;
+}
+div#carro_detalhes > div > p{
+    font-family: "Noto Serif Georgian", serif;
+    font-weight: 600;
+    text-align: center;
+    color: black;
+}
+div#carro_preco{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    font-size: 23px;
+    color: white;
+}
+
+@media only screen and (max-width: 1000px){
+    div#div_carro_img_detalhes{
+        display: grid;
+        height: auto;
+        width: 300px;
+    }
+    div#div_img_carro_carros > img{
+        width: 300px;
+        height: auto;
+    }
+    div.quadro_carros{
+        width: 300px;
+    }
+    div#carro_caracteristicas{
+        border-top: 4px solid black;
+        border-left: none;
+        width: 100%;
+    }
+}
+
+
+/* section carros (precisará ser trabalho no backending) (fim) */
+aside#aside_pesquisa{
+    display: block;
+}
+div#setinha{
+    display: none;
+}
+@media only screen and (max-width: 1200px){
+    aside#aside_pesquisa{
+        display: flex;
+        width: 330px;
+        height: 110%;
+        transition: margin-left 0.5s ease-out;
+        position: fixed;
+        margin-left: -270px;
+        top: 0;
+        overflow-y: scroll;
+        z-index: 1;
+    }
+    aside#aside_pesquisa.aberta{
+        margin-left: -10px;
+        z-index: 10;
+    }
+    div#cacetinho2{
+        overflow-y: scroll;
+        width: 78%;
+        background-color: white;
+    }
+    div#setinha{
+        display: flex;
+        width: 50px;
+        height: auto;
+        justify-content: center;
+        position: relative;
+    }
+    div#setinha.active{
+        transform: scaleX(-1);
+        transition: transform 0.5s;
+        margin-left: -1px;
+        background-color: black;
+    }
+    h2#setinha_h2 {
+        margin-top: 230px;
+        color: white;
+        font-size: 5em;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+main#home{
+    display: block;
+    width: 100vw;
+    min-width: 320px;
+    padding: 0px;
+}
+/* Página Home (início)*/
+
+
+/* aside_esq (união da frase "desconto da semana" com o nome e modelo do carro (início) */
+div#opt_svg_nome{
+    display: inline-block;
+    width: 600px;
+
+}
+div#oportunidade_da_semana{
+    display: block;
+}
+div#oportunidade_da_semana > h2{
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-size: 40px;
+    margin-left: 150px;
+    color: white;
+
+}
+text#svg_semana{
+    font-family: "Noto Serif Georgian", serif;
+    font-weight: 700;
+    font-size: 35px;
+
+}
+div#nome_carro{
+    width: auto;
+}
+div#nome_carro > h2{
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-size: 75px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin: auto;
+    background-clip: text;
+    background-image: linear-gradient(0deg,#c49c3e,#c59e40,#f3df7e,#c39b3d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+div#nome_carro > h3{
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+    letter-spacing: 5px;
+    color: var(--cor-padrao);
+    width: 450px;
+    text-shadow: 2px 2px black;
+    margin: auto;
+}
+/* aside_esq (união da frase "desconto da semana" com o nome e modelo do carro (fim) */
+
+/* aside_img (união da div aside_esq com a div img) (início) */
+div#aside_img{
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+/* aside_img (união da div aside_esq com a div img) (fim) */
+
+
+/* div contendo imagem do carro (início) */
+div#img_carro{
+    display: inline-block;
+}
+div#img_carro > img{
+    width: 600px;
+    height: 250px;
+    border: 2px solid black;
+
+}
+/* div contendo imagem do carro (final) */
+
+
+
+
+/* div contendo todos os svgs, texto 1 ("explicação do svg") e texto 2 ("valor daquele item no carro") (início) */ 
+
+
+div#caixa_todos{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+div#svg_todos > div{
+    align-self: center;
+}
+div#nome_img_carro{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 15px 100px;
+}
+/*no html:
+caixa é a união (svg + texto 1 + texto 2)
+svg é a div contendo o texto do svg
+texto 1 é a "explicação do svg" (o svg de calendário tem escrito: data de fabricação do veículo)
+texto 2 é o valor daquela característica do carro */
+/* div contendo todos os svgs, texto 1 ("explicação do svg") e texto 2 ("valor daquele item no carro") (final) */ 
+
+
+div.svg_ > svg{
+    color: var(--cor-padrao);
+    text-shadow: 2px 2px black;
+}
+div.caixa_{
+    width: 250px;
+    padding: 15px;
+    border: 2px solid black;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px black;
+    text-align: center;
+}
+div.texto_ > h3{
+    font-family: "Playfair Display", serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--cor-padrao);
+    text-shadow: 2px 2px black;
+    
+}
+div.texto_ > h4{
+    text-align: center;
+    font-size: 20px;
+    font-family: "Noto Serif Georgian", serif;
+    color: white;
+    text-transform: capitalize;
+}
+
+
+
+div#svg_preco_detalhe{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 25px 0px;
+    align-items: center;
+    width: 100%;
+}
+div#svg_preco, div#svg_detalhe{
+    align-self: center;
+}
+text#svg_semana > a{
+    color: white;
+}
+div#svg_preco > svg > text#svg_preco{
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+}
+
+
+
+
+img#foto_sobre{
+    width: 100%;
+    margin-bottom: -10px;
+}
+
+main#sobre{
+    background-color: white;
+    padding: 5%;
+    width: 75%;
+    min-width: 250px;
+    margin: auto;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+div.caixa_texto{
+    text-align: justify;
+    font-size: 1.075em;
+    margin: 15px 0px;
+}
+div.caixa_texto > p, div.caixa_texto > div > p{
+    margin: 5px 0px;
+}
+div.caixa_texto > h3, div.caixa_texto > h2{
+    font-family: "Lora", serif;
+    text-align: center;
+    color: var(--cor-padrao);
+    background-color: var(--cor-de-fundo);
+}
+div#segundo_terceiro{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+div#primeiro{
+    width: 100%;
+}
+div#segundo{
+    width: 50%;
+    min-width: 250px;
+    margin: 0px auto;
+}
+div#segundo > p{
+    text-align: justify;
+    margin: 10px 0px;
+}
+div#terceiro{
+    width: 45%;
+    min-width: 250px;
+    margin: 0px auto;
+}
+
+
+.flash{
+    font-family: "Noto Serif Georgian", serif;
+    color: black;
+    font-size: 1.25em;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+}
+.flash.error{
+    background-color: rgb(255, 100, 100);
+}
+.flash.okay{
+    background-color: rgb(50, 128, 50);
+}
+
+div#decisao_adm{
+    display: block;
+}
+div#decisao_adm > h3{
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 1.25em;
+    font-weight: 500;
+    margin: 10px 0px -5px 5px;
+}
+div#decisao_adm > h4{
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 1em;
+    font-weight: 300;
+    margin-bottom: 15px;
+}
+div#decisao_adm > div#input_div{
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 1.5em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+div#input_div > label{
+    display: flex;
+    align-items: center;
+}
+div#input_div > label > input{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+div.div_quadro > form > button#submit_criar_conta{
+    width: 100px;
+    height: 40px;
+    border-radius: 3px;
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+    background-color: var(--cor-padrao);
+    margin: -25px 10px;
+}
+
+
+div#quadro_carro_esp{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1300px;
+    margin: 50px auto;
+}
+
+div#carro_esp_img_nome_preco{
+    text-align: center;
+    background-color: white;
+    border: 4px solid black;
+    border-bottom: none;
+    height: auto;
+    padding: 15px 0px;
+    margin-left: 5%;
+    max-width: 672px
+}
+div#carro_esp_img_nome_preco > h2{
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 3em;
+    color: var(--cor-padrao);
+    background-color: var(--cor-de-fundo);
+    margin-top: 5%;
+    padding: 5px 0px;
+}
+img#carro_esp_img{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 400ms ease-in-out 0s;
+    width: 845px;
+    height: 563px;
+    margin-left: 0px;
+    margin-top: -4px;
+}
+div#carro_esp_img_caracteristicas{
+    display: flex;
+}
+div#carros_bgl{
+    display: grid;
+    justify-items: start;
+    text-wrap: nowrap;
+    background-color: rgb(40,40,40);
+    border-left: none;
+    margin: 0px 15px;
+}
+div.quadro_categoria_carro_esp{
+    width: 100%;
+    text-align: justify;
+    background-color: rgb(40,40,40);
+    border-bottom: solid black 1.5px;
+    padding: 10px 20px;
+    
+}
+div#editar, div#apagar{
+    width: 100px;
+    margin: 25px;
+}
+div#editar > h4{
+    width: 100%;
+    text-align: center;
+}
+div#editar > h4 >  a{
+    text-decoration: none;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.35em;
+    font-weight: 400;
+}
+div#apagar > form{
+    text-align: center;
+}
+div#apagar > form > button{
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+    color: black;
+    font-size: 1.35em;
+    font-weight: 400;
+}
+div#apagar > form > button:hover{
+    cursor: pointer;
+}
+main#editar_carro{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+div#dados_editar_carros{
+    width: 45%;
+    min-width: 320px;
+    background-color: white;
+}
+div#dados_editar_carros > form{
+    width: 100%;
+    margin: 20px 15px;
+    min-width: 290px;
+}
+div#dados_editar_carros > form > button{
+    width: 150px;
+    height: 50px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    color: black;
+    background-color: var(--cor-padrao);
+    box-shadow: 1px 1px black;
+    font-weight: 600;
+    margin: 25px 0px;
+}
+div#dados_editar_carros > form > button:hover{
+    cursor: pointer;
+    color: white;
+    box-shadow: 10px 10px black;
+    transition-duration: 0.5s;
+}
+div#dados_editar_carros > h2{
+    font-family: "Lora", serif;
+    font-size: 2em;
+    text-align: center;
+}
+div#dados_editar_carros > form > label{
+    font-family: "Lora", serif;
+    font-weight: 500;
+    font-size: 1.25em;
+    display: flex;
+    justify-content: space-between;
+    margin: -5px 35px 0px 0px;
+}
+div#dados_editar_carros > form > label > input{
+    width: 100%;
+    height: 25px;
+    display: inline;
+    margin-left: 15px;
+}
+div#dados_editar_carros > form > label > select{
+    height: 29px;
+    width: 100%;
+    text-align: center;
+    font-family: "Lora", serif;
+    font-size: 0.75em;
+    font-weight: 500;
+}
+div#imgs_carros_editar{
+    display: grid;
+}
+div.carros_editar{
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    width: 100%;
+    min-height: 300px;
+    margin-top: 25px;
+}
+div#img_carros_editar{
+    max-width: 500px;
+    margin: 10px auto;
+}
+div#img_carros_editar > img{
+    width: 100%;
+}
+div.carros_editar > #svg >a >svg{
+    fill: white;
+}
+div.carros_editar > #svg > a{
+    display: block;
+    height: 150%;
+}
+div.carros_editar > #svg > a > svg:hover, #svg > a:hover{
+    fill: var(--cor-padrao);
+    transition-duration: 0.25s;
+}
+div.carros_editar > #svg:hover{
+    cursor: pointer;
+    color: var(--cor-padrao);
+}
+div#carros_bgl > div >  h3{
+    color: white;
+    text-transform: capitalize;
+}
+div#carros_bgl > div > h3 > span{
+    color: var(--cor-padrao);
+}
+
+.carousel-container {
+    position: relative;
+    width: 80%;
+    overflow: hidden;
+    margin: 0px -18.5px;
+    border: 4px solid black;
+}
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+.carousel-item {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    align-content: center;
+    display: grid;
+}
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+div#bostao_carousel{
+    display: flex;
+    margin: 25px auto;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.bostao{
+    font-size: 20px;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgba(40,40,40,0.9);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 50px;
+    justify-content: center;
+    margin: 0px auto;
+}
+.bostao:hover{
+    transition-duration: 0.5s;
+    font-size: 70px;
+    color: var(--cor-padrao);
+    width: 60px;
+    animation: none;
+}
+#esq:hover > svg, #dir:hover > svg{
+    animation: none;
+}
+#esq > svg{
+    animation: esq 1.5s infinite cubic-bezier(0.38, 0.38, 0.35, 1.29);
+}
+#dir > svg {
+    animation: dir 1.5s infinite cubic-bezier(0.38, 0.38, 0.35, 1.29);
+    
+}
+@keyframes esq {
+    0%,100%{transform: translateX(3px)}
+    50%{transform: translateX(-8.5px);}
+}
+@keyframes dir {
+    0%,100%{transform: translateX(-3px)}
+    50%{transform: translateX(8.5px);}
+}
+
+div#contatos_grid{
+    position: fixed;
+    top: 40%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+div.borda_contatos_grid{
+    background-color: rgba(0,0,0,0.5);
+    border: 1px solid black;
+    padding: 5px;
+    margin: 0.75px 0px;
+}
+div#contatos_grid > div  > i{
+    font-size: 27px;
+}
+
+div#instagram:hover{
+    width: 125px;
+}
+div#contatos_grid > div#facebook:hover{
+    width: 125px;
+}
+div#contatos_grid > div#whatsapp:hover{
+    width: 125px;
+}
+div#contatos_grid > div#compartilhar:hover{
+    width: 125px;
+}
+
+
+main#contatos{
+    background-color: white;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    flex-wrap: wrap;
+    height: 110%;
+    justify-content: space-between;
+    margin-bottom: 45px;
+}
+main#contatos > div{
+    border: 1px solid black;
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: auto;
+    height: 500px;
+}
+
+div#mensagem > div#head_msg_container{
+    margin-top: 25px;
+    display: grid;
+    height: 400px;
+}
+div#mensagem > div#head_msg_container > div.head_msg{
+    padding: 5px 0px;
+}
+div#mensagem > div#head_msg_container div.head_msg > h2{
+    font-size: 2em;
+    color: black;
+    margin-left: auto;
+    font-weight: 100;
+}
+div#mensagem > div > div > h3{
+    line-height: 1;
+  color: #f9e987;
+  font-size: 18px;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 1),0px 0px 3px rgba(0, 0, 0, 1),0px 0px 3px rgba(0, 0, 0, 1),
+   4px 4px 2px rgba(162, 151, 86, 0.56);
+
+}
+
+div#mensagem > h3{
+    font-size: 18px;
+}
+div#caixa_email{
+    width: 50%;
+}
+div#caixa_email > form{border: none;}
+div#caixa_email > form > select{
+    width: 100%;
+    text-align: center;
+    height: 90px;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--cor-padrao);
+    text-shadow: 2px 2px 0px black, 4px 2px 1px #9e9451, -3px 1px 5px black;
+    letter-spacing: 1px;
+}
+div#caixa_email > form > select > option{color: black; font: 16px sans-serif;}
+
+input#titulo{
+    width: calc(100% - 4px);
+    text-align: left;
+    height: 56px;
+}
+div#email{
+    text-align: left;
+}
+div#email_destinatario_remetente{
+    margin: 5px 0px;
+    height: 60px;
+}
+div.email_content{
+    font-family: "Lora", serif;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    margin-left: 10px    
+}
+div.email_content > p, div.email_content > h3{
+    margin-right: 15px;
+    display: inline;
+}
+div.email_content > input{
+    width: 90%;
+    height: 20px;
+}
+div#corpo_email{
+    width: 100%;
+    height: 222px;
+}
+div#corpo_email > textarea{
+    margin: 0px 0.75%;
+    width: 95%;
+    height: 100%;
+}
+div#corpo_email > button{
+    width: 250px;
+    height: 40px;
+    border-radius: 3px;
+    font-size: 24px;
+    font-family: "Lora", serif;
+    color: black;
+    background-color: var(--cor-padrao);
+    margin: 5px 10px;
+    margin-left: calc(50% - 125px);
+    font-weight: 600;
+}
+
+
+
+
+
+button#aindamaisloucurakkkkk:hover{
+    cursor: pointer;
+    color: goldenrod;
+    transition-duration: 0.5s;
+}
+main#add_carro{
+    padding: 0px;
+}
+div#adicionar_carro{
+    display: grid;
+    width: 100%;
+    background-color: white;
+}
+div#adicionar_carro > form{
+    width: 30%;
+    margin: 20px 15px;
+    min-width: 290px;
+}
+div#adicionar_carro > h2{
+    font-family: "Lora", serif;
+    font-size: 2em;
+}
+div#adicionar_carro > form > label{
+    font-family: "Lora", serif;
+    font-weight: 500;
+    font-size: 1.25em;
+    display: flex;
+    justify-content: space-between;
+    margin: -5px 0px;
+}
+div#adicionar_carro > form > label > input{
+    width: 100%;
+    height: 25px;
+    display: inline;
+    margin-left: 15px;
+}
+div#adicionar_carro > form > label > select{
+    height: 29px;
+    width: 100%;
+    text-align: center;
+    font-family: "Lora", serif;
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+label.estado{
+    display: flex;
+    align-items: center;
+}
+input.estado{
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+}
+div#adicionar_carro > form > div#add_images{
+    width: 300px;
+    height: 50px;
+    margin: 15px 0px;
+}
+div#add_images > input{
+    display: none;
+}
+div#add_images > label{
+    background-color: gray;
+    width: 94%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+div#add_images > label:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+div#add_images > div.picture_image, .img,.video{
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 16/9;
+
+}
+div#adicionar_carro > form > button{
+    width: 150px;
+    height: 50px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Montserrat", sans-serif;
+    color: black;
+    background-color: var(--cor-padrao);
+    box-shadow: 1px 1px black;
+    font-weight: 600;
+} 
+div#adicionar_carro > form > button:hover{
+    cursor: pointer;
+    color: white;
+    box-shadow: 10px 10px black;
+    transition-duration: 0.5s;
+}
+main#selecionar_carros{
+    background-image: url(../static/img/fundo.png);
+    display: flex;
+}
+main#selecionar_carros > div#selecionar_carro_data{
+    padding: 50px 20px;
+    background-color: white;
+    border-bottom: none;
+    min-width: 360px;
+    width: 50%;
+}
+div#selecionar_carro_data > div#label_select{
+    display: flex;
+    height: 30px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+div#selecionar_carro_data > div#label_select > label{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    width: 400px;
+    font-family: "Lora", serif;
+}
+div#selecionar_carro_data > div#label_select > form > select{
+    width: 100%;
+    height: 35px;
+    text-align: center;
+    font-family: "Lora", serif;
+    font-size: 1.15em;
+    border: 2px solid;
+    
+}
+
+div#selecionar_carro_data > div#input_data{
+    display: block;
+    margin: 50px 0px;
+}
+main#selecionar_carros > div#Carro_em_destaque{
+    background-color: white;
+    height: 600px;
+    width: 50%;
+}
+div#Carro_em_destaque > h2,div#Carro_em_destaque > div#quadro > h2{
+    text-align: center;
+    font-family: "Lora", serif;;
+    font-size: 35px;
+    font-weight: 300;
+}
+div#Carro_em_destaque > div#quadro > h2{
+    font-family: "Lora","Serif";
+}
+div#Carro_em_destaque > div#quadro > div#img{
+    background-color: #231f20;
+    width: 600px;
+    height: 400px;
+}
+div#input_data > label{
+    height: 30px;
+    align-items: center;
+    font-size: 2em;
+    width: 400px;
+    font-family: "Lora", serif;
+}
+div#input_data > label > input{
+    height: 30px;
+    width: 215px;
+    text-align: center;
+    margin-left: 20px;
+    font-size: 22px;
+    font-family: "Roboto", sans-serif;
+}
+div#selecionar_carro_data > button{
+    width: 125px; 
+    height: 50px; 
+    background-color: rgb(193,85,0); 
+    border: 1px solid black; 
+    border-radius: 5px;
+    margin-bottom: -25px;
+    color: white;
+    font-size: 1.25em;
+    margin-left: auto;
+}
+main#selecionar_carros > div > button:hover{cursor: pointer;}
+
+h2#moises{
+    text-align: center;
+    font-size: 2.5em;
+    background-color: whitesmoke;
+    border: 2px solid black;
+    min-width: 400px;
+}
+
+main#selecionar_carros > div#situacao_carros{
+    display: grid;
+    background-color: white;
+    width: 100%;
+    height: 650px;
+}
+div#situacao_carros > div#carros_totalidade{
+    display: grid;
+    padding: 0px 25px;
+    border: 2px solid black;
+    border-top: none;
+    background-color: white;
+}
+div#carros_totalidade > div#outros_carros{
+    height: 470px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+div#carros_totalidade > div#mostruario{
+    height: auto;
+    text-align: center;
+    border: 2px solid black;
+}
+div#mostruario > h2{
+    font-size: 2em;
+    padding: 15px 0px;
+}
+div#head{
+    display: flex;
+}
+div#mostruario > div#C5{
+    min-height: 300px;
+}
+h2#moises2{
+    text-align: center;
+    font-size: 2.5em;
+    margin: 10px 0px;
+}
+div#head > h3{
+    display: inline;
+    width: calc(100%/3);
+    font-family: "Noto Serif Georgian", serif;
+    font-size: 1.5em;
+    padding: 10px 0px;
+    text-align: center;
+}
+div.carro_und{
+    display: flex;
+}
+div.carro_und > h4{
+    display: inline;
+    font-family: "Noto Serif Georgian", serif;
+    width: calc(100%/3);
+    text-align: center;
+    color: rgba(0, 0, 0, 0.75);
+}
+div.carro_und.C5 > h4{
+    padding: 10px 0px;
+    font-size: 1.5em;
+    border-bottom: dashed 1px black;
+    color: black;
+}
+div#carros_totalidade > div.carro_und > h4.data_inicio{
+    border: solid 1px black;
+    border-top:none;
+}
+
+@media screen and (max-width: 600px){
+    div#oportunidade_da_semana > h2{
+        font-size: 30px;
+        margin-left: 50px;
+        margin: 0px;
+    }
+    div#nome_carro > h2{
+        max-width: 310px;
+        font-size: 30px;
+        text-align: center;
+}
+    div#nome_carro > h3{
+    width: 310px;
+    text-align: center;
+}
+    div#img_carro > img{
+        width: 90%;
+        height: 90%;
+        display: block;
+        margin: auto;
+    }
+    svg#svgpreco{
+        transform: scale(0.5);
+    }
+    svg#svgpreco > polygon{
+        width: 100px;
+    }
+    div#opt_svg_nome{
+        width: 90%;
+        text-align: center;
+    }
+    div#carro_esp_img_nome_preco > h2{
+        font-size: 2.5em;
+        background-color: var(--cor-de-fundo);
+    }
+}
