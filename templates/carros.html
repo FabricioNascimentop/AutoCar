@@ -46,7 +46,7 @@
                         <label for="select_registro_fim">Até</label> <br>
                         <select name="select_registro_fim" id="select_registro_fim">
                             {% for ano in anos %}
-                            <option value="{{ano}}" selected="2024">{{ano}}</option>
+                            <option value="{{ano}}" selected="2025">{{ano}}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -157,7 +157,7 @@
         <a href="{{url_for('cars.carro_especifico',carro_nome=carro.nome,id=carro.id)}}">
             <div id="div_carro_img_detalhes">
                 <div id="div_img_carro_carros">
-                    <img src="../static/img/CarrosSRC/{{carro.id}}-{{(carro.nome).replace(' ','-')}}/{{ (carro.nome).replace(' ','-') }}-1.jpeg" alt="">
+                    <img src="../static/img/CarrosSRC/{{carro.id}}-{{(carro.nome).replace(' ','-')}}/{{carro.img}}" alt="">
                 </div>
                     <div id="carro_caracteristicas">
                         <div id="carro_nome">

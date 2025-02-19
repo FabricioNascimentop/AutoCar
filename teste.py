@@ -1,50 +1,29 @@
-from app.models import Carros
-
-
+from sqlalchemy import create_engine
+# from sqlalchemy.pool import NullPool
+from dotenv import load_dotenv # type: ignore
 import os
-lst = '''1 Nissan Altima
-2 BMW 3 Series
-3 Audi A4
-4 Mercedes-Benz C-Class
-5 Hyundai Sonata
-6 Kia Optima
-7 Jaguar XF
-8 Lexus ES
-9 Volvo S60
-10 Infiniti Q50
-11 Renault Megane
-12 Hyundai Elantra
-13 BMW X3
-14 Kia Seltos
-15 Mercedes-Benz A-Class
-16 Toyota Camry
-17 Mazda CX-5
-18 Acura MDX
-19 Nissan Rogue
-20 Chevrolet Equinox
-21 Ford Explorer
-22 Subaru Outback
-23 Volkswagen Tiguan
-24 Jeep Grand Cherokee
-25 Mitsubishi Outlander
-26 Audi Q5
-27 Hyundai Tucson
-28 Kia Sorento
-29 Tesla Model Y
-30 Lexus RX
-31 Ford Explorer
-32 Subaru Outback
-33 Volkswagen Tiguan
-34 Jeep Grand Cherokee
-35 Mitsubishi Outlander
-36 Audi Q5
-37 Hyundai Tucson
-38 Kia Sorento
-39 Tesla Model Y
-40 Lexus RX
-41 Nissan Altima'''
 
-carros = lst.splitlines()
-os.chdir(r'C:\TheBigPython\PyProjects\Portifolio\SiteCarro\app\static\img\CarrosSRC')
-for carro in carros:
-    os.makedirs(carro.replace(' ','-'))
+# Load environment variables from .env
+load_dotenv()
+
+# Fetch variables
+USER = os.getenv("user")
+PASSWORD = os.getenv("password")
+HOST = os.getenv("host")
+PORT = os.getenv("port")
+DBNAME = os.getenv("dbname")
+# Construct the SQLAlchemy connection string
+DATABASE_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
+
+# Create the SQLAlchemy engine
+engine = create_engine(DATABASE_URL)
+# If using Transaction Pooler or Session Pooler, we want to ensure we disable SQLAlchemy client side pooling -
+# https://docs.sqlalchemy.org/en/20/core/pooling.html#switching-pool-implementations
+# engine = create_engine(DATABASE_URL, poolclass=NullPool)
+
+# Test the connection
+try:
+    with engine.connect() as connection:
+        print("Connection successful!")
+except Exception as e:
+    print(f"Failed to connect: {e}")

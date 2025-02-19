@@ -1,10 +1,11 @@
 def dict_db(self,data_preco=False):
+        from datetime import datetime
         dict = {}
         for attr, value in self.__dict__.items():
             dict[attr] = value
             if data_preco == True:
                 if attr == 'registro':
-                    dict[attr] = value.strftime('%d/%m/%Y')
+                    dict[attr] = datetime.strptime(value, "%Y-%m-%d").strftime("%d/%m/%Y")
                 if attr == 'preco':
                     dict['preco'] = moedinha(float(value))
         return dict

@@ -86,9 +86,10 @@
   <h4><a href="{{url_for('cars.editar_carro',carro_nome=carro.nome,id=carro.id)}}">editar</a></h4>
 </div>
 <div id="apagar" class="quadro_verificado">
-  <form action="{{url_for('cars.apagar_carro')}}" method="post">
+  <form action="{{url_for('cars.processa_carro',type='excluir')}}" method="post">
     <input type="hidden" name="carro_nome" value="{{carro.nome}}">
     <input type="hidden" name="id" value="{{carro.id}}">
+    <input type="hidden" name="type" value="apagar">
     <button type="submit">apagar</button>
   </form>
 </div>

@@ -175,11 +175,11 @@ function show_div(e){
         console.log(e.id)
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
-        } else if (elem.mozRequestFullScreen) { /* Firefox */
+        } else if (elem.mozRequestFullScreen) {
             elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        } else if (elem.webkitRequestFullscreen) { 
             elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        } else if (elem.msRequestFullscreen) {
             elem.msRequestFullscreen();
         }
     }

@@ -1325,7 +1325,10 @@ div#carros_totalidade > div.carro_und > h4.data_inicio{
     border: solid 1px black;
     border-top:none;
 }
-
+main#carro_semana{
+    background-color: white;
+    height: 100vh;
+}
 @media screen and (max-width: 600px){
     div#oportunidade_da_semana > h2{
         font-size: 30px;

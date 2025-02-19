@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+<div id="esconde_esconde" style="display: none;">
+  {% block all %}
+  {% block head %}
+    {{ super() }}
+  {% endblock %}
+  {% block header %}
+  {{ super() }}
+  {% endblock %}
+</div>
+<main id="carro_semana">
+    <h1>carros da semana</h1>
+    {% for carro in carros %}
+    <h2>{{carro.carro_id}}</h2> <br>
+  
+    {% endfor %}
+    <div id="adicionar">
+        <form action="/carro semana" method="post">
+            <label for="carros_escolha">Carro</label>
+            <select name="carro" id="carro">
+                {% for carro in carros_tot %}
+                <option value="{{carro}}">{{carro}}</option>
+                {% endfor %}
+            </select>
+            <label>Data entrada<input type="date" name="data_entrada" id="data_entrada" required></label>
+            <label>Data saída<input type="date" name="data_saida" id="data_saida" required></label>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</main>
+{% block footer%}
+{{ super() }}
+{% endblock%}
+<script src="../static/js/main.js"></script>
+{% endblock %}

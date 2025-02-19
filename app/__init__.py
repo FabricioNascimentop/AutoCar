@@ -1,8 +1,16 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from dotenv import load_dotenv # type: ignore
+import os
 
-
+load_dotenv()
+USER = os.getenv("user")
+PASSWORD = os.getenv("password")
+PASSWORD = PASSWORD.replace('[','').replace(']','')
+HOST = os.getenv("host")
+PORT = os.getenv("port")
+DBNAME = os.getenv("dbname")
 db = SQLAlchemy()
 login_manager = LoginManager()
 
@@ -12,8 +20,10 @@ login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1:3306/carros_e_clientes'
+    DATABASE_URI = f'postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require'
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI 
     app.config['SECRET_KEY'] = 'fabricio'
+
 
     db.init_app(app)
     login_manager.init_app(app)
