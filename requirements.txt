@@ -1,12 +1,12 @@
 bidict==0.23.1
-blinker==1.9.0
+blinker==1.8.2
 cement==3.0.4
 certifi==2024.12.14
 charset-normalizer==3.4.1
 click==8.1.8
 colorama==0.4.6
 colorlog==6.9.0
-Flask==3.1.0
+Flask==3.0.0
 Flask-Cors==5.0.0
 Flask-Login==0.6.3
 Flask-SocketIO==5.5.1
