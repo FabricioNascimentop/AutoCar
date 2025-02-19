@@ -203,7 +203,7 @@ def processa_carro():
         carro_nome = request.form.get('carro_nome')
         carro = Carros.query.get(id)
         app = Path(__file__).parent.parent
-        shutil.rmtree(f'{app}/static/img/CarrosSRC/{id}-{carro_nome.replace(' ','-')}')
+        shutil.rmtree(f"{app}/static/img/CarrosSRC/{id}-{carro_nome.replace(' ','-')}")
 
         if carro:
             db.session.delete(carro)
