@@ -170,6 +170,10 @@ function show_div(e){
     });
         uploadFile(files);
       });
+
+
+
+      
       function toggleFullScreen(e) {
         var elem = document.getElementById(e.id);
         console.log(e.id)
