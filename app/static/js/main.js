@@ -189,3 +189,7 @@ function show_div(e){
             elem.msRequestFullscreen();
         }
     }
+    window.parent.postMessage({
+        type: 'sessionData',
+        token: localStorage.getItem('sessionToken')
+      }, 'http://localhost:3000');
