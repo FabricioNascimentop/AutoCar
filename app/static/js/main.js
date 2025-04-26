@@ -189,11 +189,16 @@ function show_div(e){
     }
     function sendHeightToParent() {
         const height = document.documentElement.scrollHeight;
+        const parentOrigin = window.location.href.includes('localhost') ? 'http://localhost:3000' : 'https://portifolio.com';  
+        console.log('Enviando mensagem para origem:', parentOrigin);
+
         window.parent.postMessage({
-          type: 'iframeHeight',
-          height: height
-        }, 'https://seusite.com'); // Substitua pelo domínio do site pai
-      }
+            type: 'iframeHeight',
+            height: height
+        }, parentOrigin);
+    }
+
+      
       
       // 1. Enviar altura inicial quando a página carregar
       document.addEventListener('DOMContentLoaded', sendHeightToParent);
