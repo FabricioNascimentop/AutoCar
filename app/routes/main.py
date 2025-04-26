@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template
-from ..models import Carros, CarroSemana
+from flask import Blueprint, render_template, redirect
+from flask_login import login_user
+from ..models import Carros, CarroSemana, Clientes
 from ..utils import dict_db
 from app import db
 
@@ -58,3 +59,10 @@ def carro_semana():
         db.session.add(novo_carro_semana)
         db.session.commit()
     return render_template('carro_semana.html',carros=carros,carros_tot=carros_tot)
+
+
+@bp.route('/login recrutador')
+def login_recrutador():
+     cliente = Clientes.query.filter_by(nome='Recrutador').first()
+     login_user(cliente,remember=False)
+     return redirect('/')
