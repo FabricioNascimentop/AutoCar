@@ -352,6 +352,7 @@ div#setinha{
         top: 0;
         overflow-y: scroll;
         z-index: 1;
+        overflow: hidden;
     }
     aside#aside_pesquisa.aberta{
         margin-left: -10px;
