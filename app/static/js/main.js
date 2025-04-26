@@ -187,3 +187,34 @@ function show_div(e){
             elem.msRequestFullscreen();
         }
     }
+    function sendHeightToParent() {
+        const height = document.documentElement.scrollHeight;
+        window.parent.postMessage({
+          type: 'iframeHeight',
+          height: height
+        }, 'https://seusite.com'); // Substitua pelo domínio do site pai
+      }
+      
+      // 1. Enviar altura inicial quando a página carregar
+      document.addEventListener('DOMContentLoaded', sendHeightToParent);
+      window.addEventListener('load', sendHeightToParent);
+      
+      // 2. Observar mudanças no conteúdo para atualizar a altura
+      const observer = new MutationObserver((mutations) => {
+        sendHeightToParent();
+      });
+      
+      // Configuração do observer:
+      observer.observe(document.body, {
+        childList: true,       // Observar adição/remoção de elementos filhos
+        subtree: true,         // Observar toda a árvore DOM
+        attributes: true,      // Observar mudanças em atributos
+        characterData: true,   // Observar mudanças em texto
+        attributeOldValue: true,
+        characterDataOldValue: true
+      });
+      
+      // 3. Se estiver usando um framework como React/Vue/Angular no iframe:
+      // Adicione este listener para capturar atualizações dinâmicas
+      window.addEventListener('resize', sendHeightToParent);
+      
