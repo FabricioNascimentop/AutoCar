@@ -189,8 +189,13 @@ function show_div(e){
             elem.msRequestFullscreen();
         }
     }
-    console.log(fetch())
-    window.parent.postMessage({
-        type: 'sessionData',
-        token: localStorage.getItem('sessionToken')
-      }, 'http://localhost:3000');
+
+fetch('/api/session')
+  .then(response => response.json())
+  .then(data => {
+    const iframe = document.getElementById('contentFrame').contentWindow;
+    iframe.postMessage({
+      type: 'sessionData',
+      data: data
+    }, 'http://localhost:3000');
+  });
