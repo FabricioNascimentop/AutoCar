@@ -149,5 +149,5 @@
 {% block footer%}
 {{ super() }}
 {% endblock%}
-<script src="../app/static/js/main.js"></script>
+<script src="{{url_for('static',filename='js/main.js')}}"></script>
 {% endblock %}

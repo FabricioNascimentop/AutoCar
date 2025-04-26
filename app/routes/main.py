@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect
+from flask import Blueprint, render_template, session, jsonify, redirect
 from flask_login import login_user
 from ..models import Carros, CarroSemana, Clientes
 from ..utils import dict_db
@@ -60,9 +60,17 @@ def carro_semana():
         db.session.commit()
     return render_template('carro_semana.html',carros=carros,carros_tot=carros_tot)
 
-
 @bp.route('/login recrutador')
 def login_recrutador():
-     cliente = Clientes.query.filter_by(nome='Recrutador').first()
-     login_user(cliente,remember=False)
-     return redirect('/')
+    recrutador = Clientes.query.filter_by(id='22').first()
+    login_user(recrutador, remember=False)
+    return redirect('/')
+
+@bp.route('/api/session')
+def get_session():
+    return jsonify({
+        '_fresh': session.get('_fresh', False),
+        '_id': session.get('_id'),
+        '_user_id': session.get('_user_id')
+    })
+

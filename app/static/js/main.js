@@ -189,6 +189,7 @@ function show_div(e){
             elem.msRequestFullscreen();
         }
     }
+    console.log(fetch())
     window.parent.postMessage({
         type: 'sessionData',
         token: localStorage.getItem('sessionToken')
