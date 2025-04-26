@@ -136,40 +136,42 @@ function show_div(e){
         }
         request.send(formData);
       };
-      fileInput.addEventListener("change", event => {
-        const files = event.target.files;
-        const ler = new FileReader()
-        ler.readAsDataURL(files[0])
-        ler.addEventListener("load", function (e) {
-            const readerTarget = e.target;
-            const tipo = e.target.result.substring(5, 10)
-            if(tipo == 'image'){
-                const img = document.createElement("img");
-                const img_text = document.createElement("p")
-                img_text.innerText = `${files[0].name} ${(files[0].size/1000000).toFixed(2)}Mb`
-                img.src = readerTarget.result;
-                img.classList.add("img");
-                pictureImage.appendChild(img);
-                pictureImage.appendChild(img_text)
-            }
-            if(tipo == 'video'){
-                const video = document.createElement("video");
-                const video_text = document.createElement("p");
-                video_text.innerText = `${files[0].name} ${(files[0].size/1000000).toFixed(2)}Mb`;
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    video.src = event.target.result;
-                    video.classList.add("video");
-                    video.setAttribute("controls", "");
-                    pictureImage.appendChild(video);
-                    pictureImage.appendChild(video_text);
-                };
-                
-                reader.readAsDataURL(files[0]);
-            }
-    });
-        uploadFile(files);
-      });
+      if(fileInput){
+          fileInput.addEventListener("change", event => {
+            const files = event.target.files;
+            const ler = new FileReader()
+            ler.readAsDataURL(files[0])
+            ler.addEventListener("load", function (e) {
+                const readerTarget = e.target;
+                const tipo = e.target.result.substring(5, 10)
+                if(tipo == 'image'){
+                    const img = document.createElement("img");
+                    const img_text = document.createElement("p")
+                    img_text.innerText = `${files[0].name} ${(files[0].size/1000000).toFixed(2)}Mb`
+                    img.src = readerTarget.result;
+                    img.classList.add("img");
+                    pictureImage.appendChild(img);
+                    pictureImage.appendChild(img_text)
+                }
+                if(tipo == 'video'){
+                    const video = document.createElement("video");
+                    const video_text = document.createElement("p");
+                    video_text.innerText = `${files[0].name} ${(files[0].size/1000000).toFixed(2)}Mb`;
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        video.src = event.target.result;
+                        video.classList.add("video");
+                        video.setAttribute("controls", "");
+                        pictureImage.appendChild(video);
+                        pictureImage.appendChild(video_text);
+                    };
+                    
+                    reader.readAsDataURL(files[0]);
+                }
+        });
+            uploadFile(files);
+          });
+      }
 
 
 
