@@ -55,7 +55,6 @@ def processar_login():
 
 
 @bp.route('/logoff', methods=['POST'])
-@login_required
 def logout():
     rota = request.args.get('rota')
     if '<' in rota:

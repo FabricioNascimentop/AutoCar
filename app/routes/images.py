@@ -13,7 +13,6 @@ def edit_image():
     return redirect(url_for('cars.editar_carro',carro_nome=nome,id=id))
 
 @bp.route('/processar_midia',methods=['POST'])
-@login_required
 def processa_midia():
     import os 
     from pathlib import Path

@@ -97,12 +97,10 @@ def carro_especifico(carro_nome):
 
 
 @bp.route('/adicionar carro')
-@login_required
 def new_car():
     return render_template('add_carro.html')
 
 @bp.route('/editar/<string:carro_nome>')
-@login_required
 def editar_carro(carro_nome):
     import os
     from pathlib import Path
@@ -134,7 +132,6 @@ def editar_carro(carro_nome):
 
 
 @bp.route('/processar_carro', methods=['POST'])
-@login_required
 def processa_carro():
     import os
     from pathlib import Path
