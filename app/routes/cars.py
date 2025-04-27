@@ -70,7 +70,6 @@ def carros():
                                     carroDB['img'] = img
                                     carros_lst.append(carroDB)
         
-
         carros_escolha = carros_lst
     return render_template('carros.html',carros=carros_escolha,lst_marcas=lst_marcas,anos=list(range(1956, 2026)))
 

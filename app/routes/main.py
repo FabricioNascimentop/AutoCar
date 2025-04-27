@@ -66,11 +66,4 @@ def login_recrutador():
     login_user(recrutador, remember=False)
     return redirect('/')
 
-@bp.route('/api/session')
-def get_session():
-    return jsonify({
-        '_fresh': session.get('_fresh', False),
-        '_id': session.get('_id'),
-        '_user_id': session.get('_user_id')
-    })
 

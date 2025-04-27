@@ -19,7 +19,7 @@
             <div id="pesquisa_reset">
                 <h2 style="display: inline;">PESQUISA</h2>
                 <form action="/carros" method="get" id="f_reset">
-                    <button type="submit" name="reset_a" id="btn_reset">RESET</button>
+                    <button type="submit" name="reset" id="btn_reset" value="true">RESET</button>
                 </form>
             </div>
             <div id="quadro_pesquisa">
@@ -123,18 +123,6 @@
                         </div>
                     </div>
                 </div>
-                <div id="estado">
-                    <h3>ESTADO</h3>
-                    <div class="div_label_input" style="width: 100px;">
-                            <label for="input_estado_usado">Usado:</label>
-                                <input type="radio" name="estado" id="input_estado_usado" class="input_radio" value="usado">
-                        </div>
-                        <br>
-                        <div class="div_label_input" style="width: 100px; margin-top: -10px;">
-                            <label for="input_estado_novo">Novo:</label>
-                            <input type="radio" name="estado" id="input_estado_novo" style="margin-left: 9px;" class="input_radio" value="novo">
-                        </div>
-                    </div>
                     <button type="submit" id="pesquisar">Pesquisar</button>
                 </form>
             </div>
@@ -152,6 +140,7 @@
         </div>
     </aside>
     <section id="carros">
+        {% if carros %}
         {%for carro in carros %}
         <div class="quadro_carros">
         <a href="{{url_for('cars.carro_especifico',carro_nome=carro.nome,id=carro.id)}}">
@@ -189,6 +178,12 @@
         </a>
     </div>
     {% endfor %}
+    {% else %}  
+        <div class="nocarro">
+            <img src="../static/img/placa-erro.png" alt="">
+            <h3>Infelizmente não há carros nas categorias escolhidas :(</h3>
+        </div>
+    {% endif %}
 </section>
 </main>
 {% block footer%}

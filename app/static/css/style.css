@@ -1366,3 +1366,16 @@ main#carro_semana{
         background-color: var(--cor-de-fundo);
     }
 }
+.nocarro{
+    display: flex;
+    justify-content: center;
+    padding-top: 35px;
+    flex-direction: column;
+    align-items: center;
+}
+.nocarro h3{
+    margin-top: 15px;
+    font-family: "Noto Serif Georgian", serif;
+    color: white;
+    font-size: 1.75rem;
+}
