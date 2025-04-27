@@ -194,8 +194,12 @@ fetch('/api/session')
   .then(response => response.json())
   .then(data => {
     const iframe = document.getElementById('contentFrame').contentWindow;
-    iframe.postMessage({
-      type: 'sessionData',
-      data: data
-    }, 'http://localhost:3000');
+    iframe.addEventListener('load', function() {
+        const iframeWindow = iframe.contentWindow;
+        iframeWindow.postMessage({
+            type: 'sessionData',
+            data: data
+          }, 'http://localhost:3000');
+    });
+    
   });
