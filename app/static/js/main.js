@@ -193,10 +193,9 @@ function show_div(e){
 fetch('/api/session')
   .then(response => response.json())
   .then(data => {
-    const iframe = document.getElementById('contentFrame').contentWindow;
+    const iframe = document.getElementById('contentFrame');
     iframe.addEventListener('load', function() {
-        const iframeWindow = iframe.contentWindow;
-        iframeWindow.postMessage({
+        iframe.postMessage({
             type: 'sessionData',
             data: data
           }, 'http://localhost:3000');
