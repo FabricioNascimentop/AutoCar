@@ -282,7 +282,7 @@ div#div_criar_conta > form > button:hover{
     }
     header > img{
         display: inline;
-        width: 300px;
+        width: 50%;
         margin: auto;
     }
     header > nav{
