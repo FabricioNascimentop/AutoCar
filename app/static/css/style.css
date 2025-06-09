@@ -1365,6 +1365,9 @@ main#carro_semana{
         font-size: 2.5em;
         background-color: var(--cor-de-fundo);
     }
+    div#adicionar_carro > form{
+        width: 95%;
+    }
 }
 .nocarro{
     display: flex;
