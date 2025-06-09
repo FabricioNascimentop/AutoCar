@@ -284,6 +284,8 @@ div#div_criar_conta > form > button:hover{
         display: inline;
         width: 300px;
         margin: auto;
+        width: 50%;
+        margin: auto;
     }
     header > nav{
         display: grid;
