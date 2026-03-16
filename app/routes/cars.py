@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from ..models import Carros
-from ..utils import dict_db
+from ..utils import dict_db, get_car_image
 from flask_login import login_required
 from .. import db
 
@@ -29,8 +29,10 @@ def carros():
     if request.method == 'GET':
         for carro in carros_geral:
             dictCarro = dict_db(carro, data_preco=True)
-            img = os.listdir(f"{CarrosSRC}/{carro.id}-{str(carro.nome).replace(' ','-')}")[0]
+            img = get_car_image(CarrosSRC, carro.id, carro.nome)
+            print('imageeeeee:',img)
             dictCarro['img'] = img
+            print(dictCarro)
             carros_escolha.append(dictCarro)
         
 
@@ -66,7 +68,7 @@ def carros():
                             if carro.combustivel in combustivel:
                                 if carro.estado in estado:
                                     carroDB = dict_db(carro, data_preco=True)
-                                    img = os.listdir(f"{CarrosSRC}/{carro.id}-{str(carro.nome).replace(' ','-')}")[0]
+                                    img = get_car_image(CarrosSRC, carro.id, carro.nome)
                                     carroDB['img'] = img
                                     carros_lst.append(carroDB)
         
@@ -86,10 +88,18 @@ def carro_especifico(carro_nome):
     carro = dict_db(car,data_preco=True)
     
     marca_carro = str(car.nome).split()[0]
-    pasta_imagens = CarrosSRC/f"{id}-{str(carro_nome).replace(' ','-')}"
-    images = [
-        img.name for img in pasta_imagens.iterdir() 
-        if img.is_file() and img.suffix.lower() in {'.jpg', '.jpeg', '.png', '.gif'}]
+    pasta_imagens = CarrosSRC / f"{id}-{str(carro_nome).replace(' ','-')}"
+
+    if pasta_imagens.exists() and pasta_imagens.is_dir():
+        images = [
+            img.name for img in pasta_imagens.iterdir()
+            if img.is_file() and img.suffix.lower() in {'.jpg', '.jpeg', '.png', '.gif'}
+        ]
+    else:
+        images = []
+
+    if not images:
+        images = ['../../erro.png']
 
     
     return render_template('carro_especifico.html',carro=carro,marca_carro=marca_carro, images=images)
@@ -165,7 +175,7 @@ def processa_carro():
         carro = Carros(
             nome=CD['nome'], modelo=CD['modelo'], preco=CD['preco'], registro=CD['registro'],
             combustivel=CD['combustivel'], motor=CD['motor'], transmissao=CD['transmissao'],
-            origem=CD['origem'], co2=CD['Co2'], estado=CD['estado'], quilometros=CD['quilometros'],
+            origem=CD['origem'], co2=CD['co2'], estado=CD['estado'], quilometros=CD['quilometros'],
             garantia=CD['garantia'], tipo=CD['tipo'], portas=CD['portas'], cor=CD['cor'], lugares=CD['lugares']
         )
 

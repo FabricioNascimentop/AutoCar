@@ -84,4 +84,19 @@ def remover_numeros(texto):
     return texto_sem_numeros
 
         
-        
+def get_car_image(base_path, carro_id, carro_nome):
+    pasta = base_path / f"{carro_id}-{carro_nome.replace(' ','-')}"
+    fallback = "img/CarrosSRC/erro.png"
+
+    try:
+        if pasta.exists():
+            imagens = [
+                img.name for img in pasta.iterdir()
+                if img.is_file() and img.suffix.lower() in {'.jpg','.jpeg','.png','.gif'}
+            ]
+            if imagens:
+                return f"img/CarrosSRC/{carro_id}-{carro_nome.replace(' ','-')}/{imagens[0]}"
+    except Exception:
+        pass
+
+    return fallback
