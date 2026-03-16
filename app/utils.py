@@ -95,7 +95,7 @@ def get_car_image(base_path, carro_id, carro_nome):
                 if img.is_file() and img.suffix.lower() in {'.jpg','.jpeg','.png','.gif'}
             ]
             if imagens:
-                return f"img/CarrosSRC/{carro_id}-{carro_nome.replace(' ','-')}/{imagens[0]}"
+                return f"{carro_id}-{carro_nome.replace(' ','-')}/{imagens[0]}"
     except Exception:
         pass
 

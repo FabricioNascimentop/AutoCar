@@ -30,9 +30,8 @@ def carros():
         for carro in carros_geral:
             dictCarro = dict_db(carro, data_preco=True)
             img = get_car_image(CarrosSRC, carro.id, carro.nome)
-            print('imageeeeee:',img)
+            print('imageee:',img)
             dictCarro['img'] = img
-            print(dictCarro)
             carros_escolha.append(dictCarro)
         
 
