@@ -1,14 +1,17 @@
-def dict_db(self,data_preco=False):
-        from datetime import datetime
-        dict = {}
-        for attr, value in self.__dict__.items():
-            dict[attr] = value
-            if data_preco == True:
-                if attr == 'registro':
-                    dict[attr] = datetime.strptime(value, "%Y-%m-%d").strftime("%d/%m/%Y")
-                if attr == 'preco':
-                    dict['preco'] = moedinha(float(value))
-        return dict
+def dict_db(self, data_preco=False):
+    data = {}
+
+    for attr, value in self.__dict__.items():
+        data[attr] = value
+
+        if data_preco:
+            if attr == 'registro' and value:
+                data[attr] = value.strftime("%d/%m/%Y")
+
+            if attr == 'preco' and value:
+                data['preco'] = moedinha(float(value))
+
+    return data
     
 
 def moedinha(numero):
