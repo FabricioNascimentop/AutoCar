@@ -1,14 +1,17 @@
-def dict_db(self,data_preco=False):
-        from datetime import datetime
-        dict = {}
-        for attr, value in self.__dict__.items():
-            dict[attr] = value
-            if data_preco == True:
-                if attr == 'registro':
-                    dict[attr] = datetime.strptime(value, "%Y-%m-%d").strftime("%d/%m/%Y")
-                if attr == 'preco':
-                    dict['preco'] = moedinha(float(value))
-        return dict
+def dict_db(self, data_preco=False):
+    data = {}
+
+    for attr, value in self.__dict__.items():
+        data[attr] = value
+
+        if data_preco:
+            if attr == 'registro' and value:
+                data[attr] = value.strftime("%d/%m/%Y")
+
+            if attr == 'preco' and value:
+                data['preco'] = moedinha(float(value))
+
+    return data
     
 
 def moedinha(numero):
@@ -81,4 +84,19 @@ def remover_numeros(texto):
     return texto_sem_numeros
 
         
-        
+def get_car_imagens(base_path, carro_id, carro_nome):
+    pasta = base_path / f"{carro_id}-{carro_nome.replace(' ','-')}"
+    fallback = "img/erro.png"
+
+    try:
+        if pasta.exists():
+            imagens = [
+                img.name for img in pasta.iterdir()
+                if img.is_file() and img.suffix.lower() in {'.jpg','.jpeg','.png','.gif'}
+            ]
+            if imagens:
+                return f"img/CarrosSRC/{carro_id}-{carro_nome.replace(' ','-')}/{imagens[0]}"
+    except Exception:
+        pass
+
+    return fallback

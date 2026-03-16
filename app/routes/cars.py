@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from ..models import Carros
-from ..utils import dict_db
+from ..utils import dict_db, get_car_imagens
 from flask_login import login_required
 from .. import db
 
@@ -29,8 +29,7 @@ def carros():
     if request.method == 'GET':
         for carro in carros_geral:
             dictCarro = dict_db(carro, data_preco=True)
-            img = os.listdir(f"{CarrosSRC}/{carro.id}-{str(carro.nome).replace(' ','-')}")[0]
-            dictCarro['img'] = img
+            img = get_car_imagens(CarrosSRC, carro.id, carro.nome)
             carros_escolha.append(dictCarro)
         
 
@@ -47,27 +46,33 @@ def carros():
             combustivel = data.getlist('combustivel')
         else:
             combustivel = ["gasolina","etanol","diesel","biodiesel","GNV","eletricidade","hibrido","flex"]
+        
+        
 
         if data.get('estado') == None:
             estado = ['novo','usado']
         else:
             estado = data.get('estado')
         
+        print(estado)
+
         registro = [int(data.get('select_registro_inicio')),int(data.get('select_registro_fim'))]
         preco = [float(data.get('select_preco_inicio')),float(data.get('select_preco_fim'))]
         quilometro = [int(data.get('select_quilometro_inicio')),int(data.get('select_quilometro_fim'))]
-
         for carro in carros_geral:
-            ano_registro = int(carro.registro.split('-')[0])
+            ano_registro = int(carro.registro.year)
             if carro.nome.split(' ')[0] in marcas:
                 if registro[0] <= ano_registro and ano_registro <= registro[1]:
                     if preco[0] <= carro.preco and carro.preco <= preco[1]:
                         if quilometro[0] <= carro.quilometros and carro.quilometros <= quilometro[1]:
                             if carro.combustivel in combustivel:
                                 if carro.estado in estado:
+                                    print(carro.nome)
                                     carroDB = dict_db(carro, data_preco=True)
-                                    img = os.listdir(f"{CarrosSRC}/{carro.id}-{str(carro.nome).replace(' ','-')}")[0]
+                                    img = get_car_imagens(CarrosSRC, carro.id, carro.nome)
+                                    print(img)
                                     carroDB['img'] = img
+                                    print(carroDB)
                                     carros_lst.append(carroDB)
         
 
@@ -169,7 +174,7 @@ def processa_carro():
         carro = Carros(
             nome=CD['nome'], modelo=CD['modelo'], preco=CD['preco'], registro=CD['registro'],
             combustivel=CD['combustivel'], motor=CD['motor'], transmissao=CD['transmissao'],
-            origem=CD['origem'], Co2=CD['co2'], estado=CD['estado'], quilometros=CD['quilometros'],
+            origem=CD['origem'], co2=CD['co2'], estado=CD['estado'], quilometros=CD['quilometros'],
             garantia=CD['garantia'], tipo=CD['tipo'], portas=CD['portas'], cor=CD['cor'], lugares=CD['lugares']
         )
 

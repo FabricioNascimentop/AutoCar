@@ -1,8 +1,7 @@
 from flask import Blueprint, redirect,url_for, request
 from werkzeug.utils import secure_filename
 from flask_login import login_required
-from ..models import Carros
-from sqlalchemy import desc
+
 
 bp = Blueprint('images', __name__)
 

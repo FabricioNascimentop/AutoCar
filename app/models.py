@@ -12,7 +12,7 @@ class Carros(db.Model):
     motor = db.Column(db.String(20))
     transmissao = db.Column(db.String(20))
     origem = db.Column(db.String(40))
-    Co2 = db.Column(db.Integer)
+    co2 = db.Column(db.Integer)
     estado = db.Column(db.String(10))
     quilometros = db.Column(db.Integer)
     garantia = db.Column(db.String(40))

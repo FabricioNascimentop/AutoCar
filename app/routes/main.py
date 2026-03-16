@@ -32,7 +32,6 @@ def carro_semana():
     from datetime import datetime
 
     carros = CarroSemana.query.all()
-    print(carros)
     carros_tot = [carro.nome for carro in Carros.query.all()]
     if request.method == 'POST':
         carro_nome = request.form.get('carro')
