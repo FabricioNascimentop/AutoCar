@@ -165,7 +165,7 @@ def processa_carro():
         carro = Carros(
             nome=CD['nome'], modelo=CD['modelo'], preco=CD['preco'], registro=CD['registro'],
             combustivel=CD['combustivel'], motor=CD['motor'], transmissao=CD['transmissao'],
-            origem=CD['origem'], Co2=CD['co2'], estado=CD['estado'], quilometros=CD['quilometros'],
+            origem=CD['origem'], Co2=CD['Co2'], estado=CD['estado'], quilometros=CD['quilometros'],
             garantia=CD['garantia'], tipo=CD['tipo'], portas=CD['portas'], cor=CD['cor'], lugares=CD['lugares']
         )
 
